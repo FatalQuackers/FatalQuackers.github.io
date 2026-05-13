@@ -108,11 +108,6 @@
             
             <!-- Video Element -->
             <video id="modal-video" controls class="hidden rounded-xl shadow-2xl max-h-[85vh] w-full max-w-5xl"></video>
-            
-            <!-- Iframe for YouTube -->
-            <div id="modal-iframe-container" class="hidden w-[80vw] max-w-5xl aspect-video">
-                <iframe id="modal-iframe" class="w-full h-full rounded-xl" frameborder="0" allowfullscreen></iframe>
-            </div>
         </div>
     </div>
 
@@ -295,7 +290,7 @@
         </div>
     </main>
 
-    <!-- NEW DYNAMIC GALLERY PAGE -->
+    <!-- FULLY ADAPTIVE DYNAMIC GALLERY PAGE -->
     <main id="gallery" class="page-section max-w-6xl mx-auto px-6 py-20">
         <div class="text-center mb-8">
             <h2 class="text-4xl font-bold text-slate-900 dark:text-white mb-4">Visual Gallery</h2>
@@ -308,69 +303,15 @@
         </div>
 
         <!-- 
-        ========================================================
-        GALLERY GRID - COPY AND PASTE BLOCKS BELOW TO ADD MORE 
-        ========================================================
+        ========================================================================
+        The gallery items below are automatically injected by JavaScript!
+        Just name your files Image1.png or Video1.mp4 and they will appear.
+        ========================================================================
         -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            
-            <!-- IMAGE 1 -->
-            <div class="aspect-video bg-slate-200 dark:bg-slate-800 rounded-xl overflow-hidden group border border-slate-200 dark:border-slate-700 relative cursor-pointer" onclick="openMedia('Image1.png', 'image')">
-                <span class="absolute top-2 right-2 text-[10px] font-bold tag-roblox px-2 py-0.5 rounded z-20 backdrop-blur-sm bg-white/80 dark:bg-black/80">ROBLOX</span>
-                <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/40 transition-all duration-300 z-10 flex items-center justify-center">
-                    <i class="fa-solid fa-expand text-white opacity-0 group-hover:opacity-100 text-4xl transition-opacity duration-300 drop-shadow-md"></i>
-                </div>
-                <img src="Image1.png" alt="Gallery Image 1" onerror="this.src='https://via.placeholder.com/600x400/1e293b/ffffff?text=Upload+Image1.png'" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-            </div>
-            
-            <!-- IMAGE 2 -->
-            <div class="aspect-video bg-slate-200 dark:bg-slate-800 rounded-xl overflow-hidden group border border-slate-200 dark:border-slate-700 relative cursor-pointer" onclick="openMedia('Image2.png', 'image')">
-                <span class="absolute top-2 right-2 text-[10px] font-bold tag-roblox px-2 py-0.5 rounded z-20 backdrop-blur-sm bg-white/80 dark:bg-black/80">ROBLOX</span>
-                <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/40 transition-all duration-300 z-10 flex items-center justify-center">
-                    <i class="fa-solid fa-expand text-white opacity-0 group-hover:opacity-100 text-4xl transition-opacity duration-300 drop-shadow-md"></i>
-                </div>
-                <img src="Image2.png" alt="Gallery Image 2" onerror="this.src='https://via.placeholder.com/600x400/1e293b/ffffff?text=Upload+Image2.png'" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-            </div>
-
-            <!-- IMAGE 3 -->
-            <div class="aspect-video bg-slate-200 dark:bg-slate-800 rounded-xl overflow-hidden group border border-slate-200 dark:border-slate-700 relative cursor-pointer" onclick="openMedia('Image3.png', 'image')">
-                <span class="absolute top-2 right-2 text-[10px] font-bold tag-roblox px-2 py-0.5 rounded z-20 backdrop-blur-sm bg-white/80 dark:bg-black/80">ROBLOX</span>
-                <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/40 transition-all duration-300 z-10 flex items-center justify-center">
-                    <i class="fa-solid fa-expand text-white opacity-0 group-hover:opacity-100 text-4xl transition-opacity duration-300 drop-shadow-md"></i>
-                </div>
-                <img src="Image3.png" alt="Gallery Image 3" onerror="this.src='https://via.placeholder.com/600x400/1e293b/ffffff?text=Upload+Image3.png'" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-            </div>
-
-            <!-- VIDEO 1 -->
-            <div class="aspect-video bg-slate-200 dark:bg-slate-800 rounded-xl overflow-hidden group border border-slate-200 dark:border-slate-700 relative cursor-pointer" onclick="openMedia('Video1.mp4', 'video')">
-                <span class="absolute top-2 right-2 text-[10px] font-bold bg-orange-600 text-white px-2 py-0.5 rounded z-20 shadow-lg">VIDEO</span>
-                <div class="absolute inset-0 bg-orange-900/0 group-hover:bg-orange-900/40 transition-all duration-300 z-10 flex items-center justify-center">
-                    <i class="fa-solid fa-play text-white opacity-0 group-hover:opacity-100 text-4xl transition-opacity duration-300 drop-shadow-md"></i>
-                </div>
-                <!-- Try to load Video1.png as thumbnail, fallback to placeholder -->
-                <img src="Video1.png" alt="Video 1 Thumbnail" onerror="this.src='https://via.placeholder.com/600x400/fb923c/ffffff?text=Play+Video1.mp4'" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-            </div>
-
-            <!-- VIDEO 2 -->
-            <div class="aspect-video bg-slate-200 dark:bg-slate-800 rounded-xl overflow-hidden group border border-slate-200 dark:border-slate-700 relative cursor-pointer" onclick="openMedia('Video2.mp4', 'video')">
-                <span class="absolute top-2 right-2 text-[10px] font-bold bg-orange-600 text-white px-2 py-0.5 rounded z-20 shadow-lg">VIDEO</span>
-                <div class="absolute inset-0 bg-orange-900/0 group-hover:bg-orange-900/40 transition-all duration-300 z-10 flex items-center justify-center">
-                    <i class="fa-solid fa-play text-white opacity-0 group-hover:opacity-100 text-4xl transition-opacity duration-300 drop-shadow-md"></i>
-                </div>
-                <img src="Video2.png" alt="Video 2 Thumbnail" onerror="this.src='https://via.placeholder.com/600x400/fb923c/ffffff?text=Play+Video2.mp4'" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-            </div>
-
-            <!-- YouTube Video Example -->
-            <div class="aspect-video bg-slate-200 dark:bg-slate-800 rounded-xl overflow-hidden group border border-slate-200 dark:border-slate-700 relative cursor-pointer" onclick="openMedia('https://www.youtube.com/embed/dQw4w9WgXcQ', 'iframe')">
-                <span class="absolute top-2 right-2 text-[10px] font-bold bg-red-600 text-white px-2 py-0.5 rounded z-20 shadow-lg">YOUTUBE</span>
-                <div class="absolute inset-0 bg-red-900/0 group-hover:bg-red-900/40 transition-all duration-300 z-10 flex items-center justify-center">
-                    <i class="fa-brands fa-youtube text-white opacity-0 group-hover:opacity-100 text-4xl transition-opacity duration-300 drop-shadow-md"></i>
-                </div>
-                <!-- YouTube Thumbnail Fetch -->
-                <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="YouTube Thumbnail" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-            </div>
-
+        <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <!-- Items injected here by initDynamicGallery() -->
         </div>
+        
     </main>
 
     <!-- Pricing Page -->
@@ -565,24 +506,76 @@
 
     <!-- NEW DYNAMIC JAVASCRIPT -->
     <script>
-        // Universal Media Logic (Images, MP4 Videos, Iframes)
+        // ==========================================
+        // DYNAMIC GALLERY GENERATOR
+        // ==========================================
+        function initDynamicGallery() {
+            const galleryGrid = document.getElementById('gallery-grid');
+            galleryGrid.innerHTML = ''; 
+            
+            // This script will automatically check for up to 50 items.
+            // If you upload 20, it will adapt and seamlessly display exactly 20!
+            const MAX_FILES = 50; 
+
+            for (let i = 1; i <= MAX_FILES; i++) {
+                
+                // 1. Check for Images (Looking for Image1.png, Image2.png, etc.)
+                let img = new Image();
+                img.src = `Image${i}.png`;
+                img.onload = () => {
+                    let imgCard = document.createElement('div');
+                    imgCard.className = 'aspect-video bg-slate-200 dark:bg-slate-800 rounded-xl overflow-hidden group border border-slate-200 dark:border-slate-700 relative cursor-pointer';
+                    imgCard.style.order = i; // Sort correctly 1, 2, 3...
+                    imgCard.onclick = () => openMedia(`Image${i}.png`, 'image');
+                    imgCard.innerHTML = `
+                        <span class="absolute top-2 right-2 text-[10px] font-bold tag-roblox px-2 py-0.5 rounded z-20 backdrop-blur-sm bg-white/80 dark:bg-black/80">ROBLOX</span>
+                        <div class="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/40 transition-all duration-300 z-10 flex items-center justify-center">
+                            <i class="fa-solid fa-expand text-white opacity-0 group-hover:opacity-100 text-4xl transition-opacity duration-300 drop-shadow-md"></i>
+                        </div>
+                    `;
+                    img.className = 'w-full h-full object-cover group-hover:scale-105 transition duration-500';
+                    imgCard.appendChild(img);
+                    galleryGrid.appendChild(imgCard);
+                };
+
+                // 2. Check for Videos (Looking for Video1.mp4, Video2.mp4, etc.)
+                let vid = document.createElement('video');
+                vid.src = `Video${i}.mp4`;
+                vid.preload = "metadata";
+                vid.onloadedmetadata = () => {
+                    let vidCard = document.createElement('div');
+                    vidCard.className = 'aspect-video bg-slate-200 dark:bg-slate-800 rounded-xl overflow-hidden group border border-slate-200 dark:border-slate-700 relative cursor-pointer';
+                    vidCard.style.order = i + 100; // Display videos after all images
+                    vidCard.onclick = () => openMedia(`Video${i}.mp4`, 'video');
+                    
+                    // Uses the standard VIDEO badge exclusively
+                    vidCard.innerHTML = `
+                        <span class="absolute top-2 right-2 text-[10px] font-bold bg-orange-600 text-white px-2 py-0.5 rounded z-20 shadow-lg">VIDEO</span>
+                        <div class="absolute inset-0 bg-orange-900/0 group-hover:bg-orange-900/40 transition-all duration-300 z-10 flex items-center justify-center">
+                            <i class="fa-solid fa-play text-white opacity-0 group-hover:opacity-100 text-4xl transition-opacity duration-300 drop-shadow-md"></i>
+                        </div>
+                    `;
+                    vid.className = 'w-full h-full object-cover group-hover:scale-105 transition duration-500 pointer-events-none';
+                    vid.muted = true;
+                    vidCard.appendChild(vid);
+                    galleryGrid.appendChild(vidCard);
+                };
+            }
+        }
+
+
+        // Universal Media Modal Logic
         function openMedia(src, type) {
             const modal = document.getElementById('media-modal');
             const img = document.getElementById('modal-img');
             const video = document.getElementById('modal-video');
-            const iframeCont = document.getElementById('modal-iframe-container');
-            const iframe = document.getElementById('modal-iframe');
 
             // Hide all first
             img.classList.add('hidden');
             video.classList.add('hidden');
-            iframeCont.classList.add('hidden');
             
-            // Reset sources
             video.src = "";
-            iframe.src = "";
 
-            // Assign proper source
             if (type === 'image') {
                 img.src = src;
                 img.classList.remove('hidden');
@@ -590,12 +583,8 @@
                 video.src = src;
                 video.classList.remove('hidden');
                 video.play();
-            } else if (type === 'iframe') {
-                iframe.src = src;
-                iframeCont.classList.remove('hidden');
             }
 
-            // Show Modal
             modal.classList.remove('hidden');
             setTimeout(() => { modal.classList.remove('opacity-0'); }, 10);
         }
@@ -603,16 +592,10 @@
         function closeModal() {
             const modal = document.getElementById('media-modal');
             const video = document.getElementById('modal-video');
-            const iframe = document.getElementById('modal-iframe');
 
-            // Start fade out
             modal.classList.add('opacity-0');
-            
-            // Pause any running videos instantly so audio doesn't linger
             video.pause();
-            iframe.src = ""; 
             
-            // Wait for fade transition, then hide display
             setTimeout(() => { modal.classList.add('hidden'); }, 300);
         }
 
@@ -674,10 +657,12 @@
             });
         }
         
-        document.addEventListener("DOMContentLoaded", runCounters);
+        document.addEventListener("DOMContentLoaded", () => {
+            runCounters();
+            initDynamicGallery(); // Boot up the auto-loader when the page starts!
+        });
 
         // EASTER EGGS LOGIC
-        // 1. Robux Rain (Type "robux")
         let secretBuffer = "";
         document.addEventListener('keydown', (e) => {
             if (e.key.length === 1) {
@@ -702,7 +687,6 @@
             }
         }
 
-        // 2. Secret Dev Mode Shake (Click Logo 5 times)
         let clickCount = 0;
         let clickTimer;
         function triggerSecretClick() {
@@ -729,7 +713,6 @@
             clickTimer = setTimeout(() => clickCount = 0, 2000);
         }
 
-        // 3. Coderxaron Teleport 
         let coderxaronBuffer = "";
         document.addEventListener('keydown', (e) => {
             if (e.key.length === 1) {
