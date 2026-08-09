@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Quackers - Professional Game Developer, Builder, Animator, and QA Tester specializing in Roblox Studio, Unreal Engine, and UEFN based in OCE.">
+    <meta name="description" content="Quackers - Professional Game Developer, Builder, Animator, and QA Tester specializing in Roblox Studio, Unreal Engine, and UEFN.">
     
     <title>Quackers | Pro Developer & QA</title>
     
@@ -43,6 +43,13 @@
     <style>
         body { transition: background-color 0.3s ease, color 0.3s ease; scroll-behavior: smooth; overflow-x: hidden; }
         
+        /* Custom Cursor */
+        body.custom-cursor { cursor: none; }
+        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 99999; pointer-events: none; transition: opacity 0.2s; }
+        .cursor-dot { width: 8px; height: 8px; background-color: #3b82f6; }
+        .cursor-outline { width: 40px; height: 40px; border: 2px solid rgba(59, 130, 246, 0.5); transition: width 0.2s, height 0.2s, border-color 0.2s; }
+        body:not(.custom-cursor) .cursor-dot, body:not(.custom-cursor) .cursor-outline { display: none; }
+        
         /* Scroll Progress Bar */
         #scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: #3b82f6; z-index: 9999; transition: width 0.1s; box-shadow: 0 0 10px #3b82f6; }
 
@@ -53,20 +60,17 @@
         
         /* Page Transitions & Staggers */
         .page-section { display: none; }
-        .page-section.active { display: block; }
-        .page-section.active .stagger-1 { animation: slideUpFade 0.5s ease forwards 0.1s; opacity: 0; transform: translateY(20px); }
-        .page-section.active .stagger-2 { animation: slideUpFade 0.5s ease forwards 0.2s; opacity: 0; transform: translateY(20px); }
-        .page-section.active .stagger-3 { animation: slideUpFade 0.5s ease forwards 0.3s; opacity: 0; transform: translateY(20px); }
-        .page-section.active .stagger-4 { animation: slideUpFade 0.5s ease forwards 0.4s; opacity: 0; transform: translateY(20px); }
+        .page-section.active { display: block; animation: slideUpFade 0.4s ease forwards; }
         
-        @keyframes slideUpFade { to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUpFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Glassmorphism */
         .glass-panel { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); }
         .dark .glass-panel { background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.05); }
         
-        .glass-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        .glass-card:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        /* 3D Tilt Card Base */
+        .tilt-card { transform-style: preserve-3d; transform: perspective(1000px); }
+        .tilt-card-content { transform: translateZ(30px); }
         
         /* Glowing Texts */
         .glow-robux { text-shadow: 0 0 15px rgba(74, 222, 128, 0.6); }
@@ -80,12 +84,12 @@
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
         
-        /* Animated Hero Background */
+        /* Reverted Original Dark Blue Animated Hero Background */
         @keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         .hero-bg {
-            background: linear-gradient(-45deg, #020617, #0f172a, #1e3a8a, #064e3b, #020617);
+            background: linear-gradient(-45deg, #0f172a, #1e3a8a, #020617, #0f172a);
             background-size: 400% 400%;
-            animation: gradientMove 20s ease infinite;
+            animation: gradientMove 15s ease infinite;
         }
 
         /* Developer Grid Background */
@@ -95,7 +99,10 @@
             background-size: 40px 40px;
         }
         
-        /* Gallery Filter Buttons */
+        /* Engine Tags */
+        .tag-roblox { background: rgba(220, 38, 38, 0.1); color: #ef4444; border: 1px solid rgba(220, 38, 38, 0.3); }
+
+        /* Gallery Filters */
         .filter-btn { padding: 0.5rem 1.5rem; border-radius: 9999px; font-weight: 600; font-size: 0.875rem; transition: all 0.2s; border: 1px solid transparent; }
         .filter-btn.active { background-color: #3b82f6; color: white; box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.39); }
         .filter-btn:not(.active) { background-color: rgba(148, 163, 184, 0.1); color: #64748b; }
@@ -112,11 +119,19 @@
         .cursor-blink { animation: blink 1s step-end infinite; }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* Timeline Styles */
+        /* Settings Sidebar */
+        #settings-menu { transform: translateX(100%); transition: transform 0.3s ease-in-out; }
+        #settings-menu.open { transform: translateX(0); }
+        
+        /* Timeline */
         .timeline-dot { position: absolute; left: -29px; width: 16px; height: 16px; border-radius: 50%; background: #3b82f6; border: 3px solid #0f172a; box-shadow: 0 0 10px rgba(59,130,246,0.5); }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 antialiased font-sans relative">
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 antialiased font-sans relative custom-cursor">
+
+    <!-- Custom Cursor Elements -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
 
     <!-- Scroll Progress -->
     <div id="scroll-progress"></div>
@@ -130,14 +145,52 @@
         </div>
     </div>
 
-    <!-- Floating Action Buttons -->
+    <!-- Floating Action Buttons (Right) -->
     <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
-        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="glass-panel p-3 rounded-full shadow-lg hover:scale-110 transition-transform flex items-center justify-center text-slate-800 dark:text-white group">
-            <i class="fa-solid fa-chevron-up group-hover:-translate-y-1 transition-transform"></i>
+        <button onclick="toggleSettings()" class="bg-slate-800 dark:bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform flex items-center justify-center group" title="Settings">
+            <i class="fa-solid fa-gear group-hover:rotate-90 transition-transform duration-500"></i>
         </button>
-        <button onclick="showPage('contact')" class="bg-blue-600 hover:bg-blue-500 text-white p-4 rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)] hover:scale-110 transition-transform flex items-center justify-center group relative">
-            <i class="fa-solid fa-paper-plane text-xl group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform"></i>
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="bg-slate-800 dark:bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform flex items-center justify-center opacity-70 hover:opacity-100">
+            <i class="fa-solid fa-chevron-up"></i>
         </button>
+    </div>
+
+    <!-- Settings Sidebar Overlay -->
+    <div id="settings-overlay" class="fixed inset-0 bg-black/50 z-[101] hidden opacity-0 transition-opacity" onclick="toggleSettings()"></div>
+    
+    <!-- Settings Sidebar -->
+    <div id="settings-menu" class="fixed top-0 right-0 w-80 h-full bg-white dark:bg-slate-900 z-[102] shadow-[-10px_0_30px_rgba(0,0,0,0.3)] border-l border-slate-200 dark:border-slate-800 p-6 flex flex-col">
+        <div class="flex justify-between items-center mb-8 border-b border-slate-200 dark:border-slate-800 pb-4">
+            <h3 class="text-xl font-bold"><i class="fa-solid fa-sliders mr-2 text-blue-500"></i> Preferences</h3>
+            <button onclick="toggleSettings()" class="text-slate-500 hover:text-red-500 text-2xl">&times;</button>
+        </div>
+        
+        <div class="space-y-6">
+            <!-- Theme Toggle -->
+            <div class="flex justify-between items-center">
+                <span class="font-medium">Dark Mode</span>
+                <button onclick="toggleTheme()" class="w-12 h-6 bg-slate-300 dark:bg-blue-500 rounded-full relative transition-colors">
+                    <div id="theme-toggle-ball" class="w-4 h-4 bg-white rounded-full absolute top-1 left-1 dark:translate-x-6 transition-transform"></div>
+                </button>
+            </div>
+            
+            <!-- Cursor Toggle -->
+            <div class="flex justify-between items-center">
+                <span class="font-medium">Custom Cursor</span>
+                <button onclick="toggleCursor()" class="w-12 h-6 bg-blue-500 rounded-full relative transition-colors" id="cursor-toggle-bg">
+                    <div id="cursor-toggle-ball" class="w-4 h-4 bg-white rounded-full absolute top-1 left-1 translate-x-6 transition-transform"></div>
+                </button>
+            </div>
+
+            <!-- Quick Links inside settings -->
+            <div class="pt-6 border-t border-slate-200 dark:border-slate-800">
+                <h4 class="text-sm font-bold text-slate-500 mb-4 uppercase">Quick Links</h4>
+                <div class="flex flex-col gap-3">
+                    <a href="https://www.youtube.com/@Fatalquackers" target="_blank" class="flex items-center text-slate-600 dark:text-slate-300 hover:text-red-500 transition-colors"><i class="fa-brands fa-youtube w-6"></i> YouTube Channel</a>
+                    <button onclick="copyDiscord(); toggleSettings();" class="flex items-center text-slate-600 dark:text-slate-300 hover:text-indigo-500 transition-colors text-left"><i class="fa-brands fa-discord w-6"></i> Copy Discord ID</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Navigation -->
@@ -147,25 +200,19 @@
                 <div class="text-2xl font-black tracking-widest text-slate-900 dark:text-white cursor-pointer select-none" onclick="triggerSecretClick()">
                     QUACKERS<span class="text-blue-500 text-3xl leading-none">.</span>
                 </div>
-                <div class="hidden lg:flex items-center bg-green-100 dark:bg-green-900/30 px-3 py-1 rounded-full border border-green-200 dark:border-green-800">
-                    <span class="relative flex h-2.5 w-2.5 mr-2">
-                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
-                    </span>
-                    <span class="text-xs font-bold text-green-700 dark:text-green-400 uppercase tracking-wide">Available to Hire</span>
-                </div>
             </div>
             
-            <div class="flex flex-wrap justify-center gap-2 md:gap-4 font-semibold text-sm md:text-base text-slate-600 dark:text-slate-300">
+            <div class="flex flex-wrap justify-center items-center gap-2 md:gap-4 font-semibold text-sm md:text-base text-slate-600 dark:text-slate-300">
                 <a onclick="showPage('home')" class="nav-link active" id="nav-home">Home</a>
                 <a onclick="showPage('portfolio')" class="nav-link" id="nav-portfolio">Portfolio</a>
-                <a onclick="showPage('testing')" class="nav-link text-cyan-600 dark:text-cyan-400" id="nav-testing"><i class="fa-solid fa-vial mr-1"></i> QA Test</a>
                 <a onclick="showPage('gallery')" class="nav-link" id="nav-gallery">Gallery</a>
                 <a onclick="showPage('pricing')" class="nav-link" id="nav-pricing">Pricing</a>
+                <a onclick="showPage('testing')" class="nav-link text-cyan-600 dark:text-cyan-400" id="nav-testing"><i class="fa-solid fa-vial mr-1"></i> QA</a>
                 <a onclick="showPage('contact')" class="nav-link" id="nav-contact">Contact</a>
                 
-                <button onclick="toggleTheme()" class="text-lg hover:text-blue-500 transition ml-2 p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700">
-                    <i id="theme-icon" class="fa-solid fa-moon"></i>
+                <!-- Hire Me Button -->
+                <button onclick="showPage('contact')" class="ml-2 bg-blue-600 hover:bg-blue-500 text-white px-4 py-1.5 rounded-full shadow-[0_0_15px_rgba(59,130,246,0.4)] transition-transform hover:-translate-y-0.5 font-bold text-sm">
+                    Hire Me
                 </button>
             </div>
         </div>
@@ -175,10 +222,10 @@
     <main id="home" class="page-section active">
         <div class="hero-bg py-32 px-6 text-center text-white relative overflow-hidden">
             <!-- Floating Ambient Shapes -->
-            <div class="absolute top-10 left-10 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl animate-float-slow"></div>
-            <div class="absolute bottom-10 right-20 w-48 h-48 bg-green-500/20 rounded-full blur-3xl animate-float-fast"></div>
+            <div class="absolute top-10 left-10 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl animate-float-slow pointer-events-none"></div>
+            <div class="absolute bottom-10 right-20 w-48 h-48 bg-blue-400/20 rounded-full blur-3xl animate-float-fast pointer-events-none"></div>
             
-            <div class="max-w-6xl mx-auto relative z-10 stagger-1">
+            <div class="max-w-6xl mx-auto relative z-10">
                 <div class="inline-flex items-center glass-panel px-4 py-1.5 rounded-full mb-8 shadow-lg">
                     <i class="fa-solid fa-code text-blue-400 mr-2"></i>
                     <span class="text-sm font-bold uppercase tracking-wider text-slate-200">OCE Based Multi-Engine Dev</span>
@@ -192,7 +239,7 @@
                 </h2>
                 
                 <p class="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed mb-10 drop-shadow-md">
-                    Determined to push the boundaries of multiplayer experiences. Specializing in competitive maps in <strong>UEFN</strong>, developing in <strong>Unreal Engine</strong>, and creating massive <strong>Roblox projects</strong>. Currently building hit titles at Toaster Productions and hunting bugs in top unreleased games.
+                    Determined to push the boundaries of multiplayer experiences. Specializing in crafting competitive maps in <strong>UEFN</strong>, developing in <strong>Unreal Engine</strong>, and creating massive <strong>Roblox projects</strong>. I don't script or 3D model—I focus strictly on world building, animation, and breaking games through QA testing.
                 </p>
 
                 <div class="flex justify-center gap-4 flex-wrap mb-12">
@@ -204,111 +251,92 @@
             </div>
         </div>
 
-        <!-- Quick Stats Banner -->
-        <div class="bg-slate-900 border-y border-slate-800 shadow-2xl relative z-20 -mt-1">
-            <div class="max-w-5xl mx-auto px-6 py-8">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-x divide-slate-800 stagger-2">
-                    <div>
-                        <div class="text-3xl font-black text-green-400 glow-robux mb-1"><span class="counter" data-target="1200">0</span>+</div>
-                        <div class="text-xs text-slate-400 uppercase tracking-wide font-bold">Robux Earned</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl font-black text-green-400 glow-garp mb-1"><span class="counter" data-target="5000">0</span>+</div>
-                        <div class="text-xs text-slate-400 uppercase tracking-wide font-bold">Waiting (GARP)</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl font-black text-blue-400 glow-blue mb-1"><span class="counter" data-target="3">0</span></div>
-                        <div class="text-xs text-slate-400 uppercase tracking-wide font-bold">Engines Mastered</div>
-                    </div>
-                    <div>
-                        <div class="text-3xl font-black text-purple-400 mb-1"><span class="counter" data-target="8">0</span>+</div>
-                        <div class="text-xs text-slate-400 uppercase tracking-wide font-bold">Games QA Tested</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="max-w-6xl mx-auto px-6 py-20">
-            <!-- Expertise Section -->
-            <div class="text-center mb-12 stagger-3">
-                <span class="text-blue-500 font-bold uppercase tracking-widest text-sm mb-2 block">What I Do</span>
+            <!-- Expertise Section with Bold Header Style -->
+            <div class="text-center mb-12">
+                <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 border border-blue-200 dark:border-blue-800 shadow-sm">
+                    <i class="fa-solid fa-star"></i>
+                </div>
                 <h3 class="text-4xl font-black text-slate-900 dark:text-white">Core Expertise</h3>
             </div>
             
-            <div class="grid md:grid-cols-3 gap-8 mb-20 stagger-4">
-                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl glass-card relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 p-4 opacity-5 text-8xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-hammer"></i></div>
-                    <i class="fa-solid fa-hammer text-4xl text-blue-500 mb-6 relative z-10"></i>
-                    <h4 class="text-xl font-bold mb-3 text-slate-900 dark:text-white relative z-10">World Building</h4>
-                    <p class="text-slate-600 dark:text-slate-400 relative z-10">Designing immersive environments, optimized 3D assets, and structured level layouts for Roblox and UEFN.</p>
+            <div class="grid md:grid-cols-3 gap-8 mb-20">
+                <!-- 3D Tilt Cards -->
+                <div class="tilt-card bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl glass-card relative overflow-hidden group">
+                    <div class="tilt-card-content">
+                        <div class="absolute top-0 right-0 p-4 opacity-5 text-8xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-hammer"></i></div>
+                        <i class="fa-solid fa-hammer text-4xl text-blue-500 mb-6 relative z-10"></i>
+                        <h4 class="text-xl font-bold mb-3 text-slate-900 dark:text-white relative z-10">World Building</h4>
+                        <p class="text-slate-600 dark:text-slate-400 relative z-10">Designing immersive environments and structured level layouts for Roblox and UEFN.</p>
+                    </div>
                 </div>
                 
-                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl glass-card relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 p-4 opacity-5 text-8xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-person-running"></i></div>
-                    <i class="fa-solid fa-person-running text-4xl text-orange-500 mb-6 relative z-10"></i>
-                    <h4 class="text-xl font-bold mb-3 text-slate-900 dark:text-white relative z-10">Character Animation</h4>
-                    <p class="text-slate-600 dark:text-slate-400 relative z-10">Bringing characters to life with fluid R6 and R15 animations, from traversal loops to heavy combat sequences.</p>
+                <div class="tilt-card bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl glass-card relative overflow-hidden group">
+                    <div class="tilt-card-content">
+                        <div class="absolute top-0 right-0 p-4 opacity-5 text-8xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-person-running"></i></div>
+                        <i class="fa-solid fa-person-running text-4xl text-orange-500 mb-6 relative z-10"></i>
+                        <h4 class="text-xl font-bold mb-3 text-slate-900 dark:text-white relative z-10">Character Animation</h4>
+                        <p class="text-slate-600 dark:text-slate-400 relative z-10">Bringing characters to life with fluid R6 and R15 animations, from traversal loops to heavy combat sequences.</p>
+                    </div>
                 </div>
                 
-                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl glass-card cursor-pointer relative overflow-hidden group" onclick="showPage('testing')">
-                    <div class="absolute top-0 right-0 p-4 opacity-5 text-8xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-vial-virus"></i></div>
-                    <i class="fa-solid fa-vial-virus text-4xl text-cyan-500 mb-6 relative z-10"></i>
-                    <h4 class="text-xl font-bold mb-3 text-slate-900 dark:text-white relative z-10">QA & Playtesting</h4>
-                    <p class="text-slate-600 dark:text-slate-400 relative z-10">Extensive bug hunting, economy balancing, and exploitation checks for hit unreleased titles.</p>
-                    <span class="text-cyan-500 font-bold block mt-4 relative z-10 group-hover:translate-x-2 transition-transform">See QA Details &rarr;</span>
+                <div class="tilt-card bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl glass-card cursor-pointer relative overflow-hidden group" onclick="showPage('testing')">
+                    <div class="tilt-card-content">
+                        <div class="absolute top-0 right-0 p-4 opacity-5 text-8xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-vial-virus"></i></div>
+                        <i class="fa-solid fa-vial-virus text-4xl text-cyan-500 mb-6 relative z-10"></i>
+                        <h4 class="text-xl font-bold mb-3 text-slate-900 dark:text-white relative z-10">QA & Playtesting</h4>
+                        <p class="text-slate-600 dark:text-slate-400 relative z-10">Strict bug hunting, balancing, and game-feel testing for hit unreleased titles.</p>
+                        <span class="text-cyan-500 font-bold block mt-4 relative z-10 group-hover:translate-x-2 transition-transform">See QA Details &rarr;</span>
+                    </div>
                 </div>
             </div>
 
             <!-- Software Skills -->
-            <div class="bg-slate-100 dark:bg-slate-900 p-8 rounded-3xl text-center border border-slate-200 dark:border-slate-800 shadow-inner">
-                <h4 class="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-8">Software & Engines</h4>
-                <div class="flex flex-wrap justify-center gap-6 md:gap-12">
+            <div class="bg-slate-100 dark:bg-slate-900/50 p-8 rounded-3xl text-center border border-slate-200 dark:border-slate-800 shadow-inner">
+                <h4 class="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-8">Engines I Operate</h4>
+                <div class="flex flex-wrap justify-center gap-6 md:gap-16">
                     <div class="flex flex-col items-center hover:-translate-y-2 transition-transform cursor-default">
-                        <div class="w-16 h-16 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center shadow-lg mb-3 border border-slate-200 dark:border-slate-700">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Roblox_player_icon_black.svg" class="w-8 h-8 dark:invert" alt="Roblox">
+                        <div class="w-20 h-20 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center shadow-lg mb-3 border border-slate-200 dark:border-slate-700">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Roblox_player_icon_black.svg" class="w-10 h-10 dark:invert" alt="Roblox">
                         </div>
                         <span class="font-bold text-sm text-slate-800 dark:text-slate-200">Roblox Studio</span>
                     </div>
                     <div class="flex flex-col items-center hover:-translate-y-2 transition-transform cursor-default">
-                        <div class="w-16 h-16 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center shadow-lg mb-3 border border-slate-200 dark:border-slate-700">
-                            <i class="fa-brands fa-uncharted text-3xl text-orange-500"></i>
+                        <div class="w-20 h-20 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center shadow-lg mb-3 border border-slate-200 dark:border-slate-700">
+                            <i class="fa-brands fa-uncharted text-4xl text-orange-500"></i>
                         </div>
                         <span class="font-bold text-sm text-slate-800 dark:text-slate-200">Unreal Engine</span>
                     </div>
                     <div class="flex flex-col items-center hover:-translate-y-2 transition-transform cursor-default">
-                        <div class="w-16 h-16 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center shadow-lg mb-3 border border-slate-200 dark:border-slate-700">
-                            <i class="fa-solid fa-map-location-dot text-3xl text-blue-500"></i>
+                        <div class="w-20 h-20 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center shadow-lg mb-3 border border-slate-200 dark:border-slate-700">
+                            <i class="fa-solid fa-map-location-dot text-4xl text-blue-500"></i>
                         </div>
                         <span class="font-bold text-sm text-slate-800 dark:text-slate-200">UEFN</span>
-                    </div>
-                    <div class="flex flex-col items-center hover:-translate-y-2 transition-transform cursor-default">
-                        <div class="w-16 h-16 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center shadow-lg mb-3 border border-slate-200 dark:border-slate-700">
-                            <i class="fa-solid fa-cube text-3xl text-orange-400"></i>
-                        </div>
-                        <span class="font-bold text-sm text-slate-800 dark:text-slate-200">Blender</span>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- SECTION: PORTFOLIO -->
+    <!-- SECTION: PORTFOLIO & TIMELINE -->
     <main id="portfolio" class="page-section max-w-6xl mx-auto px-6 py-20 bg-grid-pattern">
-        <div class="text-center mb-16 stagger-1">
-            <span class="text-blue-500 font-bold uppercase tracking-widest text-sm mb-2 block">My Work</span>
-            <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white">Projects & Experience</h2>
+        <div class="text-center mb-16">
+            <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 border border-purple-200 dark:border-purple-800 shadow-sm">
+                <i class="fa-solid fa-folder-open"></i>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white">Portfolio & Timeline</h2>
         </div>
         
         <!-- Featured Project -->
-        <div class="stagger-2 bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-1 relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.3)] mb-20 group">
+        <div class="tilt-card bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-1 relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.3)] mb-20 group">
             <div class="absolute inset-0 bg-gradient-to-r from-green-500 to-blue-500 opacity-20 blur-xl group-hover:opacity-30 transition-opacity"></div>
-            <div class="bg-slate-900 rounded-[22px] p-8 md:p-12 relative z-10 border border-slate-700/50 flex flex-col md:flex-row items-center gap-8">
+            <div class="tilt-card-content bg-slate-900 rounded-[22px] p-8 md:p-12 relative z-10 border border-slate-700/50 flex flex-col md:flex-row items-center gap-8">
                 <div class="flex-1 text-center md:text-left">
-                    <span class="bg-green-500/20 text-green-400 border border-green-500/30 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-4 inline-block">Featured Upcoming Title</span>
+                    <span class="bg-green-500/20 text-green-400 border border-green-500/30 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-4 inline-block">Featured Title</span>
                     <h3 class="text-4xl md:text-5xl font-black mb-4 text-white drop-shadow-[0_0_15px_rgba(34,197,94,0.4)]">Grow A Random Plant</h3>
                     <p class="text-slate-300 mb-6 text-lg">Currently in deep development with a massive following. Over <strong class="text-green-400">5,000+ players</strong> eagerly waiting in the community for release. Working actively as a core developer and tester.</p>
                     <div class="flex flex-wrap gap-2 justify-center md:justify-start">
-                        <span class="text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700 px-3 py-1.5 rounded uppercase">Roblox Engine</span>
+                        <span class="text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700 px-3 py-1.5 rounded uppercase">Roblox</span>
                         <span class="text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700 px-3 py-1.5 rounded uppercase">World Building</span>
                         <span class="text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700 px-3 py-1.5 rounded uppercase">QA Testing</span>
                     </div>
@@ -321,40 +349,42 @@
             </div>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-12 stagger-3">
-            <!-- Timeline (Studios) -->
+        <div class="grid md:grid-cols-2 gap-12">
+            <!-- New Updated Timeline -->
             <div>
                 <h3 class="text-2xl font-bold mb-8 text-slate-900 dark:text-white flex items-center">
-                    <i class="fa-solid fa-briefcase text-blue-500 mr-3"></i> Career Timeline
+                    <i class="fa-solid fa-route text-blue-500 mr-3"></i> The Journey
                 </h3>
-                <div class="relative border-l-2 border-slate-200 dark:border-slate-700 pl-8 ml-3 space-y-8">
-                    <!-- Item -->
+                <div class="relative border-l-2 border-slate-200 dark:border-slate-700 pl-8 ml-3 space-y-10">
+                    <!-- Future -->
+                    <div class="relative">
+                        <div class="timeline-dot bg-yellow-400 shadow-[0_0_15px_rgba(250,204,21,0.6)] flex items-center justify-center text-[8px] text-black border-yellow-200"><i class="fa-solid fa-crown"></i></div>
+                        <h4 class="text-lg font-bold text-slate-900 dark:text-white">The Goal</h4>
+                        <p class="text-sm text-yellow-600 dark:text-yellow-400 font-medium mb-1">Future</p>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">To be the absolute best developer in the space.</p>
+                    </div>
+                    <!-- Current 1 -->
                     <div class="relative">
                         <div class="timeline-dot bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
                         <h4 class="text-lg font-bold text-slate-900 dark:text-white">Developer @ GARP</h4>
                         <p class="text-sm text-green-600 dark:text-green-400 font-medium mb-1">Current • 5k+ Waiting Players</p>
                         <p class="text-sm text-slate-600 dark:text-slate-400">Core building and active QA testing.</p>
                     </div>
-                    <!-- Item -->
+                    <!-- Current 2 -->
                     <div class="relative">
-                        <div class="timeline-dot bg-yellow-500"></div>
+                        <div class="timeline-dot bg-green-400 shadow-[0_0_10px_rgba(74,222,128,0.5)]"></div>
+                        <h4 class="text-lg font-bold text-slate-900 dark:text-white">Developer @ Catch a plant</h4>
+                        <p class="text-sm text-green-600 dark:text-green-400 font-medium mb-1">Current • In Development</p>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Building environmental assets.</p>
+                    </div>
+                    <!-- Current 3 -->
+                    <div class="relative">
+                        <div class="timeline-dot bg-blue-500"></div>
                         <h4 class="text-lg font-bold text-slate-900 dark:text-white">Developer @ Toaster Productions</h4>
-                        <p class="text-sm text-yellow-600 dark:text-yellow-400 font-medium mb-1">Current</p>
+                        <p class="text-sm text-blue-600 dark:text-blue-400 font-medium mb-1">Current</p>
                         <p class="text-sm text-slate-600 dark:text-slate-400">Building and managing core studio projects.</p>
                     </div>
-                    <!-- Item -->
-                    <div class="relative">
-                        <div class="timeline-dot bg-slate-500"></div>
-                        <h4 class="text-lg font-bold text-slate-900 dark:text-white">Developer @ Catch a plant</h4>
-                        <p class="text-sm text-slate-500 font-medium mb-1">In Development (Unreleased)</p>
-                    </div>
-                    <!-- Item -->
-                    <div class="relative">
-                        <div class="timeline-dot bg-purple-500"></div>
-                        <h4 class="text-lg font-bold text-slate-900 dark:text-white">2 Redacted Games</h4>
-                        <p class="text-sm text-purple-600 dark:text-purple-400 font-medium mb-1">Under NDA</p>
-                    </div>
-                    <!-- Item -->
+                    <!-- Past -->
                     <div class="relative">
                         <div class="timeline-dot bg-slate-300 dark:bg-slate-600 border-slate-200 dark:border-slate-500 box-shadow-none"></div>
                         <h4 class="text-lg font-bold text-slate-600 dark:text-slate-400">Past Developer</h4>
@@ -382,12 +412,6 @@
                             <a href="https://www.roblox.com/games/107246293141946/Race-for-Power" target="_blank" class="text-slate-800 dark:text-slate-200 hover:text-blue-500 font-bold flex items-center"><i class="fa-solid fa-arrow-up-right-from-square text-xs mr-2 text-blue-400"></i> Race For Power</a>
                             <span class="text-[10px] font-bold tag-roblox px-2 py-0.5 rounded">ROBLOX</span>
                         </li>
-                        <li class="flex items-center justify-between p-3 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-lg transition-colors">
-                            <a href="https://www.roblox.com/games/116118074078225/Brainrots-RNG" target="_blank" class="text-slate-600 dark:text-slate-400 hover:text-blue-500 text-sm flex items-center"><i class="fa-solid fa-link text-xs mr-2"></i> Brainrots RNG</a>
-                        </li>
-                        <li class="flex items-center justify-between p-3 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-lg transition-colors">
-                            <a href="https://www.roblox.com/games/73859728333895/Poison-a-Candy" target="_blank" class="text-slate-600 dark:text-slate-400 hover:text-blue-500 text-sm flex items-center"><i class="fa-solid fa-link text-xs mr-2"></i> Poison a Candy</a>
-                        </li>
                     </ul>
                 </div>
 
@@ -403,58 +427,42 @@
 
     <!-- SECTION: QA & TESTING -->
     <main id="testing" class="page-section max-w-6xl mx-auto px-6 py-20">
-        <div class="text-center mb-16 stagger-1">
-            <div class="inline-flex items-center justify-center bg-cyan-100 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400 p-4 rounded-full mb-6 border border-cyan-200 dark:border-cyan-800 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
-                <i class="fa-solid fa-vial-virus text-4xl"></i>
+        <div class="text-center mb-16">
+            <div class="w-16 h-16 bg-cyan-100 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 border border-cyan-200 dark:border-cyan-800 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
+                <i class="fa-solid fa-vial-virus"></i>
             </div>
             <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-4 tracking-tight">Pro QA & Playtesting</h2>
-            <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg">I actively test and balance some of the most highly anticipated games on the platform. My goal is to break games logically before the players break them maliciously.</p>
+            <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg">I actively test and balance some of the most highly anticipated games on the platform. As a pure tester, my job is to find the holes, exploits, and bad flow before your players do.</p>
         </div>
 
-        <div class="grid md:grid-cols-5 gap-8 mb-16 stagger-2">
-            <!-- Terminal Console -->
-            <div class="md:col-span-3 bg-[#0a0a0a] rounded-2xl border border-slate-700 shadow-2xl overflow-hidden font-mono text-sm relative group">
-                <div class="bg-slate-800 px-4 py-2 flex items-center gap-2 border-b border-slate-700">
-                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                    <span class="ml-4 text-slate-400 text-xs">QA_Terminal.exe</span>
-                </div>
-                <div class="p-6 text-green-400 h-64 overflow-y-hidden relative">
-                    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#0a0a0a] z-10 top-1/2"></div>
-                    <div id="qa-console" class="space-y-2 opacity-80">
-                        <p>> Initializing test environment...</p>
-                        <p>> [OK] Environment loaded.</p>
-                        <p>> Running boundary check on Map_01...</p>
-                        <p class="text-red-400">> [WARN] Collision missing at coords (124, 50, -89).</p>
-                        <p>> Injecting simulated economy load...</p>
-                        <p>> [OK] Economy balanced. No infinite loops detected.</p>
-                        <p>> Initiating combat latency test...</p>
-                        <p class="cursor-blink">> _</p>
-                    </div>
+        <div class="grid md:grid-cols-3 gap-8 mb-16">
+            <!-- Value Props (No terminal) -->
+            <div class="tilt-card glass-panel p-8 rounded-2xl border-t-4 border-cyan-500 shadow-xl group hover:bg-white dark:hover:bg-slate-800 transition-colors">
+                <div class="tilt-card-content text-center">
+                    <i class="fa-solid fa-shield-halved text-5xl text-cyan-500 mb-6 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="text-xl font-black text-slate-900 dark:text-white mb-3">Exploit Hunting</h4>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Finding map holes, logical loops, and oversight vulnerabilities so you can patch them before launch day.</p>
                 </div>
             </div>
-
-            <!-- Value Prop -->
-            <div class="md:col-span-2 flex flex-col justify-center space-y-6">
-                <div class="glass-panel p-6 rounded-xl border-l-4 border-cyan-500">
-                    <h4 class="font-bold text-slate-900 dark:text-white mb-1"><i class="fa-solid fa-shield-halved text-cyan-500 mr-2"></i> Exploit Vulnerability</h4>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">Finding map holes, logical loops, and script oversights before release.</p>
+            <div class="tilt-card glass-panel p-8 rounded-2xl border-t-4 border-purple-500 shadow-xl group hover:bg-white dark:hover:bg-slate-800 transition-colors">
+                <div class="tilt-card-content text-center">
+                    <i class="fa-solid fa-scale-balanced text-5xl text-purple-500 mb-6 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="text-xl font-black text-slate-900 dark:text-white mb-3">Economy Balancing</h4>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Testing progression pacing and item values to ensure long-term player retention without grinding frustration.</p>
                 </div>
-                <div class="glass-panel p-6 rounded-xl border-l-4 border-purple-500">
-                    <h4 class="font-bold text-slate-900 dark:text-white mb-1"><i class="fa-solid fa-scale-balanced text-purple-500 mr-2"></i> Economy & Balancing</h4>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">Running the math on progression systems to ensure long-term player retention.</p>
-                </div>
-                <div class="glass-panel p-6 rounded-xl border-l-4 border-blue-500">
-                    <h4 class="font-bold text-slate-900 dark:text-white mb-1"><i class="fa-solid fa-gamepad text-blue-500 mr-2"></i> Game Feel / UX</h4>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">Providing actionable feedback on UI flow, combat weight, and input latency.</p>
+            </div>
+            <div class="tilt-card glass-panel p-8 rounded-2xl border-t-4 border-blue-500 shadow-xl group hover:bg-white dark:hover:bg-slate-800 transition-colors">
+                <div class="tilt-card-content text-center">
+                    <i class="fa-solid fa-gamepad text-5xl text-blue-500 mb-6 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="text-xl font-black text-slate-900 dark:text-white mb-3">Game Feel & UX</h4>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Providing actionable feedback on UI flow, combat weight, input latency, and general player enjoyment.</p>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl overflow-hidden mb-16 stagger-3">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl overflow-hidden mb-16">
             <div class="bg-slate-100 dark:bg-slate-900/80 px-8 py-6 border-b border-slate-200 dark:border-slate-700">
-                <h3 class="text-xl font-bold text-slate-900 dark:text-white"><i class="fa-solid fa-clipboard-check mr-2 text-cyan-500"></i> Games I Currently / Previously Test</h3>
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white"><i class="fa-solid fa-list-check mr-2 text-cyan-500"></i> Active / Past Test Roster</h3>
             </div>
             <div class="p-8">
                 <div class="flex flex-wrap gap-4 font-medium">
@@ -471,7 +479,7 @@
             </div>
         </div>
 
-        <div class="flex justify-center stagger-4">
+        <div class="flex justify-center">
             <button onclick="hireForTesting()" class="bg-cyan-500 hover:bg-cyan-400 text-slate-900 px-10 py-5 rounded-2xl font-black text-xl transition-all shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:shadow-[0_0_30px_rgba(6,182,212,0.6)] hover:-translate-y-1 flex items-center group">
                 <i class="fa-solid fa-file-signature mr-3 group-hover:scale-110 transition-transform"></i> Hire Me For QA Testing
             </button>
@@ -480,14 +488,16 @@
 
     <!-- SECTION: GALLERY (DYNAMIC JS) -->
     <main id="gallery" class="page-section max-w-6xl mx-auto px-6 py-20">
-        <div class="text-center mb-12 stagger-1">
-            <span class="text-blue-500 font-bold uppercase tracking-widest text-sm mb-2 block">Visuals</span>
+        <div class="text-center mb-12">
+            <div class="w-16 h-16 bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 border border-pink-200 dark:border-pink-800 shadow-sm">
+                <i class="fa-solid fa-images"></i>
+            </div>
             <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-4">Media Gallery</h2>
-            <p class="text-slate-600 dark:text-slate-400 max-w-xl mx-auto">A collection of my latest Roblox builds, fluid animations, and design workflows. Click any media to expand.</p>
+            <p class="text-slate-600 dark:text-slate-400 max-w-xl mx-auto">A collection of my latest builds and fluid animations. Click any media to expand.</p>
         </div>
 
         <!-- Filters & Sorting -->
-        <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4 bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm stagger-2">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4 bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
             <div class="flex gap-2 bg-slate-100 dark:bg-slate-900 p-1.5 rounded-full">
                 <button onclick="setGalleryFilter('all')" id="btn-filter-all" class="filter-btn active">All</button>
                 <button onclick="setGalleryFilter('image')" id="btn-filter-image" class="filter-btn">Images</button>
@@ -504,7 +514,7 @@
         </div>
 
         <!-- Dynamic Grid Container -->
-        <div id="dynamic-gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 transition-opacity duration-300 stagger-3">
+        <div id="dynamic-gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 transition-opacity duration-300">
             <!-- Rendered via JS -->
         </div>
     </main>
@@ -512,40 +522,46 @@
     <!-- SECTION: PRICING -->
     <main id="pricing" class="page-section bg-grid-pattern relative">
         <div class="max-w-6xl mx-auto px-6 py-20 relative z-10">
-            <div class="text-center mb-16 stagger-1">
-                <span class="text-blue-500 font-bold uppercase tracking-widest text-sm mb-2 block">Investment</span>
+            <div class="text-center mb-16">
+                <div class="w-16 h-16 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 border border-green-200 dark:border-green-800 shadow-sm">
+                    <i class="fa-solid fa-tags"></i>
+                </div>
                 <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white bg-white/80 dark:bg-slate-900/80 backdrop-blur-md inline-block px-10 py-3 rounded-full border border-slate-200 dark:border-slate-800 shadow-sm">Pricing Rates</h2>
             </div>
             
-            <div class="grid md:grid-cols-2 gap-8 mb-16 stagger-2">
-                <div class="bg-slate-900 p-8 rounded-2xl border border-slate-700 shadow-xl relative overflow-hidden group hover:border-blue-500/50 transition-colors">
-                    <div class="absolute top-0 right-0 p-4 opacity-5 text-8xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-hammer"></i></div>
-                    <h3 class="text-2xl font-black mb-8 text-white relative z-10 flex items-center border-b border-slate-800 pb-4"><i class="fa-solid fa-hammer mr-3 text-blue-500"></i> Building</h3>
-                    <div class="space-y-4 text-slate-300 font-medium relative z-10">
-                        <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Simple Assets</span><span class="font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded">50 - 100 R$</span></div>
-                        <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Detailed Props</span><span class="font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded">250 - 400 R$</span></div>
-                        <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Exterior Build</span><span class="font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded">500 - 800 R$</span></div>
-                        <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Interior Build</span><span class="font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded">800 - 1.2k R$</span></div>
-                        <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Small Map / Lobby</span><span class="font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded">1.5k - 2.5k R$</span></div>
-                        <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Large Map</span><span class="font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded">3.5k - 10k R$</span></div>
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+                <div class="tilt-card bg-slate-900 p-8 rounded-2xl border border-slate-700 shadow-xl relative overflow-hidden group hover:border-blue-500/50 transition-colors">
+                    <div class="tilt-card-content">
+                        <div class="absolute top-0 right-0 p-4 opacity-5 text-8xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-hammer"></i></div>
+                        <h3 class="text-2xl font-black mb-8 text-white relative z-10 flex items-center border-b border-slate-800 pb-4"><i class="fa-solid fa-hammer mr-3 text-blue-500"></i> Building</h3>
+                        <div class="space-y-4 text-slate-300 font-medium relative z-10">
+                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Simple Assets</span><span class="font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded">50 - 100 R$</span></div>
+                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Detailed Props</span><span class="font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded">250 - 400 R$</span></div>
+                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Exterior Build</span><span class="font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded">500 - 800 R$</span></div>
+                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Interior Build</span><span class="font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded">800 - 1.2k R$</span></div>
+                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Small Map / Lobby</span><span class="font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded">1.5k - 2.5k R$</span></div>
+                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Large Map</span><span class="font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded">3.5k - 10k R$</span></div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="bg-slate-900 p-8 rounded-2xl border border-slate-700 shadow-xl relative overflow-hidden group hover:border-orange-500/50 transition-colors">
-                    <div class="absolute top-0 right-0 p-4 opacity-5 text-8xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-person-running"></i></div>
-                    <h3 class="text-2xl font-black mb-8 text-white relative z-10 flex items-center border-b border-slate-800 pb-4"><i class="fa-solid fa-person-running mr-3 text-orange-500"></i> Animation (R6/R15)</h3>
-                    <div class="space-y-4 text-slate-300 font-medium relative z-10">
-                        <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Basic Loops</span><span class="font-bold text-orange-400 bg-orange-500/10 px-3 py-1 rounded">50 - 250 R$</span></div>
-                        <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Action / Combat Moves</span><span class="font-bold text-orange-400 bg-orange-500/10 px-3 py-1 rounded">150 - 600 R$</span></div>
-                        <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Dances / Emotes</span><span class="font-bold text-orange-400 bg-orange-500/10 px-3 py-1 rounded">350 - 1.2k R$</span></div>
-                        <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Action Sets (Combos)</span><span class="font-bold text-orange-400 bg-orange-500/10 px-3 py-1 rounded">500 - 1.5k R$</span></div>
+                <div class="tilt-card bg-slate-900 p-8 rounded-2xl border border-slate-700 shadow-xl relative overflow-hidden group hover:border-orange-500/50 transition-colors">
+                    <div class="tilt-card-content">
+                        <div class="absolute top-0 right-0 p-4 opacity-5 text-8xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-person-running"></i></div>
+                        <h3 class="text-2xl font-black mb-8 text-white relative z-10 flex items-center border-b border-slate-800 pb-4"><i class="fa-solid fa-person-running mr-3 text-orange-500"></i> Animation (R6/R15)</h3>
+                        <div class="space-y-4 text-slate-300 font-medium relative z-10">
+                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Basic Loops</span><span class="font-bold text-orange-400 bg-orange-500/10 px-3 py-1 rounded">50 - 250 R$</span></div>
+                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Action / Combat Moves</span><span class="font-bold text-orange-400 bg-orange-500/10 px-3 py-1 rounded">150 - 600 R$</span></div>
+                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Dances / Emotes</span><span class="font-bold text-orange-400 bg-orange-500/10 px-3 py-1 rounded">350 - 1.2k R$</span></div>
+                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Action Sets (Combos)</span><span class="font-bold text-orange-400 bg-orange-500/10 px-3 py-1 rounded">500 - 1.5k R$</span></div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Payment Structures -->
-            <h3 class="text-3xl font-bold mb-8 text-center text-slate-900 dark:text-white stagger-3">Payment Structures</h3>
-            <div class="grid md:grid-cols-3 gap-6 mb-16 stagger-4">
+            <h3 class="text-3xl font-bold mb-8 text-center text-slate-900 dark:text-white">Payment Structures</h3>
+            <div class="grid md:grid-cols-3 gap-6 mb-16">
                 <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 text-center shadow-lg transition-transform hover:-translate-y-2">
                     <div class="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4 text-green-500 text-2xl"><i class="fa-solid fa-lock"></i></div>
                     <h4 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">100% Upfront</h4>
@@ -565,16 +581,16 @@
                     <p class="text-sm text-slate-600 dark:text-slate-400">For trusted clients. View final product in a locked showcase, pay prior to handoff.</p>
                 </div>
             </div>
-
+            
             <!-- FAQs -->
-            <div class="max-w-3xl mx-auto space-y-4 stagger-4">
+            <div class="max-w-3xl mx-auto space-y-4">
                 <details class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 group cursor-pointer overflow-hidden">
                     <summary class="p-6 font-bold text-lg text-slate-900 dark:text-white flex justify-between items-center outline-none hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
                         <span><i class="fa-solid fa-code mr-2 text-blue-500"></i> Do you also do scripting or UI design?</span>
                         <i class="fa-solid fa-chevron-down transition-transform group-open:rotate-180 text-slate-400"></i>
                     </summary>
                     <div class="p-6 pt-0 border-t border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 text-sm mt-4 bg-slate-50 dark:bg-slate-900/50">
-                        My core expertise is entirely focused on World Building, Character Animation, and QA Testing. I do not offer scripting or UI design services, ensuring my full attention goes to the visual and mechanical quality of your project.
+                        No. I focus strictly on what I am best at: World Building, Character Animation, and QA Playtesting. By not spreading myself thin over scripts and UI, you get the absolute highest quality visual and mechanical testing work.
                     </div>
                 </details>
                 
@@ -584,22 +600,7 @@
                         <i class="fa-solid fa-chevron-down transition-transform group-open:rotate-180 text-slate-400"></i>
                     </summary>
                     <div class="p-6 pt-0 border-t border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 text-sm mt-4 bg-slate-50 dark:bg-slate-900/50">
-                        I accept Robux (via Roblox group payouts or T-Shirt with 30% tax covered by client). Direct cash equivalents are accepted depending on project scope. Open to Rev-Share ONLY for established, highly promising studios.
-                    </div>
-                </details>
-
-                <details class="bg-red-50 dark:bg-red-900/10 rounded-2xl shadow-sm border border-red-200 dark:border-red-900/30 group cursor-pointer overflow-hidden">
-                    <summary class="p-6 font-bold text-lg text-red-600 dark:text-red-400 flex justify-between items-center outline-none hover:bg-red-100 dark:hover:bg-red-900/20 transition-colors">
-                        <span><i class="fa-solid fa-scroll mr-2"></i> Terms of Service</span>
-                        <i class="fa-solid fa-chevron-down transition-transform group-open:rotate-180 text-red-400"></i>
-                    </summary>
-                    <div class="p-6 pt-0 border-t border-red-200 dark:border-red-900/30 text-slate-700 dark:text-slate-300 text-sm mt-4">
-                        <ul class="list-disc pl-5 space-y-2">
-                            <li>I reserve the right to decline any commission.</li>
-                            <li><strong>No refunds</strong> will be issued after the project is 50% completed or handed over.</li>
-                            <li>Marketplace Taxes (30%) must be covered by the client if paying via Gamepass/T-Shirt.</li>
-                            <li>You are entitled to two (2) free minor revisions. Major structural changes cost extra.</li>
-                        </ul>
+                        I accept Robux (via Roblox group payouts or T-Shirt with the 30% tax covered by the client). Direct cash equivalents are accepted depending on project scope. Open to Rev-Share ONLY for established, highly promising studios.
                     </div>
                 </details>
             </div>
@@ -608,8 +609,10 @@
 
     <!-- SECTION: CONTACT -->
     <main id="contact" class="page-section max-w-5xl mx-auto px-6 py-20">
-        <div class="text-center mb-12 stagger-1">
-            <span class="text-blue-500 font-bold uppercase tracking-widest text-sm mb-2 block">Connect</span>
+        <div class="text-center mb-12">
+            <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 border border-blue-200 dark:border-blue-800 shadow-sm">
+                <i class="fa-solid fa-paper-plane"></i>
+            </div>
             <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-6">Let's Work Together</h2>
             
             <div class="inline-flex items-center gap-6 glass-panel px-8 py-4 rounded-full border border-slate-300 dark:border-slate-700 shadow-md">
@@ -626,7 +629,7 @@
             </div>
         </div>
         
-        <div class="bg-white dark:bg-slate-800 p-8 md:p-12 rounded-3xl shadow-2xl max-w-3xl mx-auto border border-slate-200 dark:border-slate-700 relative overflow-hidden stagger-2">
+        <div class="bg-white dark:bg-slate-800 p-8 md:p-12 rounded-3xl shadow-2xl max-w-3xl mx-auto border border-slate-200 dark:border-slate-700 relative overflow-hidden">
             <!-- Decorative blur -->
             <div class="absolute -top-20 -right-20 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
             
@@ -679,6 +682,108 @@
 
     <script>
         /* -----------------------------------------------------
+           SETTINGS MENU LOGIC
+        ----------------------------------------------------- */
+        function toggleSettings() {
+            const menu = document.getElementById('settings-menu');
+            const overlay = document.getElementById('settings-overlay');
+            if(menu.classList.contains('open')) {
+                menu.classList.remove('open');
+                overlay.classList.add('opacity-0');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+            } else {
+                overlay.classList.remove('hidden');
+                // slight delay for rendering
+                setTimeout(() => {
+                    overlay.classList.remove('opacity-0');
+                    menu.classList.add('open');
+                }, 10);
+            }
+        }
+
+        /* -----------------------------------------------------
+           CUSTOM CURSOR
+        ----------------------------------------------------- */
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorOutline = document.getElementById('cursor-outline');
+        let cursorEnabled = true;
+
+        window.addEventListener('mousemove', function(e) {
+            if(!cursorEnabled) return;
+            const posX = e.clientX;
+            const posY = e.clientY;
+            
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            
+            // Subtle delay on outline
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        // Hover effect for buttons/links
+        document.querySelectorAll('button, a, .cursor-pointer').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                if(!cursorEnabled) return;
+                cursorOutline.style.width = '60px';
+                cursorOutline.style.height = '60px';
+                cursorOutline.style.borderColor = 'rgba(239, 68, 68, 0.5)'; // red-ish
+            });
+            el.addEventListener('mouseleave', () => {
+                if(!cursorEnabled) return;
+                cursorOutline.style.width = '40px';
+                cursorOutline.style.height = '40px';
+                cursorOutline.style.borderColor = 'rgba(59, 130, 246, 0.5)'; // blue
+            });
+        });
+
+        function toggleCursor() {
+            cursorEnabled = !cursorEnabled;
+            const ball = document.getElementById('cursor-toggle-ball');
+            const bg = document.getElementById('cursor-toggle-bg');
+            if(cursorEnabled) {
+                document.body.classList.add('custom-cursor');
+                ball.classList.add('translate-x-6');
+                bg.classList.replace('bg-slate-300', 'bg-blue-500');
+            } else {
+                document.body.classList.remove('custom-cursor');
+                ball.classList.remove('translate-x-6');
+                bg.classList.replace('bg-blue-500', 'bg-slate-300');
+            }
+        }
+
+        /* -----------------------------------------------------
+           VANILLA 3D TILT EFFECT
+        ----------------------------------------------------- */
+        const tiltCards = document.querySelectorAll('.tilt-card');
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const tiltX = ((y - centerY) / centerY) * -10; // max rotation degrees
+                const tiltY = ((x - centerX) / centerX) * 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                card.style.transition = 'transform 0.5s ease';
+            });
+            
+            card.addEventListener('mouseenter', () => {
+                card.style.transition = 'none'; // remove transition for smooth tracking
+            });
+        });
+
+        /* -----------------------------------------------------
            SCROLL PROGRESS
         ----------------------------------------------------- */
         window.addEventListener('scroll', () => {
@@ -716,7 +821,6 @@
             const sortOrder = document.getElementById('sort-gallery').value;
             
             let filtered = mediaData.filter(item => currentFilter === 'all' || item.type === currentFilter);
-            
             filtered.sort((a, b) => sortOrder === 'newest' ? b.num - a.num : a.num - b.num);
 
             grid.style.opacity = 0;
@@ -784,14 +888,12 @@
         }
 
         function showPage(pageId) {
-            // Remove active classes
             document.querySelectorAll('.page-section').forEach(page => page.classList.remove('active'));
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
-                if(link.id !== 'nav-testing') { link.classList.remove('text-cyan-600', 'dark:text-cyan-400'); } // reset specific coloring
+                if(link.id !== 'nav-testing') { link.classList.remove('text-cyan-600', 'dark:text-cyan-400'); } 
             });
             
-            // Re-trigger animation by forcing reflow (optional, but CSS display block usually handles it)
             const activePage = document.getElementById(pageId);
             activePage.classList.add('active');
             
@@ -802,7 +904,6 @@
             
             if(pageId === 'home') runCounters();
             if(pageId === 'gallery') renderGallery();
-            if(pageId === 'testing') runQAConsole();
         }
 
         function hireForTesting() {
@@ -818,12 +919,14 @@
             navigator.clipboard.writeText("Quackers");
             showToast("Copied Discord Username!");
             const icon = document.getElementById("copy-icon");
-            icon.classList.replace("fa-copy", "fa-check");
-            icon.classList.add("text-green-500");
-            setTimeout(() => {
-                icon.classList.replace("fa-check", "fa-copy");
-                icon.classList.remove("text-green-500");
-            }, 2000);
+            if(icon) {
+                icon.classList.replace("fa-copy", "fa-check");
+                icon.classList.add("text-green-500");
+                setTimeout(() => {
+                    icon.classList.replace("fa-check", "fa-copy");
+                    icon.classList.remove("text-green-500");
+                }, 2000);
+            }
         }
 
         function showToast(message) {
@@ -833,10 +936,7 @@
             toast.innerHTML = `<i class="fa-solid fa-check-circle text-green-400 mr-2"></i> ${message}`;
             container.appendChild(toast);
             
-            // Animate in
             setTimeout(() => { toast.classList.remove('translate-y-[-20px]', 'opacity-0'); }, 10);
-            
-            // Animate out
             setTimeout(() => { 
                 toast.classList.add('opacity-0', 'translate-y-[-20px]'); 
                 setTimeout(() => toast.remove(), 300); 
@@ -853,6 +953,7 @@
         const typeTarget = document.getElementById("typewriter-text");
 
         function typeEffect() {
+            if(!typeTarget) return;
             const currentRole = roles[roleIndex];
             
             if (isDeleting) {
@@ -866,36 +967,14 @@
             let typeSpeed = isDeleting ? 50 : 100;
 
             if (!isDeleting && charIndex === currentRole.length) {
-                typeSpeed = 2000; // Pause at end of word
+                typeSpeed = 2000;
                 isDeleting = true;
             } else if (isDeleting && charIndex === 0) {
                 isDeleting = false;
                 roleIndex = (roleIndex + 1) % roles.length;
-                typeSpeed = 500; // Pause before new word
+                typeSpeed = 500;
             }
-
             setTimeout(typeEffect, typeSpeed);
-        }
-
-        /* -----------------------------------------------------
-           QA CONSOLE EFFECT
-        ----------------------------------------------------- */
-        function runQAConsole() {
-            const consoleBox = document.getElementById('qa-console');
-            const lines = consoleBox.children;
-            // Reset opacity
-            for(let i=0; i<lines.length-1; i++) {
-                lines[i].style.display = 'none';
-            }
-            
-            let delay = 0;
-            for(let i=0; i<lines.length-1; i++) {
-                delay += Math.random() * 400 + 200; // Random delay between lines
-                setTimeout(() => {
-                    lines[i].style.display = 'block';
-                    consoleBox.parentElement.scrollTop = consoleBox.parentElement.scrollHeight;
-                }, delay);
-            }
         }
 
         /* -----------------------------------------------------
@@ -904,12 +983,16 @@
         function toggleTheme() {
             const html = document.documentElement;
             const icon = document.getElementById('theme-icon');
+            const toggleBall = document.getElementById('theme-toggle-ball');
+            
             if (html.classList.contains('dark')) {
                 html.classList.remove('dark');
-                icon.classList.replace('fa-moon', 'fa-sun');
+                if(icon) icon.classList.replace('fa-moon', 'fa-sun');
+                if(toggleBall) toggleBall.classList.remove('translate-x-6');
             } else {
                 html.classList.add('dark');
-                icon.classList.replace('fa-sun', 'fa-moon');
+                if(icon) icon.classList.replace('fa-sun', 'fa-moon');
+                if(toggleBall) toggleBall.classList.add('translate-x-6');
             }
         }
 
