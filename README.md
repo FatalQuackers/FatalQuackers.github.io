@@ -1,17 +1,21 @@
 # FatalQuackers.github.io
 
-Portfolio site for Quackers (Developer @ RUSHED). Live at https://fatalquackers.github.io
+Portfolio site for Quackers, owner of RUSHED. Live at https://fatalquackers.github.io
 
-## Updating
+## Games page (live Roblox stats)
 
-Everything is in `index.html`. Near the bottom, in the `DATA` section of the script:
+List your games in `data/games.config.json`:
 
-- `projects`: the "More projects" cards.
-- `nowBuilding`: the scrolling "Currently on" bar.
-- `strips`: screenshot rows for RUSHED and Tethr Link (images live in `projects/`).
-- `priceBuild` / `priceAnim`: pricing rows.
-- `mediaData`: gallery items (add the file to the repo, then list it).
+- `places`: place IDs (the number in `roblox.com/games/<ID>/...`)
+- `groups`: Roblox group IDs (e.g. the RUSHED group); every public game the group owns is added
+- `users`: Roblox user IDs; every public game on that profile is added
 
-Background music is generated live in the browser (no audio file). Visitors start it with the Music button; volume is in Settings.
+The **Update Roblox game stats** GitHub Action (`.github/workflows/roblox-games.yml`) fetches visits, players, likes, favourites, icons and screenshots every 6 hours and saves them to `data/games.json`. Run it any time from the **Actions** tab → *Update Roblox game stats* → *Run workflow*. Game screenshots also show up in the Gallery under "My games".
 
-Pages can be linked directly: `#portfolio`, `#gallery`, `#pricing`, `#testing`, `#contact`.
+## Other content
+
+Everything else is in `index.html`, in the `DATA` section near the bottom of the script: the "Currently on" bar, QA roster, RUSHED / Tethr Link screenshot rows (`projects/`), pricing and gallery files.
+
+Light/dark mode follows the visitor's device and can be switched with the moon button. Background music is generated in the browser (no audio file).
+
+Pages: `#portfolio`, `#games`, `#gallery`, `#pricing`, `#testing`, `#contact`.

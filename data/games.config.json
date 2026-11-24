@@ -1,0 +1,6 @@
+{
+  "_help": "Add your Roblox games here. places = place IDs (the number in roblox.com/games/<ID>/...). groups / users = Roblox group or user IDs; every public game they own is added automatically.",
+  "places": [122389212847304, 136622842983476, 107246293141946],
+  "groups": [],
+  "users": []
+}
