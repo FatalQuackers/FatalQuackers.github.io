@@ -1,39 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Quackers - Professional Game Developer, Builder, Animator, and QA Tester specializing in Roblox Studio, Unreal Engine, and UEFN.">
-    
-    <title>Quackers | Pro Developer & QA</title>
-    
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
-    
+    <meta name="description" content="Quackers — multi-engine game developer from OCE. World building, animation and QA for Roblox, UEFN and Unreal, plus my own games and open-source apps like Tethr Link.">
+    <meta property="og:title" content="Quackers | Game Developer & QA">
+    <meta property="og:description" content="Roblox, Unreal & UEFN developer. Now building HAZARDOUS CORP., Parcel Dash and Tethr Link.">
+    <meta property="og:image" content="https://fatalquackers.github.io/Image6.png">
+    <meta name="theme-color" content="#0b0d10">
+    <title>Quackers | Game Developer & QA</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2224%22 fill=%22%23ffd23f%22/><text x=%2250%22 y=%2272%22 font-size=%2264%22 font-family=%22Arial Black,Arial%22 font-weight=%22900%22 text-anchor=%22middle%22 fill=%22%230b0d10%22>Q</text></svg>">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            darkMode: 'class',
-            theme: { 
-                extend: { 
-                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['Fira Code', 'monospace'] },
-                    animation: {
-                        'float-slow': 'float 6s ease-in-out infinite',
-                        'float-fast': 'float 4s ease-in-out infinite reverse',
+            theme: {
+                extend: {
+                    colors: {
+                        ink: '#0b0d10', panel: '#13161b', panel2: '#1a1e25', line: '#262b34',
+                        duck: '#ffd23f', duckdim: '#c9a42e', sky: '#4cc9f0', mute: '#8b93a1'
                     },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        }
+                    fontFamily: {
+                        display: ['Unbounded', 'system-ui', 'sans-serif'],
+                        sans: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
                     }
-                } 
+                }
             }
         }
     </script>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
     <script>
         window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
         formspree('initForm', { formElement: '#contact-form', formId: 'maqapryg' });
@@ -41,1108 +40,800 @@
     <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
     <style>
-        body { transition: background-color 0.3s ease, color 0.3s ease; scroll-behavior: smooth; overflow-x: hidden; }
-        
-        /* Custom Cursor */
-        body.custom-cursor { cursor: none; }
-        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 99999; pointer-events: none; transition: opacity 0.2s; }
-        .cursor-dot { width: 8px; height: 8px; background-color: #3b82f6; }
-        .cursor-outline { width: 40px; height: 40px; border: 2px solid rgba(59, 130, 246, 0.5); transition: width 0.2s, height 0.2s, border-color 0.2s; }
+        html { scroll-behavior: smooth; }
+        body { overflow-x: hidden; }
+        ::selection { background: #ffd23f; color: #0b0d10; }
+
+        /* Custom cursor (toggle in settings) */
+        body.custom-cursor, body.custom-cursor * { cursor: none !important; }
+        .cursor-dot, .cursor-outline { opacity: 0; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 99999; pointer-events: none; }
+        .cursor-dot { width: 8px; height: 8px; background: #ffd23f; }
+        .cursor-outline { width: 38px; height: 38px; border: 2px solid rgba(255, 210, 63, .45); transition: width .2s, height .2s, border-color .2s; }
+        .cursor-outline.hover { width: 60px; height: 60px; border-color: rgba(76, 201, 240, .6); }
         body:not(.custom-cursor) .cursor-dot, body:not(.custom-cursor) .cursor-outline { display: none; }
-        
-        /* Scroll Progress Bar */
-        #scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: #3b82f6; z-index: 9999; transition: width 0.1s; box-shadow: 0 0 10px #3b82f6; }
+        @media (hover: none) { .cursor-dot, .cursor-outline { display: none !important; } }
 
-        /* Navigation */
-        .nav-link { cursor: pointer; transition: 0.3s; padding: 0.5rem 1rem; border-radius: 99px; font-weight: 600; display: inline-flex; items-center; gap: 0.3rem; }
-        .nav-link:hover { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
-        .nav-link.active { background: #3b82f6; color: white; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); }
-        .nav-link.active i { color: white !important; }
-        
-        /* Page Transitions */
+        #scroll-progress { position: fixed; top: 0; left: 0; width: 0; height: 3px; background: #ffd23f; z-index: 9999; }
+
+        /* Nav */
+        .nav-link { cursor: pointer; padding: .55rem 1rem; border-radius: 999px; font-weight: 600; color: #b7bec9; transition: .2s; white-space: nowrap; }
+        .nav-link:hover { color: #fff; background: rgba(255,255,255,.06); }
+        .nav-link.active { background: #ffd23f; color: #0b0d10; }
+
+        /* Pages */
         .page-section { display: none; }
-        .page-section.active { display: block; animation: slideUpFade 0.4s ease forwards; }
-        @keyframes slideUpFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .page-section.active { display: block; animation: rise .45s ease both; }
+        @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,0,1); }
+        .reveal.active { opacity: 1; transform: none; }
 
-        /* Scroll Reveal Animation */
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        /* Hero */
+        .hero-grid { background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 48px 48px; mask-image: radial-gradient(ellipse at 30% 40%, #000 30%, transparent 75%); }
+        .shot { box-shadow: 0 30px 60px -20px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.08); }
+        .float-a { animation: floatA 7s ease-in-out infinite; }
+        .float-b { animation: floatB 8s ease-in-out infinite; }
+        @keyframes floatA { 0%,100% { transform: rotate(-4deg) translateY(0); } 50% { transform: rotate(-4deg) translateY(-12px); } }
+        @keyframes floatB { 0%,100% { transform: rotate(5deg) translateY(0); } 50% { transform: rotate(5deg) translateY(10px); } }
 
-        /* Glassmorphism */
-        .glass-panel { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); }
-        .dark .glass-panel { background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.05); }
-        
-        /* 3D Tilt & Magnetic Glow Cards */
-        .tilt-card { transform-style: preserve-3d; transform: perspective(1000px); }
-        .tilt-card-content { transform: translateZ(30px); }
-        
-        .glow-card { position: relative; overflow: hidden; }
-        .glow-card::before {
-            content: ""; position: absolute; inset: 0; border-radius: inherit;
-            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 40%);
-            z-index: 0; pointer-events: none; opacity: 0; transition: opacity 0.3s;
+        /* Ticker */
+        .ticker { display: flex; width: max-content; animation: ticker 32s linear infinite; }
+        @keyframes ticker { to { transform: translateX(-50%); } }
+
+        /* Cards */
+        .card { background: #13161b; border: 1px solid #262b34; border-radius: 22px; transition: transform .25s ease, border-color .25s ease; }
+        .card:hover { border-color: #3a404b; }
+        .lift:hover { transform: translateY(-4px); }
+        .glow { position: relative; overflow: hidden; }
+        .glow::before { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .3s;
+            background: radial-gradient(500px circle at var(--mx, 50%) var(--my, 50%), rgba(255,210,63,.07), transparent 40%); }
+        .glow:hover::before { opacity: 1; }
+        .glow > * { position: relative; }
+
+        .status { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .02em; padding: .25rem .6rem; border-radius: 999px; display: inline-flex; align-items: center; gap: .4rem; }
+        .status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+        .s-live { color: #4ade80; background: rgba(74,222,128,.1); }
+        .s-dev { color: #ffd23f; background: rgba(255,210,63,.1); }
+        .s-past { color: #8b93a1; background: rgba(139,147,161,.12); }
+        .chip { font-size: 12px; font-weight: 600; padding: .3rem .65rem; border-radius: 8px; background: #1a1e25; color: #c5ccd6; border: 1px solid #262b34; }
+
+        .filter-btn { padding: .5rem 1.1rem; border-radius: 999px; font-weight: 600; font-size: .875rem; color: #b7bec9; background: #1a1e25; border: 1px solid #262b34; transition: .2s; }
+        .filter-btn:hover { color: #fff; }
+        .filter-btn.active { background: #ffd23f; color: #0b0d10; border-color: #ffd23f; }
+
+        .skill-bar-fill { transition: width 1.4s cubic-bezier(.1,.6,.1,1); width: 0; }
+
+        .timeline { position: relative; border-left: 2px solid #262b34; margin-left: 8px; padding-left: 28px; }
+        .t-dot { position: absolute; left: -37px; top: 4px; width: 16px; height: 16px; border-radius: 50%; border: 3px solid #0b0d10; }
+
+        [data-fs-error]:not(:empty) { display: block; color: #f87171; font-size: .875rem; margin-top: .25rem; }
+        details > summary { list-style: none; } details > summary::-webkit-details-marker { display: none; }
+
+        #settings-menu { transform: translateX(100%); transition: transform .3s ease; }
+        #settings-menu.open { transform: none; }
+
+        ::-webkit-scrollbar { width: 8px; } ::-webkit-scrollbar-track { background: #0b0d10; }
+        ::-webkit-scrollbar-thumb { background: #2c323c; border-radius: 10px; } ::-webkit-scrollbar-thumb:hover { background: #ffd23f; }
+
+        .cursor-blink { animation: blink 1s step-end infinite; } @keyframes blink { 50% { opacity: 0; } }
+
+        /* Easter eggs */
+        .robux-rain { position: fixed; top: -60px; z-index: 9998; pointer-events: none; animation: fall linear forwards; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+        .shake-screen { animation: shake .45s; }
+        @keyframes shake { 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-5px); } 80% { transform: translateX(5px); } }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            .reveal { opacity: 1; transform: none; }
         }
-        .dark .glow-card::before { background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.04), transparent 40%); }
-        .glow-card:hover::before { opacity: 1; }
-        .glow-card > * { position: relative; z-index: 1; }
-        
-        /* Glowing Texts */
-        .glow-robux { text-shadow: 0 0 15px rgba(74, 222, 128, 0.6); }
-        .glow-blue { text-shadow: 0 0 15px rgba(59, 130, 246, 0.7); }
-
-        /* Progress Bars */
-        .skill-bar-fill { transition: width 1.5s cubic-bezier(0.1, 0.5, 0.1, 1); width: 0%; }
-
-        /* Formspree */
-        [data-fs-error]:not(:empty) { display: block; color: #ef4444; font-size: 0.875rem; margin-top: 0.25rem; }
-        details > summary { list-style: none; }
-        details > summary::-webkit-details-marker { display: none; }
-        
-        /* Animated Hero Background */
-        @keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        .hero-bg { background: linear-gradient(-45deg, #0f172a, #1e3a8a, #020617, #0f172a); background-size: 400% 400%; animation: gradientMove 15s ease infinite; }
-
-        /* Developer Grid Background */
-        .bg-grid-pattern {
-            background-image: linear-gradient(to right, rgba(148, 163, 184, 0.07) 1px, transparent 1px), linear-gradient(to bottom, rgba(148, 163, 184, 0.07) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
-        
-        /* Engine Tags & Buttons */
-        .tag-roblox { background: rgba(220, 38, 38, 0.1); color: #ef4444; border: 1px solid rgba(220, 38, 38, 0.3); }
-        .filter-btn { padding: 0.5rem 1.5rem; border-radius: 9999px; font-weight: 600; font-size: 0.875rem; transition: all 0.2s; border: 1px solid transparent; }
-        .filter-btn.active { background-color: #3b82f6; color: white; box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.39); }
-        .filter-btn:not(.active) { background-color: rgba(148, 163, 184, 0.1); color: #64748b; }
-        .dark .filter-btn:not(.active) { color: #cbd5e1; }
-        .filter-btn:not(.active):hover { background-color: rgba(148, 163, 184, 0.2); }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #2563eb; }
-
-        /* Typing Cursor & Timeline */
-        .cursor-blink { animation: blink 1s step-end infinite; }
-        @keyframes blink { 50% { opacity: 0; } }
-        
-        #settings-menu { transform: translateX(100%); transition: transform 0.3s ease-in-out; }
-        #settings-menu.open { transform: translateX(0); }
-        .timeline-dot { position: absolute; left: -29px; width: 16px; height: 16px; border-radius: 50%; background: #3b82f6; border: 3px solid #0f172a; box-shadow: 0 0 10px rgba(59,130,246,0.5); }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 antialiased font-sans relative custom-cursor">
+<body class="bg-ink text-slate-100 antialiased font-sans custom-cursor">
 
-    <!-- Custom Cursor -->
     <div class="cursor-dot" id="cursor-dot"></div>
     <div class="cursor-outline" id="cursor-outline"></div>
     <div id="scroll-progress"></div>
 
-    <!-- Media Modal -->
-    <div id="media-modal" class="fixed inset-0 z-[100] bg-slate-900/95 backdrop-blur-md hidden flex justify-center items-center opacity-0 transition-opacity duration-300" onclick="closeModal()">
-        <span class="absolute top-6 right-6 text-white text-5xl cursor-pointer hover:text-red-500 transition-colors z-[110]">&times;</span>
-        <div class="max-w-[90%] max-h-[90%] flex justify-center items-center" onclick="event.stopPropagation()">
-            <img id="modal-img" class="hidden rounded-xl shadow-2xl object-contain max-h-[85vh] border border-slate-700" src="">
-            <video id="modal-video" controls class="hidden rounded-xl shadow-2xl max-h-[85vh] w-full max-w-5xl border border-slate-700"></video>
+    <!-- Media modal -->
+    <div id="media-modal" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md hidden flex justify-center items-center opacity-0 transition-opacity duration-300" onclick="closeModal()">
+        <button class="absolute top-5 right-6 text-white/80 hover:text-duck text-5xl leading-none" aria-label="Close">&times;</button>
+        <div class="max-w-[92%] max-h-[90%] flex justify-center items-center" onclick="event.stopPropagation()">
+            <img id="modal-img" class="hidden rounded-2xl shadow-2xl object-contain max-h-[86vh]" src="" alt="">
+            <video id="modal-video" controls class="hidden rounded-2xl shadow-2xl max-h-[86vh] w-full max-w-5xl"></video>
         </div>
     </div>
 
-    <!-- Floating Action Buttons -->
-    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
-        <button onclick="toggleSettings()" class="bg-slate-800 dark:bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform flex items-center justify-center group" title="Settings">
+    <!-- Floating buttons -->
+    <div class="fixed bottom-5 right-5 z-50 flex flex-col gap-3">
+        <button onclick="toggleSettings()" class="w-12 h-12 bg-panel2 border border-line hover:border-duck text-white rounded-full shadow-lg flex items-center justify-center group" title="Settings" aria-label="Settings">
             <i class="fa-solid fa-gear group-hover:rotate-90 transition-transform duration-500"></i>
         </button>
-        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="bg-slate-800 dark:bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform flex items-center justify-center opacity-70 hover:opacity-100">
-            <i class="fa-solid fa-chevron-up"></i>
+        <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="w-12 h-12 bg-panel2 border border-line hover:border-duck text-white rounded-full shadow-lg flex items-center justify-center" aria-label="Back to top">
+            <i class="fa-solid fa-arrow-up"></i>
         </button>
     </div>
 
-    <!-- Settings Sidebar -->
-    <div id="settings-overlay" class="fixed inset-0 bg-black/50 z-[101] hidden opacity-0 transition-opacity" onclick="toggleSettings()"></div>
-    <div id="settings-menu" class="fixed top-0 right-0 w-80 h-full bg-white dark:bg-slate-900 z-[102] shadow-[-10px_0_30px_rgba(0,0,0,0.3)] border-l border-slate-200 dark:border-slate-800 p-6 flex flex-col">
-        <div class="flex justify-between items-center mb-8 border-b border-slate-200 dark:border-slate-800 pb-4">
-            <h3 class="text-xl font-bold"><i class="fa-solid fa-sliders mr-2 text-blue-500"></i> Preferences</h3>
-            <button onclick="toggleSettings()" class="text-slate-500 hover:text-red-500 text-2xl">&times;</button>
+    <!-- Settings -->
+    <div id="settings-overlay" class="fixed inset-0 bg-black/60 z-[101] hidden opacity-0 transition-opacity" onclick="toggleSettings()"></div>
+    <aside id="settings-menu" class="fixed top-0 right-0 w-80 max-w-[85vw] h-full bg-panel z-[102] border-l border-line p-6 flex flex-col">
+        <div class="flex justify-between items-center mb-8 pb-4 border-b border-line">
+            <h3 class="text-lg font-bold">Settings</h3>
+            <button onclick="toggleSettings()" class="text-mute hover:text-duck text-3xl leading-none" aria-label="Close">&times;</button>
         </div>
-        <div class="space-y-6">
-            <div class="flex justify-between items-center">
-                <span class="font-medium">Dark Mode</span>
-                <button onclick="toggleTheme()" class="w-12 h-6 bg-slate-300 dark:bg-blue-500 rounded-full relative transition-colors">
-                    <div id="theme-toggle-ball" class="w-4 h-4 bg-white rounded-full absolute top-1 left-1 dark:translate-x-6 transition-transform"></div>
-                </button>
-            </div>
-            <div class="flex justify-between items-center">
-                <span class="font-medium">Custom Cursor</span>
-                <button onclick="toggleCursor()" class="w-12 h-6 bg-blue-500 rounded-full relative transition-colors" id="cursor-toggle-bg">
-                    <div id="cursor-toggle-ball" class="w-4 h-4 bg-white rounded-full absolute top-1 left-1 translate-x-6 transition-transform"></div>
-                </button>
-            </div>
-            <div class="pt-6 border-t border-slate-200 dark:border-slate-800">
-                <h4 class="text-sm font-bold text-slate-500 mb-4 uppercase">Quick Links</h4>
-                <div class="flex flex-col gap-3">
-                    <a href="https://www.youtube.com/@Fatalquackers" target="_blank" class="flex items-center text-slate-600 dark:text-slate-300 hover:text-red-500 transition-colors"><i class="fa-brands fa-youtube w-6"></i> YouTube Channel</a>
-                    <button onclick="copyDiscord(); toggleSettings();" class="flex items-center text-slate-600 dark:text-slate-300 hover:text-indigo-500 transition-colors text-left"><i class="fa-brands fa-discord w-6"></i> Copy Discord ID</button>
-                </div>
+        <div class="flex justify-between items-center">
+            <span class="font-medium">Custom cursor</span>
+            <button onclick="toggleCursor()" id="cursor-toggle-bg" class="w-12 h-6 bg-duck rounded-full relative transition-colors" aria-label="Toggle custom cursor">
+                <span id="cursor-toggle-ball" class="w-4 h-4 bg-ink rounded-full absolute top-1 left-1 translate-x-6 transition-transform"></span>
+            </button>
+        </div>
+        <div class="mt-8 pt-6 border-t border-line">
+            <h4 class="text-sm font-semibold text-mute mb-4">Quick links</h4>
+            <div class="flex flex-col gap-3">
+                <a href="https://www.youtube.com/@Fatalquackers" target="_blank" rel="noopener" class="text-slate-300 hover:text-duck"><i class="fa-brands fa-youtube w-6"></i> YouTube</a>
+                <a href="https://github.com/FatalQuackers" target="_blank" rel="noopener" class="text-slate-300 hover:text-duck"><i class="fa-brands fa-github w-6"></i> GitHub</a>
+                <button onclick="copyDiscord(); toggleSettings();" class="text-left text-slate-300 hover:text-duck"><i class="fa-brands fa-discord w-6"></i> Copy Discord username</button>
             </div>
         </div>
-    </div>
+        <p class="mt-auto text-xs text-mute">Psst: try typing <span class="font-mono text-duck">robux</span> anywhere.</p>
+    </aside>
 
-    <!-- Navigation -->
-    <nav class="glass-panel sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0">
-            <div class="flex items-center gap-4">
-                <div class="text-2xl font-black tracking-widest text-slate-900 dark:text-white cursor-pointer select-none" onclick="triggerSecretClick()">
-                    QUACKERS<span class="text-blue-500 text-3xl leading-none">.</span>
-                </div>
-            </div>
-            
-            <div class="flex flex-wrap justify-center items-center gap-2 md:gap-4 font-semibold text-sm md:text-base text-slate-600 dark:text-slate-300">
-                <a onclick="showPage('home')" class="nav-link active" id="nav-home"><i class="fa-solid fa-house text-slate-400"></i> Home</a>
-                <a onclick="showPage('portfolio')" class="nav-link" id="nav-portfolio"><i class="fa-solid fa-folder-open text-slate-400"></i> Portfolio</a>
-                <a onclick="showPage('gallery')" class="nav-link" id="nav-gallery"><i class="fa-solid fa-images text-slate-400"></i> Gallery</a>
-                <a onclick="showPage('pricing')" class="nav-link" id="nav-pricing"><i class="fa-solid fa-tags text-slate-400"></i> Pricing</a>
-                <a onclick="showPage('testing')" class="nav-link" id="nav-testing"><i class="fa-solid fa-vial-virus text-cyan-500"></i> QA</a>
-                <a onclick="showPage('contact')" class="nav-link" id="nav-contact"><i class="fa-solid fa-paper-plane text-slate-400"></i> Contact</a>
+    <!-- Nav -->
+    <nav class="sticky top-0 z-50 bg-ink/80 backdrop-blur-xl border-b border-line">
+        <div class="max-w-6xl mx-auto px-5 py-3 flex flex-col md:flex-row md:justify-between items-center gap-3">
+            <button class="font-display font-black text-xl tracking-tight select-none" onclick="triggerSecretClick()">
+                QUACKERS<span class="text-duck">.</span>
+            </button>
+            <div class="flex gap-1 overflow-x-auto max-w-full text-sm pb-1 md:pb-0">
+                <a href="#home" class="nav-link active" id="nav-home">Home</a>
+                <a href="#work" class="nav-link" id="nav-work">Work</a>
+                <a href="#testing" class="nav-link" id="nav-testing">QA</a>
+                <a href="#gallery" class="nav-link" id="nav-gallery">Gallery</a>
+                <a href="#pricing" class="nav-link" id="nav-pricing">Pricing</a>
+                <a href="#contact" class="nav-link" id="nav-contact">Contact</a>
             </div>
         </div>
     </nav>
 
-    <!-- SECTION: HOME -->
+    <!-- ================= HOME ================= -->
     <main id="home" class="page-section active">
-        <div class="hero-bg py-32 px-6 text-center text-white relative overflow-hidden">
-            <!-- Particle Canvas -->
-            <canvas id="hero-particles" class="absolute inset-0 z-0 opacity-50"></canvas>
-            
-            <!-- Floating Ambient Shapes -->
-            <div class="absolute top-10 left-10 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl animate-float-slow pointer-events-none z-0"></div>
-            <div class="absolute bottom-10 right-20 w-48 h-48 bg-blue-400/20 rounded-full blur-3xl animate-float-fast pointer-events-none z-0"></div>
-            
-            <div class="max-w-6xl mx-auto relative z-10 reveal active">
-                <div class="inline-flex items-center glass-panel px-4 py-1.5 rounded-full mb-8 shadow-lg">
-                    <i class="fa-solid fa-code text-blue-400 mr-2"></i>
-                    <span class="text-sm font-bold uppercase tracking-wider text-slate-200">OCE Based Multi-Engine Dev</span>
-                </div>
-                
-                <h1 class="text-5xl md:text-7xl font-black mb-4 drop-shadow-2xl tracking-tight">HI, I'M <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">QUACKERS</span></h1>
-                
-                <h2 class="text-2xl md:text-3xl text-slate-300 mb-8 font-mono h-10">
-                    > <span id="typewriter-text" class="text-white font-bold"></span><span class="cursor-blink text-blue-400">_</span>
-                </h2>
-                
-                <p class="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed mb-10 drop-shadow-md">
-                    Determined to push the boundaries of multiplayer experiences. Specializing in crafting competitive maps in <strong>UEFN</strong>, developing in <strong>Unreal Engine</strong>, and creating massive <strong>Roblox projects</strong>. I focus strictly on world building, animation, and breaking games through professional QA testing.
-                </p>
+        <section class="relative overflow-hidden">
+            <div class="absolute inset-0 hero-grid pointer-events-none"></div>
+            <div class="absolute -top-32 -left-24 w-96 h-96 bg-duck/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute bottom-0 right-0 w-[28rem] h-[28rem] bg-sky/10 rounded-full blur-3xl pointer-events-none"></div>
 
-                <div class="flex justify-center gap-4 flex-wrap mb-12">
-                    <button onclick="showPage('portfolio')" class="bg-white text-slate-900 hover:bg-slate-200 px-8 py-3 rounded-full font-bold transition shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:-translate-y-1">View Portfolio</button>
-                    <a href="https://www.youtube.com/@Fatalquackers" target="_blank" class="glass-panel hover:bg-white/20 text-white px-8 py-3 rounded-full font-bold transition flex items-center hover:-translate-y-1">
-                        <i class="fa-brands fa-youtube mr-2 text-red-500 text-xl"></i> YouTube
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="max-w-6xl mx-auto px-6 py-20">
-            <!-- Expertise Section -->
-            <div class="text-center mb-12 reveal">
-                <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 border border-blue-200 dark:border-blue-800 shadow-sm">
-                    <i class="fa-solid fa-star"></i>
-                </div>
-                <h3 class="text-4xl font-black text-slate-900 dark:text-white">Core Expertise</h3>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-8 mb-20 reveal">
-                <div class="tilt-card glow-card bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl relative group">
-                    <div class="tilt-card-content">
-                        <div class="absolute top-0 right-0 p-4 opacity-5 text-8xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-hammer"></i></div>
-                        <i class="fa-solid fa-hammer text-4xl text-blue-500 mb-6 relative z-10"></i>
-                        <h4 class="text-xl font-bold mb-3 text-slate-900 dark:text-white relative z-10">World Building</h4>
-                        <p class="text-slate-600 dark:text-slate-400 relative z-10">Designing immersive environments and structured level layouts for Roblox and UEFN.</p>
-                    </div>
-                </div>
-                
-                <div class="tilt-card glow-card bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl relative group">
-                    <div class="tilt-card-content">
-                        <div class="absolute top-0 right-0 p-4 opacity-5 text-8xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-person-running"></i></div>
-                        <i class="fa-solid fa-person-running text-4xl text-orange-500 mb-6 relative z-10"></i>
-                        <h4 class="text-xl font-bold mb-3 text-slate-900 dark:text-white relative z-10">Character Animation</h4>
-                        <p class="text-slate-600 dark:text-slate-400 relative z-10">Bringing characters to life with fluid R6 and R15 animations, from traversal loops to heavy combat sequences.</p>
-                    </div>
-                </div>
-                
-                <div class="tilt-card glow-card bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl cursor-pointer relative group" onclick="showPage('testing')">
-                    <div class="tilt-card-content">
-                        <div class="absolute top-0 right-0 p-4 opacity-5 text-8xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-vial-virus"></i></div>
-                        <i class="fa-solid fa-vial-virus text-4xl text-cyan-500 mb-6 relative z-10"></i>
-                        <h4 class="text-xl font-bold mb-3 text-slate-900 dark:text-white relative z-10">QA & Playtesting</h4>
-                        <p class="text-slate-600 dark:text-slate-400 relative z-10">Strict bug hunting, balancing, and game-feel testing for hit unreleased titles.</p>
-                        <span class="text-cyan-500 font-bold block mt-4 relative z-10 group-hover:translate-x-2 transition-transform">See QA Details &rarr;</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Software Skills w/ Progress Bars -->
-            <div class="bg-slate-100 dark:bg-slate-900/50 p-8 md:p-12 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-inner reveal">
-                <h4 class="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-10 text-center">Engines I Operate</h4>
-                
-                <div class="grid md:grid-cols-3 gap-10">
-                    <div class="flex flex-col">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-white dark:bg-slate-800 rounded-xl flex items-center justify-center shadow-md mr-4 border border-slate-200 dark:border-slate-700">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Roblox_player_icon_black.svg" class="w-6 h-6 dark:invert" alt="Roblox">
-                            </div>
-                            <span class="font-bold text-lg text-slate-800 dark:text-slate-200">Roblox Studio</span>
-                        </div>
-                        <div class="h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
-                            <div class="h-full bg-blue-500 skill-bar-fill" data-width="95%"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="flex flex-col">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-white dark:bg-slate-800 rounded-xl flex items-center justify-center shadow-md mr-4 border border-slate-200 dark:border-slate-700">
-                                <i class="fa-brands fa-uncharted text-2xl text-orange-500"></i>
-                            </div>
-                            <span class="font-bold text-lg text-slate-800 dark:text-slate-200">Unreal Engine</span>
-                        </div>
-                        <div class="h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
-                            <div class="h-full bg-orange-500 skill-bar-fill" data-width="75%"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="flex flex-col">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-white dark:bg-slate-800 rounded-xl flex items-center justify-center shadow-md mr-4 border border-slate-200 dark:border-slate-700">
-                                <i class="fa-solid fa-map-location-dot text-2xl text-blue-400"></i>
-                            </div>
-                            <span class="font-bold text-lg text-slate-800 dark:text-slate-200">UEFN</span>
-                        </div>
-                        <div class="h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
-                            <div class="h-full bg-blue-400 skill-bar-fill" data-width="85%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- SECTION: PORTFOLIO & TIMELINE -->
-    <main id="portfolio" class="page-section max-w-6xl mx-auto px-6 py-20 bg-grid-pattern">
-        <div class="text-center mb-16 reveal">
-            <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 border border-purple-200 dark:border-purple-800 shadow-sm">
-                <i class="fa-solid fa-folder-open"></i>
-            </div>
-            <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white">Portfolio & Timeline</h2>
-        </div>
-        
-        <!-- Featured Project: Garden Maniac -->
-        <div class="tilt-card glow-card bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-1 relative shadow-[0_20px_50px_rgba(0,0,0,0.3)] mb-20 group reveal">
-            <div class="absolute inset-0 bg-gradient-to-r from-emerald-500 to-lime-500 opacity-20 blur-xl group-hover:opacity-30 transition-opacity"></div>
-            <div class="tilt-card-content bg-slate-900 rounded-[22px] p-8 md:p-12 relative z-10 border border-slate-700/50 flex flex-col md:flex-row items-center gap-8">
-                <div class="flex-1 text-center md:text-left">
-                    <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-4 inline-block">Active Title</span>
-                    <h3 class="text-4xl md:text-5xl font-black mb-4 text-white drop-shadow-[0_0_15px_rgba(16,185,129,0.4)]">Garden Maniac</h3>
-                    <p class="text-slate-300 mb-6 text-lg">Currently in active, core development. Focusing on custom environmental layouts, high-detail prop creation, polished animation sequences, and extensive mechanical testing.</p>
-                    <div class="flex flex-wrap gap-2 justify-center md:justify-start">
-                        <span class="text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700 px-3 py-1.5 rounded uppercase">Roblox</span>
-                        <span class="text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700 px-3 py-1.5 rounded uppercase">World Building</span>
-                        <span class="text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700 px-3 py-1.5 rounded uppercase">QA & Balancing</span>
-                    </div>
-                </div>
-                <div class="w-full md:w-1/3 flex justify-center">
-                    <div class="w-48 h-48 bg-slate-800 rounded-full border-4 border-emerald-500 shadow-[0_0_30px_rgba(16,185,129,0.3)] flex items-center justify-center animate-pulse">
-                        <i class="fa-solid fa-seedling text-7xl text-emerald-400"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-12 reveal">
-            <!-- Timeline -->
-            <div>
-                <h3 class="text-2xl font-bold mb-8 text-slate-900 dark:text-white flex items-center">
-                    <i class="fa-solid fa-route text-blue-500 mr-3"></i> The Journey
-                </h3>
-                <div class="relative border-l-2 border-slate-200 dark:border-slate-700 pl-8 ml-3 space-y-10">
-                    <div class="relative">
-                        <div class="timeline-dot bg-yellow-400 shadow-[0_0_15px_rgba(250,204,21,0.6)] flex items-center justify-center text-[8px] text-black border-yellow-200"><i class="fa-solid fa-crown"></i></div>
-                        <h4 class="text-lg font-bold text-slate-900 dark:text-white">The Goal</h4>
-                        <p class="text-sm text-yellow-600 dark:text-yellow-400 font-medium mb-1">Future</p>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">To be the absolute best developer in the space.</p>
-                    </div>
-                    <div class="relative">
-                        <div class="timeline-dot bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]"></div>
-                        <h4 class="text-lg font-bold text-slate-900 dark:text-white">Developer @ Garden Maniac</h4>
-                        <p class="text-sm text-emerald-600 dark:text-emerald-400 font-medium mb-1">Current • Active Development</p>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">Handling core environmental construction, world assets, and QA balancing.</p>
-                    </div>
-                    <div class="relative">
-                        <div class="timeline-dot bg-green-400 shadow-[0_0_10px_rgba(74,222,128,0.5)]"></div>
-                        <h4 class="text-lg font-bold text-slate-900 dark:text-white">Developer @ Catch a plant</h4>
-                        <p class="text-sm text-green-600 dark:text-green-400 font-medium mb-1">Current • In Development</p>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">Building environmental assets.</p>
-                    </div>
-                    <div class="relative">
-                        <div class="timeline-dot bg-blue-500"></div>
-                        <h4 class="text-lg font-bold text-slate-900 dark:text-white">Developer @ Toaster Productions</h4>
-                        <p class="text-sm text-blue-600 dark:text-blue-400 font-medium mb-1">Current</p>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">Building and managing core studio projects.</p>
-                    </div>
-                    <div class="relative">
-                        <div class="timeline-dot bg-slate-400 dark:bg-slate-600 border-slate-300 dark:border-slate-500"></div>
-                        <h4 class="text-lg font-bold text-slate-700 dark:text-slate-300">Ex-Developer @ GARP (Grow A Random Plant)</h4>
-                        <p class="text-sm text-slate-500 font-medium mb-1">Past</p>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">Worked on core environmental building, map setups, and testing for community release.</p>
-                    </div>
-                    <div class="relative">
-                        <div class="timeline-dot bg-slate-300 dark:bg-slate-600 border-slate-200 dark:border-slate-500 box-shadow-none"></div>
-                        <h4 class="text-lg font-bold text-slate-600 dark:text-slate-400">Past Developer</h4>
-                        <p class="text-sm text-slate-500 font-medium">@ Astrax Interactive & Spawnpoint Studios</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="space-y-8">
-                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-lg glow-card">
-                    <h3 class="text-xl font-bold mb-6 text-slate-900 dark:text-white flex items-center">
-                        <i class="fa-solid fa-gamepad text-orange-500 mr-3"></i> Released Titles
-                    </h3>
-                    <ul class="space-y-4">
-                        <li class="flex items-center justify-between p-3 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-lg transition-colors">
-                            <a href="https://www.roblox.com/games/122389212847304/Sunkun" target="_blank" class="text-slate-800 dark:text-slate-200 hover:text-blue-500 font-bold flex items-center"><i class="fa-solid fa-arrow-up-right-from-square text-xs mr-2 text-blue-400"></i> Sunkun</a>
-                            <span class="text-[10px] font-bold tag-roblox px-2 py-0.5 rounded">ROBLOX</span>
-                        </li>
-                        <li class="flex items-center justify-between p-3 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-lg transition-colors">
-                            <a href="https://www.roblox.com/games/136622842983476/Punch-For-Power" target="_blank" class="text-slate-800 dark:text-slate-200 hover:text-blue-500 font-bold flex items-center"><i class="fa-solid fa-arrow-up-right-from-square text-xs mr-2 text-blue-400"></i> Punch For Power</a>
-                            <span class="text-[10px] font-bold tag-roblox px-2 py-0.5 rounded">ROBLOX</span>
-                        </li>
-                        <li class="flex items-center justify-between p-3 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-lg transition-colors">
-                            <a href="https://www.roblox.com/games/107246293141946/Race-for-Power" target="_blank" class="text-slate-800 dark:text-slate-200 hover:text-blue-500 font-bold flex items-center"><i class="fa-solid fa-arrow-up-right-from-square text-xs mr-2 text-blue-400"></i> Race For Power</a>
-                            <span class="text-[10px] font-bold tag-roblox px-2 py-0.5 rounded">ROBLOX</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="bg-gradient-to-r from-blue-900/80 to-slate-900 p-6 rounded-2xl border border-blue-500/30 shadow-lg text-white">
-                    <h3 class="text-lg font-bold mb-2 flex items-center">
-                        <i class="fa-solid fa-map-location-dot text-blue-400 mr-2"></i> Engine Prototypes
-                    </h3>
-                    <p class="text-sm text-blue-200">Developing various competitive maps and structured environments within <strong class="text-white bg-blue-500/20 px-1 rounded">UEFN</strong>. Check out the visual gallery to see standard workflow results.</p>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- SECTION: QA & TESTING -->
-    <main id="testing" class="page-section max-w-6xl mx-auto px-6 py-20">
-        <div class="text-center mb-16 reveal">
-            <div class="w-16 h-16 bg-cyan-100 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 border border-cyan-200 dark:border-cyan-800 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
-                <i class="fa-solid fa-vial-virus"></i>
-            </div>
-            <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-4 tracking-tight">Pro QA & Playtesting</h2>
-            <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg">I actively test and balance some of the most highly anticipated games on the platform. As a pure tester, my job is to find the holes, exploits, and bad flow before your players do.</p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-8 mb-16 reveal">
-            <div class="tilt-card glow-card glass-panel p-8 rounded-2xl border-t-4 border-cyan-500 shadow-xl group hover:bg-white dark:hover:bg-slate-800 transition-colors">
-                <div class="tilt-card-content text-center">
-                    <i class="fa-solid fa-shield-halved text-5xl text-cyan-500 mb-6 group-hover:scale-110 transition-transform"></i>
-                    <h4 class="text-xl font-black text-slate-900 dark:text-white mb-3">Exploit Hunting</h4>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">Finding map holes, logical loops, and oversight vulnerabilities so you can patch them before launch day.</p>
-                </div>
-            </div>
-            <div class="tilt-card glow-card glass-panel p-8 rounded-2xl border-t-4 border-purple-500 shadow-xl group hover:bg-white dark:hover:bg-slate-800 transition-colors">
-                <div class="tilt-card-content text-center">
-                    <i class="fa-solid fa-scale-balanced text-5xl text-purple-500 mb-6 group-hover:scale-110 transition-transform"></i>
-                    <h4 class="text-xl font-black text-slate-900 dark:text-white mb-3">Economy Balancing</h4>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">Testing progression pacing and item values to ensure long-term player retention without grinding frustration.</p>
-                </div>
-            </div>
-            <div class="tilt-card glow-card glass-panel p-8 rounded-2xl border-t-4 border-blue-500 shadow-xl group hover:bg-white dark:hover:bg-slate-800 transition-colors">
-                <div class="tilt-card-content text-center">
-                    <i class="fa-solid fa-gamepad text-5xl text-blue-500 mb-6 group-hover:scale-110 transition-transform"></i>
-                    <h4 class="text-xl font-black text-slate-900 dark:text-white mb-3">Game Feel & UX</h4>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">Providing actionable feedback on UI flow, combat weight, input latency, and general player enjoyment.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl overflow-hidden mb-16 reveal">
-            <div class="bg-slate-100 dark:bg-slate-900/80 px-8 py-6 border-b border-slate-200 dark:border-slate-700">
-                <h3 class="text-xl font-bold text-slate-900 dark:text-white"><i class="fa-solid fa-list-check mr-2 text-cyan-500"></i> Active / Past Test Roster</h3>
-            </div>
-            <div class="p-8">
-                <div class="flex flex-wrap gap-4 font-medium">
-                    <span class="bg-slate-50 dark:bg-slate-700/50 px-4 py-2 rounded-lg text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-600 shadow-sm hover:-translate-y-1 transition-transform cursor-default">🌱 Garden Maniac</span>
-                    <span class="bg-slate-50 dark:bg-slate-700/50 px-4 py-2 rounded-lg text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-600 shadow-sm hover:-translate-y-1 transition-transform cursor-default">🌿 Plants vs Brainrots</span>
-                    <span class="bg-slate-50 dark:bg-slate-700/50 px-4 py-2 rounded-lg text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-600 shadow-sm hover:-translate-y-1 transition-transform cursor-default">⚔️ Jandels Battlegrounds</span>
-                    <span class="bg-slate-50 dark:bg-slate-700/50 px-4 py-2 rounded-lg text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-600 shadow-sm hover:-translate-y-1 transition-transform cursor-default">🌊 Brainrot Seas</span>
-                    <span class="bg-slate-50 dark:bg-slate-700/50 px-4 py-2 rounded-lg text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-600 shadow-sm hover:-translate-y-1 transition-transform cursor-default">🌾 Grow a random plant (Past QA)</span>
-                    <span class="bg-slate-50 dark:bg-slate-700/50 px-4 py-2 rounded-lg text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-600 shadow-sm hover:-translate-y-1 transition-transform cursor-default">🪴 Catch a plant</span>
-                    <span class="bg-slate-50 dark:bg-slate-700/50 px-4 py-2 rounded-lg text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-600 shadow-sm hover:-translate-y-1 transition-transform cursor-default">🦎 Chameleon by SPS</span>
-                    <span class="bg-slate-50 dark:bg-slate-700/50 px-4 py-2 rounded-lg text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-600 shadow-sm hover:-translate-y-1 transition-transform cursor-default">🔫 Strike Force</span>
-                    <span class="bg-slate-50 dark:bg-slate-700/50 px-4 py-2 rounded-lg text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-600 shadow-sm hover:-translate-y-1 transition-transform cursor-default">🍀 +1 SPEED LUCKY BLOCK</span>
-                    <span class="bg-gradient-to-r from-cyan-100 to-blue-100 dark:from-cyan-900/40 dark:to-blue-900/40 px-4 py-2 rounded-lg text-cyan-800 dark:text-cyan-300 border border-cyan-300 dark:border-cyan-700 italic font-bold">...and unreleased NDA titles 🤫</span>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- SECTION: GALLERY (DYNAMIC JS) -->
-    <main id="gallery" class="page-section max-w-6xl mx-auto px-6 py-20">
-        <div class="text-center mb-12 reveal">
-            <div class="w-16 h-16 bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 border border-pink-200 dark:border-pink-800 shadow-sm">
-                <i class="fa-solid fa-images"></i>
-            </div>
-            <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-4">Media Gallery</h2>
-            <p class="text-slate-600 dark:text-slate-400 max-w-xl mx-auto">A collection of my latest builds and fluid animations. Click any media to expand.</p>
-        </div>
-
-        <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4 bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm reveal">
-            <div class="flex gap-2 bg-slate-100 dark:bg-slate-900 p-1.5 rounded-full">
-                <button onclick="setGalleryFilter('all')" id="btn-filter-all" class="filter-btn active">All</button>
-                <button onclick="setGalleryFilter('image')" id="btn-filter-image" class="filter-btn">Images</button>
-                <button onclick="setGalleryFilter('video')" id="btn-filter-video" class="filter-btn">Videos</button>
-            </div>
-            
-            <div class="flex items-center gap-3">
-                <label for="sort-gallery" class="text-sm font-bold text-slate-600 dark:text-slate-400"><i class="fa-solid fa-sort mr-1"></i> Sort:</label>
-                <select id="sort-gallery" onchange="renderGallery()" class="bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-white border border-slate-300 dark:border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500 font-medium cursor-pointer transition-colors">
-                    <option value="newest">Newest First</option>
-                    <option value="oldest">Oldest First</option>
-                </select>
-            </div>
-        </div>
-
-        <div id="dynamic-gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 transition-opacity duration-300 reveal">
-            <!-- Rendered via JS -->
-        </div>
-    </main>
-
-    <!-- SECTION: PRICING -->
-    <main id="pricing" class="page-section bg-grid-pattern relative">
-        <div class="max-w-6xl mx-auto px-6 py-20 relative z-10">
-            <div class="text-center mb-16 reveal">
-                <div class="w-16 h-16 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 border border-green-200 dark:border-green-800 shadow-sm">
-                    <i class="fa-solid fa-tags"></i>
-                </div>
-                <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white bg-white/80 dark:bg-slate-900/80 backdrop-blur-md inline-block px-10 py-3 rounded-full border border-slate-200 dark:border-slate-800 shadow-sm">Pricing Rates</h2>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-8 mb-16 reveal">
-                <div class="tilt-card glow-card bg-slate-900 p-8 rounded-2xl border border-slate-700 shadow-xl relative group">
-                    <div class="tilt-card-content">
-                        <div class="absolute top-0 right-0 p-4 opacity-5 text-8xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-hammer"></i></div>
-                        <h3 class="text-2xl font-black mb-8 text-white relative z-10 flex items-center border-b border-slate-800 pb-4"><i class="fa-solid fa-hammer mr-3 text-blue-500"></i> Building</h3>
-                        <div class="space-y-4 text-slate-300 font-medium relative z-10">
-                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Simple Assets</span><span class="font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded">50 - 100 R$</span></div>
-                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Detailed Props</span><span class="font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded">250 - 400 R$</span></div>
-                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Exterior Build</span><span class="font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded">500 - 800 R$</span></div>
-                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Interior Build</span><span class="font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded">800 - 1.2k R$</span></div>
-                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Small Map / Lobby</span><span class="font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded">1.5k - 2.5k R$</span></div>
-                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Large Map</span><span class="font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded">3.5k - 10k R$</span></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tilt-card glow-card bg-slate-900 p-8 rounded-2xl border border-slate-700 shadow-xl relative group">
-                    <div class="tilt-card-content">
-                        <div class="absolute top-0 right-0 p-4 opacity-5 text-8xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-person-running"></i></div>
-                        <h3 class="text-2xl font-black mb-8 text-white relative z-10 flex items-center border-b border-slate-800 pb-4"><i class="fa-solid fa-person-running mr-3 text-orange-500"></i> Animation (R6/R15)</h3>
-                        <div class="space-y-4 text-slate-300 font-medium relative z-10">
-                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Basic Loops</span><span class="font-bold text-orange-400 bg-orange-500/10 px-3 py-1 rounded">50 - 250 R$</span></div>
-                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Action / Combat Moves</span><span class="font-bold text-orange-400 bg-orange-500/10 px-3 py-1 rounded">150 - 600 R$</span></div>
-                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Dances / Emotes</span><span class="font-bold text-orange-400 bg-orange-500/10 px-3 py-1 rounded">350 - 1.2k R$</span></div>
-                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Action Sets (Combos)</span><span class="font-bold text-orange-400 bg-orange-500/10 px-3 py-1 rounded">500 - 1.5k R$</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Payment Structures -->
-            <h3 class="text-3xl font-bold mb-8 text-center text-slate-900 dark:text-white reveal">Payment Structures</h3>
-            <div class="grid md:grid-cols-3 gap-6 mb-16 reveal">
-                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 text-center shadow-lg transition-transform hover:-translate-y-2">
-                    <div class="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4 text-green-500 text-2xl"><i class="fa-solid fa-lock"></i></div>
-                    <h4 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">100% Upfront</h4>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">Guarantees your priority spot and rapid delivery.</p>
-                </div>
-                
-                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border-2 border-blue-500 text-center shadow-[0_0_20px_rgba(59,130,246,0.2)] transition-transform hover:-translate-y-2 relative transform md:-translate-y-4">
-                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider">Most Popular</div>
-                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-500 text-2xl mt-2"><i class="fa-solid fa-scale-balanced"></i></div>
-                    <h4 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">50 / 50 Split</h4>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">Pay 50% deposit. Preview and approve the work, then pay the remaining 50% for handoff.</p>
-                </div>
-
-                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 text-center shadow-lg transition-transform hover:-translate-y-2">
-                    <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-4 text-purple-500 text-2xl"><i class="fa-solid fa-handshake-angle"></i></div>
-                    <h4 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">Pay After</h4>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">For trusted clients. View final product in a locked showcase, pay prior to handoff.</p>
-                </div>
-            </div>
-            
-            <!-- FAQs -->
-            <div class="max-w-3xl mx-auto space-y-4 reveal">
-                <details class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 group cursor-pointer overflow-hidden">
-                    <summary class="p-6 font-bold text-lg text-slate-900 dark:text-white flex justify-between items-center outline-none hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-                        <span><i class="fa-solid fa-code mr-2 text-blue-500"></i> Do you also do scripting or UI design?</span>
-                        <i class="fa-solid fa-chevron-down transition-transform group-open:rotate-180 text-slate-400"></i>
-                    </summary>
-                    <div class="p-6 pt-0 border-t border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 text-sm mt-4 bg-slate-50 dark:bg-slate-900/50">
-                        No. I focus strictly on what I am best at: World Building, Character Animation, and QA Playtesting. By not spreading myself thin over scripts and UI, you get the absolute highest quality visual and mechanical testing work.
-                    </div>
-                </details>
-                
-                <details class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 group cursor-pointer overflow-hidden">
-                    <summary class="p-6 font-bold text-lg text-slate-900 dark:text-white flex justify-between items-center outline-none hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-                        <span><i class="fa-solid fa-coins mr-2 text-yellow-500"></i> What payment methods do you accept?</span>
-                        <i class="fa-solid fa-chevron-down transition-transform group-open:rotate-180 text-slate-400"></i>
-                    </summary>
-                    <div class="p-6 pt-0 border-t border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 text-sm mt-4 bg-slate-50 dark:bg-slate-900/50">
-                        I accept Robux (via Roblox group payouts or T-Shirt with the 30% tax covered by the client). Direct cash equivalents are accepted depending on project scope. Open to Rev-Share ONLY for established, highly promising studios.
-                    </div>
-                </details>
-            </div>
-        </div>
-    </main>
-
-    <!-- SECTION: CONTACT -->
-    <main id="contact" class="page-section max-w-5xl mx-auto px-6 py-20">
-        <div class="text-center mb-12 reveal">
-            <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 border border-blue-200 dark:border-blue-800 shadow-sm">
-                <i class="fa-solid fa-paper-plane"></i>
-            </div>
-            <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-6">Let's Work Together</h2>
-            
-            <div class="inline-flex items-center gap-6 glass-panel px-8 py-4 rounded-full border border-slate-300 dark:border-slate-700 shadow-md">
-                <div class="flex items-center">
-                    <i class="fa-regular fa-clock text-blue-500 mr-2 animate-pulse text-lg"></i> 
-                    <span class="text-slate-600 dark:text-slate-300 font-medium">Local Time (OCE): <strong id="local-time" class="text-slate-900 dark:text-white font-mono ml-1">...</strong></span>
-                </div>
-                <div class="w-px h-6 bg-slate-300 dark:bg-slate-700"></div>
-                <button onclick="copyDiscord()" class="flex items-center text-slate-600 dark:text-slate-300 hover:text-indigo-500 transition-colors group">
-                    <i class="fa-brands fa-discord text-indigo-500 mr-2 text-lg"></i>
-                    <span class="font-medium">Quackers<span class="text-xs text-slate-400 dark:text-slate-500">#0000</span></span>
-                    <i id="copy-icon" class="fa-regular fa-copy ml-2 text-sm opacity-50 group-hover:opacity-100 transition-opacity"></i>
-                </button>
-            </div>
-        </div>
-        
-        <div class="glow-card bg-white dark:bg-slate-800 p-8 md:p-12 rounded-3xl shadow-2xl max-w-3xl mx-auto border border-slate-200 dark:border-slate-700 relative reveal">
-            <div class="absolute -top-20 -right-20 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
-            
-            <div data-fs-success style="display: none;" class="bg-green-500 text-white p-4 rounded-xl font-bold text-center mb-8 shadow-lg">
-                <i class="fa-solid fa-check-circle mr-2"></i> Message sent successfully! I will get back to you soon.
-            </div>
-            
-            <form id="contact-form" class="space-y-6 relative z-10">
-                <div data-fs-error class="font-bold"></div>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Name / Roblox ID</label>
-                        <input type="text" name="name" required data-fs-field class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-4 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-slate-900 dark:text-white transition-all shadow-inner">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Email or Discord</label>
-                        <input type="text" name="contact_info" required data-fs-field class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-4 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-slate-900 dark:text-white transition-all shadow-inner">
-                    </div>
-                </div>
+            <div class="relative max-w-6xl mx-auto px-5 pt-16 pb-20 md:pt-24 md:pb-28 grid md:grid-cols-[1.1fr_.9fr] gap-12 items-center">
                 <div>
-                    <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Message (Project details, budget, timeline)</label>
-                    <textarea id="contact-message-box" name="message" rows="5" required data-fs-field class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-4 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-slate-900 dark:text-white placeholder-slate-400 transition-all shadow-inner resize-y"></textarea>
+                    <div class="inline-flex items-center gap-2 bg-panel border border-line px-3 py-1.5 rounded-full text-sm text-slate-300 mb-7">
+                        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                        Open for commissions · OCE
+                    </div>
+                    <h1 class="font-display font-black text-5xl sm:text-6xl lg:text-7xl leading-[1.02] tracking-tight mb-5">
+                        Hi, I'm<br><span class="text-duck">Quackers.</span>
+                    </h1>
+                    <p class="font-mono text-lg sm:text-xl text-slate-300 mb-6 h-8">
+                        &gt; <span id="typewriter-text" class="text-white"></span><span class="cursor-blink text-duck">_</span>
+                    </p>
+                    <p class="text-lg text-slate-300 max-w-xl leading-relaxed mb-9">
+                        Multi-engine developer working across <strong class="text-white">Roblox</strong>, <strong class="text-white">UEFN</strong> and <strong class="text-white">Unreal Engine</strong>. I build worlds, animate characters and break games through professional QA. Lately I've been shipping my own projects too, from an Unreal co-op horror game to an open-source phone-to-PC app.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="#work" class="bg-duck text-ink hover:bg-white px-7 py-3.5 rounded-full font-bold transition">See my work</a>
+                        <a href="#contact" class="bg-panel border border-line hover:border-duck px-7 py-3.5 rounded-full font-bold transition">Hire me</a>
+                        <a href="https://www.youtube.com/@Fatalquackers" target="_blank" rel="noopener" class="px-4 py-3.5 rounded-full font-bold text-slate-300 hover:text-white transition"><i class="fa-brands fa-youtube text-red-500 mr-2"></i>YouTube</a>
+                    </div>
                 </div>
-                <button type="submit" data-fs-submit-btn class="w-full bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-black py-5 rounded-xl transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] flex justify-center items-center group text-lg mt-4 cursor-none">
-                    Send Transmission <i class="fa-solid fa-paper-plane ml-3 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
-                </button>
-            </form>
-        </div>
+
+                <div class="relative h-[340px] sm:h-[420px]">
+                    <img src="Image6.png" alt="Aquarium island build" class="shot float-a absolute right-0 top-0 w-[88%] rounded-2xl object-cover aspect-[16/10]">
+                    <img src="Image8.png" alt="Park build with timer" class="shot float-b absolute left-0 bottom-0 w-[62%] rounded-2xl object-cover aspect-[16/10]">
+                    <div class="absolute right-3 bottom-6 bg-ink/90 border border-line rounded-xl px-4 py-3 shadow-xl">
+                        <div class="text-xs text-mute">Engines</div>
+                        <div class="font-semibold text-sm">Roblox · UEFN · Unreal</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Now building ticker -->
+            <div class="relative border-y border-line bg-panel overflow-hidden py-3">
+                <div class="ticker font-display font-bold text-sm sm:text-base text-slate-300" id="ticker"></div>
+            </div>
+        </section>
+
+        <section class="max-w-6xl mx-auto px-5 py-20">
+            <div class="flex flex-wrap items-end justify-between gap-4 mb-10 reveal">
+                <div>
+                    <p class="text-duck font-semibold mb-2">Latest</p>
+                    <h2 class="font-display font-bold text-3xl md:text-4xl">What I'm working on</h2>
+                </div>
+                <a href="#work" class="text-slate-300 hover:text-duck font-semibold">All projects <i class="fa-solid fa-arrow-right ml-1"></i></a>
+            </div>
+            <div id="latest-grid" class="grid md:grid-cols-3 gap-5 reveal"></div>
+        </section>
+
+        <section class="max-w-6xl mx-auto px-5 pb-20">
+            <h2 class="font-display font-bold text-3xl md:text-4xl mb-10 reveal">What I do</h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-16 reveal">
+                <div class="card glow lift p-7">
+                    <i class="fa-solid fa-mountain-city text-3xl text-duck mb-5"></i>
+                    <h3 class="text-lg font-bold mb-2">World building</h3>
+                    <p class="text-slate-400 text-[15px]">Immersive environments and structured level layouts for Roblox and UEFN.</p>
+                </div>
+                <div class="card glow lift p-7">
+                    <i class="fa-solid fa-person-running text-3xl text-orange-400 mb-5"></i>
+                    <h3 class="text-lg font-bold mb-2">Character animation</h3>
+                    <p class="text-slate-400 text-[15px]">Fluid R6 and R15 animation, from traversal loops to heavy combat sequences.</p>
+                </div>
+                <a href="#testing" class="card glow lift p-7 block">
+                    <i class="fa-solid fa-bug text-3xl text-sky mb-5"></i>
+                    <h3 class="text-lg font-bold mb-2">QA &amp; playtesting</h3>
+                    <p class="text-slate-400 text-[15px]">Bug hunting, balancing and game-feel testing for big unreleased titles.</p>
+                    <span class="text-sky font-semibold text-sm mt-3 inline-block">QA details →</span>
+                </a>
+                <div class="card glow lift p-7">
+                    <i class="fa-solid fa-code text-3xl text-green-400 mb-5"></i>
+                    <h3 class="text-lg font-bold mb-2">Games &amp; apps</h3>
+                    <p class="text-slate-400 text-[15px]">My own projects: Unreal C++ games, Roblox plugins, websites and an open-source app.</p>
+                </div>
+            </div>
+
+            <div class="card p-7 md:p-10 reveal">
+                <h3 class="text-sm font-semibold text-mute mb-8">Engines I work in</h3>
+                <div class="grid md:grid-cols-3 gap-8 mb-10">
+                    <div>
+                        <div class="flex justify-between mb-3"><span class="font-bold">Roblox Studio</span><span class="font-mono text-sm text-mute">95%</span></div>
+                        <div class="h-2 bg-panel2 rounded-full overflow-hidden"><div class="h-full bg-duck skill-bar-fill rounded-full" data-width="95%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-3"><span class="font-bold">UEFN</span><span class="font-mono text-sm text-mute">85%</span></div>
+                        <div class="h-2 bg-panel2 rounded-full overflow-hidden"><div class="h-full bg-sky skill-bar-fill rounded-full" data-width="85%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-3"><span class="font-bold">Unreal Engine</span><span class="font-mono text-sm text-mute">75%</span></div>
+                        <div class="h-2 bg-panel2 rounded-full overflow-hidden"><div class="h-full bg-orange-400 skill-bar-fill rounded-full" data-width="75%"></div></div>
+                    </div>
+                </div>
+                <h3 class="text-sm font-semibold text-mute mb-4">Also in the toolbox</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="chip"><i class="fa-solid fa-cube mr-1.5 text-orange-400"></i>Blender</span>
+                    <span class="chip"><i class="fa-brands fa-figma mr-1.5 text-pink-400"></i>Figma</span>
+                    <span class="chip">Luau</span>
+                    <span class="chip">Unreal C++</span>
+                    <span class="chip">Kotlin (Android)</span>
+                    <span class="chip">Swift (iOS)</span>
+                    <span class="chip">C# (Windows)</span>
+                    <span class="chip">HTML / JS</span>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <footer class="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 mt-10 transition-colors pb-24 md:pb-8">
-        <div class="max-w-6xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="text-center md:text-left">
-                <div class="text-xl font-black tracking-widest text-slate-900 dark:text-white mb-2">QUACKERS.</div>
-                <p class="text-slate-500 dark:text-slate-400 text-sm">Changing the foundation of Multiplayer Gaming.</p>
+    <!-- ================= WORK ================= -->
+    <main id="work" class="page-section">
+        <section class="max-w-6xl mx-auto px-5 py-16 md:py-20">
+            <div class="mb-12 reveal">
+                <p class="text-duck font-semibold mb-2">Work</p>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-4">Projects &amp; timeline</h2>
+                <p class="text-slate-400 max-w-2xl text-lg">My own games, tools and apps, plus the studios I've built for.</p>
             </div>
-            <div class="flex gap-4">
-                <a href="https://www.youtube.com/@Fatalquackers" target="_blank" class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-red-500 hover:text-white transition-all shadow-sm">
-                    <i class="fa-brands fa-youtube"></i>
+
+            <!-- Featured: Tethr Link -->
+            <article class="card overflow-hidden mb-14 grid md:grid-cols-2 reveal">
+                <a href="https://fatalquackers.github.io/tethr-link/" target="_blank" rel="noopener" class="block bg-panel2 aspect-video md:aspect-auto">
+                    <img src="https://fatalquackers.github.io/tethr-link/videos/trailer-16x9.jpg" alt="Tethr Link trailer" class="w-full h-full object-cover" loading="lazy" onerror="this.parentElement.innerHTML='<div class=&quot;w-full h-full flex items-center justify-center text-6xl text-sky&quot;><i class=&quot;fa-solid fa-mobile-screen-button&quot;></i></div>'">
                 </a>
+                <div class="p-7 md:p-10 flex flex-col">
+                    <div class="flex flex-wrap gap-2 mb-4"><span class="status s-live">Open source · Live</span><span class="chip">Android · iPhone · Windows</span></div>
+                    <h3 class="font-display font-bold text-3xl md:text-4xl mb-3">Tethr Link</h3>
+                    <p class="text-slate-300 mb-5">A free, open-source app that links any Android phone or iPhone to a Windows PC: notifications and texts, screen mirroring with control, one-click hotspot, calls through your PC, photos and files. It started as Pixlink for Pixel phones and grew into a full Phone Link alternative.</p>
+                    <div class="flex flex-wrap gap-2 mb-7"><span class="chip">Kotlin</span><span class="chip">Swift</span><span class="chip">C# / XAML</span><span class="chip">Supabase</span></div>
+                    <div class="flex flex-wrap gap-3 mt-auto">
+                        <a href="https://fatalquackers.github.io/tethr-link/" target="_blank" rel="noopener" class="bg-duck text-ink hover:bg-white px-5 py-2.5 rounded-full font-bold transition">Website</a>
+                        <a href="https://fatalquackers.github.io/tethr-link/videos.html" target="_blank" rel="noopener" class="bg-panel2 border border-line hover:border-duck px-5 py-2.5 rounded-full font-bold transition"><i class="fa-solid fa-play mr-1.5"></i>Trailer</a>
+                        <a href="https://github.com/FatalQuackers/tethr-link" target="_blank" rel="noopener" class="bg-panel2 border border-line hover:border-duck px-5 py-2.5 rounded-full font-bold transition"><i class="fa-brands fa-github mr-1.5"></i>GitHub</a>
+                    </div>
+                </div>
+            </article>
+
+            <div class="flex flex-wrap gap-2 mb-6 reveal" id="project-filters">
+                <button class="filter-btn active" data-f="all">All</button>
+                <button class="filter-btn" data-f="roblox">Roblox</button>
+                <button class="filter-btn" data-f="unreal">Unreal</button>
+                <button class="filter-btn" data-f="web">Apps &amp; web</button>
             </div>
-            <div class="text-slate-400 dark:text-slate-500 text-sm">
-                &copy; 2026 Quackers Creative. All rights reserved.
+            <div id="project-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-20"></div>
+
+            <div class="grid md:grid-cols-2 gap-10 reveal">
+                <div>
+                    <h3 class="font-display font-bold text-2xl mb-8">The journey</h3>
+                    <div class="timeline space-y-9">
+                        <div class="relative">
+                            <span class="t-dot bg-duck"></span>
+                            <h4 class="font-bold text-lg">The goal</h4>
+                            <p class="text-sm text-duck mb-1">Future</p>
+                            <p class="text-sm text-slate-400">To be the absolute best developer in the space.</p>
+                        </div>
+                        <div class="relative">
+                            <span class="t-dot bg-green-400"></span>
+                            <h4 class="font-bold text-lg">Solo projects</h4>
+                            <p class="text-sm text-green-400 mb-1">Now</p>
+                            <p class="text-sm text-slate-400">Building HAZARDOUS CORP. in Unreal, Parcel Dash on Roblox, and keeping Tethr Link updated.</p>
+                        </div>
+                        <div class="relative">
+                            <span class="t-dot bg-green-400"></span>
+                            <h4 class="font-bold text-lg">Developer @ Catch a plant</h4>
+                            <p class="text-sm text-green-400 mb-1">Current · In development</p>
+                            <p class="text-sm text-slate-400">Building environmental assets.</p>
+                        </div>
+                        <div class="relative">
+                            <span class="t-dot bg-sky"></span>
+                            <h4 class="font-bold text-lg">Developer @ Toaster Productions</h4>
+                            <p class="text-sm text-sky mb-1">Current</p>
+                            <p class="text-sm text-slate-400">Building and managing core studio projects.</p>
+                        </div>
+                        <div class="relative">
+                            <span class="t-dot bg-slate-500"></span>
+                            <h4 class="font-bold text-lg text-slate-300">Developer @ Garden Maniac</h4>
+                            <p class="text-sm text-mute mb-1">Past</p>
+                            <p class="text-sm text-slate-400">Core environmental construction, world assets and QA balancing.</p>
+                        </div>
+                        <div class="relative">
+                            <span class="t-dot bg-slate-500"></span>
+                            <h4 class="font-bold text-lg text-slate-300">Developer @ GARP (Grow A Random Plant)</h4>
+                            <p class="text-sm text-mute mb-1">Past</p>
+                            <p class="text-sm text-slate-400">Core environmental building, map setups and testing for community release.</p>
+                        </div>
+                        <div class="relative">
+                            <span class="t-dot bg-slate-600"></span>
+                            <h4 class="font-bold text-lg text-slate-400">Past developer</h4>
+                            <p class="text-sm text-mute">@ Astrax Interactive &amp; Spawnpoint Studios</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-5">
+                    <div class="card p-7">
+                        <h3 class="font-display font-bold text-xl mb-5">Released titles</h3>
+                        <ul class="divide-y divide-line">
+                            <li><a href="https://www.roblox.com/games/122389212847304/Sunkun" target="_blank" rel="noopener" class="flex justify-between items-center py-3.5 hover:text-duck font-semibold">Sunkun <span class="chip">Roblox <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i></span></a></li>
+                            <li><a href="https://www.roblox.com/games/136622842983476/Punch-For-Power" target="_blank" rel="noopener" class="flex justify-between items-center py-3.5 hover:text-duck font-semibold">Punch For Power <span class="chip">Roblox <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i></span></a></li>
+                            <li><a href="https://www.roblox.com/games/107246293141946/Race-for-Power" target="_blank" rel="noopener" class="flex justify-between items-center py-3.5 hover:text-duck font-semibold">Race For Power <span class="chip">Roblox <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i></span></a></li>
+                        </ul>
+                    </div>
+                    <div class="card p-7 bg-gradient-to-br from-sky/10 to-transparent">
+                        <h3 class="font-bold text-lg mb-2"><i class="fa-solid fa-map-location-dot text-sky mr-2"></i>UEFN prototypes</h3>
+                        <p class="text-sm text-slate-300">Competitive maps and structured environments built in UEFN. See the <a href="#gallery" class="text-sky hover:underline">gallery</a> for workflow results.</p>
+                    </div>
+                </div>
             </div>
+        </section>
+    </main>
+
+    <!-- ================= QA ================= -->
+    <main id="testing" class="page-section">
+        <section class="max-w-6xl mx-auto px-5 py-16 md:py-20">
+            <div class="mb-12 reveal">
+                <p class="text-sky font-semibold mb-2">QA</p>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-4">Pro QA &amp; playtesting</h2>
+                <p class="text-slate-400 max-w-2xl text-lg">I test and balance some of the most anticipated games on the platform. My job is to find the holes, exploits and bad flow before your players do.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-5 mb-12 reveal">
+                <div class="card glow p-7 border-t-4 border-t-sky">
+                    <i class="fa-solid fa-shield-halved text-3xl text-sky mb-5"></i>
+                    <h3 class="text-lg font-bold mb-2">Exploit hunting</h3>
+                    <p class="text-slate-400 text-[15px]">Map holes, logic loops and oversights found so you can patch them before launch day.</p>
+                </div>
+                <div class="card glow p-7 border-t-4 border-t-purple-400">
+                    <i class="fa-solid fa-scale-balanced text-3xl text-purple-400 mb-5"></i>
+                    <h3 class="text-lg font-bold mb-2">Economy balancing</h3>
+                    <p class="text-slate-400 text-[15px]">Progression pacing and item values tested for long-term retention without grind frustration.</p>
+                </div>
+                <div class="card glow p-7 border-t-4 border-t-duck">
+                    <i class="fa-solid fa-gamepad text-3xl text-duck mb-5"></i>
+                    <h3 class="text-lg font-bold mb-2">Game feel &amp; UX</h3>
+                    <p class="text-slate-400 text-[15px]">Actionable feedback on UI flow, combat weight, input latency and general enjoyment.</p>
+                </div>
+            </div>
+            <div class="card p-7 md:p-9 reveal">
+                <h3 class="font-display font-bold text-xl mb-6">Test roster: active &amp; past</h3>
+                <div class="flex flex-wrap gap-3 font-medium">
+                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl">🌱 Garden Maniac</span>
+                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl">🌿 Plants vs Brainrots</span>
+                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl">⚔️ Jandels Battlegrounds</span>
+                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl">🌊 Brainrot Seas</span>
+                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl">🌾 Grow a random plant (past QA)</span>
+                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl">🪴 Catch a plant</span>
+                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl">🦎 Chameleon by SPS</span>
+                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl">🔫 Strike Force</span>
+                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl">🍀 +1 SPEED LUCKY BLOCK</span>
+                    <span class="bg-sky/10 border border-sky/40 text-sky px-4 py-2 rounded-xl italic font-bold">…and unreleased NDA titles 🤫</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= GALLERY ================= -->
+    <main id="gallery" class="page-section">
+        <section class="max-w-6xl mx-auto px-5 py-16 md:py-20">
+            <div class="flex flex-wrap items-end justify-between gap-6 mb-10 reveal">
+                <div>
+                    <p class="text-duck font-semibold mb-2">Gallery</p>
+                    <h2 class="font-display font-bold text-4xl md:text-5xl mb-3">Builds &amp; clips</h2>
+                    <p class="text-slate-400">Click any shot to expand.</p>
+                </div>
+                <div class="flex flex-wrap items-center gap-3">
+                    <div class="flex gap-2">
+                        <button onclick="setGalleryFilter('all')" id="btn-filter-all" class="filter-btn active">All</button>
+                        <button onclick="setGalleryFilter('image')" id="btn-filter-image" class="filter-btn">Images</button>
+                        <button onclick="setGalleryFilter('video')" id="btn-filter-video" class="filter-btn">Videos</button>
+                    </div>
+                    <select id="sort-gallery" onchange="renderGallery()" class="bg-panel2 border border-line rounded-full px-4 py-2 text-sm font-semibold focus:outline-none focus:border-duck">
+                        <option value="newest">Newest first</option>
+                        <option value="oldest">Oldest first</option>
+                    </select>
+                </div>
+            </div>
+            <div id="dynamic-gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 transition-opacity duration-300"></div>
+        </section>
+    </main>
+
+    <!-- ================= PRICING ================= -->
+    <main id="pricing" class="page-section">
+        <section class="max-w-6xl mx-auto px-5 py-16 md:py-20">
+            <div class="mb-12 reveal">
+                <p class="text-green-400 font-semibold mb-2">Pricing</p>
+                <h2 class="font-display font-bold text-4xl md:text-5xl">Commission rates</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-5 mb-16 reveal">
+                <div class="card p-7 md:p-8">
+                    <h3 class="font-display font-bold text-xl mb-6 pb-4 border-b border-line"><i class="fa-solid fa-hammer mr-2 text-duck"></i>Building</h3>
+                    <div class="space-y-2" id="price-build"></div>
+                </div>
+                <div class="card p-7 md:p-8">
+                    <h3 class="font-display font-bold text-xl mb-6 pb-4 border-b border-line"><i class="fa-solid fa-person-running mr-2 text-orange-400"></i>Animation (R6/R15)</h3>
+                    <div class="space-y-2" id="price-anim"></div>
+                </div>
+            </div>
+
+            <h3 class="font-display font-bold text-2xl mb-8 reveal">Payment structures</h3>
+            <div class="grid md:grid-cols-3 gap-5 mb-16 reveal">
+                <div class="card p-7 text-center">
+                    <i class="fa-solid fa-lock text-2xl text-green-400 mb-4"></i>
+                    <h4 class="font-bold text-lg mb-2">100% upfront</h4>
+                    <p class="text-sm text-slate-400">Guarantees your priority spot and rapid delivery.</p>
+                </div>
+                <div class="card p-7 text-center border-duck relative">
+                    <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-duck text-ink text-xs font-bold px-3 py-1 rounded-full">Most popular</span>
+                    <i class="fa-solid fa-scale-balanced text-2xl text-duck mb-4"></i>
+                    <h4 class="font-bold text-lg mb-2">50 / 50 split</h4>
+                    <p class="text-sm text-slate-400">Pay a 50% deposit. Preview and approve the work, then pay the remaining 50% for handoff.</p>
+                </div>
+                <div class="card p-7 text-center">
+                    <i class="fa-solid fa-handshake-angle text-2xl text-purple-400 mb-4"></i>
+                    <h4 class="font-bold text-lg mb-2">Pay after</h4>
+                    <p class="text-sm text-slate-400">For trusted clients. View the final product in a locked showcase, pay before handoff.</p>
+                </div>
+            </div>
+
+            <div class="max-w-3xl space-y-3 reveal">
+                <details class="card group overflow-hidden">
+                    <summary class="p-6 font-bold text-lg flex justify-between items-center cursor-pointer hover:bg-panel2">
+                        <span>Do you also do scripting or UI design?</span>
+                        <i class="fa-solid fa-chevron-down transition-transform group-open:rotate-180 text-mute"></i>
+                    </summary>
+                    <div class="px-6 pb-6 text-slate-400 text-[15px]">For commissions, no. I focus on what I'm best at: world building, character animation and QA playtesting. By not spreading myself thin over scripts and UI, you get the highest quality visual and testing work.</div>
+                </details>
+                <details class="card group overflow-hidden">
+                    <summary class="p-6 font-bold text-lg flex justify-between items-center cursor-pointer hover:bg-panel2">
+                        <span>What payment methods do you accept?</span>
+                        <i class="fa-solid fa-chevron-down transition-transform group-open:rotate-180 text-mute"></i>
+                    </summary>
+                    <div class="px-6 pb-6 text-slate-400 text-[15px]">Robux, via Roblox group payouts or a T-shirt with the 30% tax covered by the client. Direct cash equivalents are accepted depending on project scope. Open to rev-share only for established, highly promising studios.</div>
+                </details>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= CONTACT ================= -->
+    <main id="contact" class="page-section">
+        <section class="max-w-3xl mx-auto px-5 py-16 md:py-20">
+            <div class="mb-10 reveal">
+                <p class="text-duck font-semibold mb-2">Contact</p>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">Let's work together</h2>
+                <div class="flex flex-wrap items-center gap-4 text-slate-300">
+                    <span class="bg-panel border border-line px-4 py-2 rounded-full"><i class="fa-regular fa-clock text-duck mr-2"></i>OCE time: <strong id="local-time" class="font-mono text-white">…</strong></span>
+                    <button onclick="copyDiscord()" class="bg-panel border border-line hover:border-duck px-4 py-2 rounded-full">
+                        <i class="fa-brands fa-discord text-indigo-400 mr-2"></i>Quackers <i id="copy-icon" class="fa-regular fa-copy ml-1.5 text-sm text-mute"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card p-7 md:p-10 reveal">
+                <div data-fs-success style="display:none" class="bg-green-500/15 border border-green-500/40 text-green-300 p-4 rounded-xl font-bold mb-6">
+                    <i class="fa-solid fa-circle-check mr-2"></i>Message sent! I'll get back to you soon.
+                </div>
+                <form id="contact-form" class="space-y-5">
+                    <div data-fs-error class="font-bold"></div>
+                    <div class="grid sm:grid-cols-2 gap-5">
+                        <label class="block">
+                            <span class="block text-sm font-semibold text-slate-400 mb-2">Name / Roblox ID</span>
+                            <input type="text" name="name" required data-fs-field class="w-full bg-ink border border-line rounded-xl px-4 py-3.5 text-base focus:outline-none focus:border-duck">
+                        </label>
+                        <label class="block">
+                            <span class="block text-sm font-semibold text-slate-400 mb-2">Email or Discord</span>
+                            <input type="text" name="contact_info" required data-fs-field class="w-full bg-ink border border-line rounded-xl px-4 py-3.5 text-base focus:outline-none focus:border-duck">
+                        </label>
+                    </div>
+                    <label class="block">
+                        <span class="block text-sm font-semibold text-slate-400 mb-2">Message: project details, budget, timeline</span>
+                        <textarea name="message" rows="5" required data-fs-field class="w-full bg-ink border border-line rounded-xl px-4 py-3.5 text-base focus:outline-none focus:border-duck resize-y"></textarea>
+                    </label>
+                    <button type="submit" data-fs-submit-btn class="w-full bg-duck hover:bg-white disabled:opacity-50 text-ink font-bold py-4 rounded-xl transition text-lg">
+                        Send message <i class="fa-solid fa-paper-plane ml-2"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-line mt-10 pb-24 md:pb-8">
+        <div class="max-w-6xl mx-auto px-5 py-10 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <div class="font-display font-black text-lg">QUACKERS<span class="text-duck">.</span></div>
+                <p class="text-mute text-sm">Changing the foundation of multiplayer gaming.</p>
+            </div>
+            <div class="flex gap-3">
+                <a href="https://www.youtube.com/@Fatalquackers" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-panel2 border border-line flex items-center justify-center hover:bg-red-500 hover:border-red-500 transition" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://github.com/FatalQuackers" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-panel2 border border-line flex items-center justify-center hover:bg-white hover:text-ink transition" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <button onclick="copyDiscord()" class="w-10 h-10 rounded-full bg-panel2 border border-line flex items-center justify-center hover:bg-indigo-500 hover:border-indigo-500 transition" aria-label="Copy Discord username"><i class="fa-brands fa-discord"></i></button>
+            </div>
+            <div class="text-mute text-sm">&copy; <span id="year">2026</span> Quackers Creative</div>
         </div>
     </footer>
 
-    <!-- Toast Notification Container -->
-    <div id="toast-container" class="fixed top-24 left-1/2 transform -translate-x-1/2 z-[100] flex flex-col gap-2 pointer-events-none"></div>
+    <div id="toast-container" class="fixed top-20 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-2 pointer-events-none"></div>
 
     <script>
-        /* -----------------------------------------------------
-           INTERSECTION OBSERVER (SCROLL REVEAL & SKILL BARS)
-        ----------------------------------------------------- */
-        const revealCallback = function(entries, observer) {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    
-                    const bars = entry.target.querySelectorAll('.skill-bar-fill');
-                    bars.forEach(bar => {
-                        bar.style.width = bar.getAttribute('data-width');
-                    });
-                    
-                    observer.unobserve(entry.target);
-                }
-            });
+    {
+        /* ---------- DATA: edit these to update the site ---------- */
+        const projects = [
+            { name: 'HAZARDOUS CORP.', cat: 'unreal', status: 'dev', icon: 'fa-skull-crossbones', color: '#ff7a3d',
+              blurb: 'A 1–4 player co-op physics extraction horror-comedy aboard a cargo dirigible above the storm clouds. Steam multiplayer, server-authoritative mechanics and a retro CRT/brass-gauge UI.',
+              tags: ['Unreal Engine 5', 'C++', 'Co-op'], latest: true },
+            { name: 'Parcel Dash', cat: 'roblox', status: 'dev', icon: 'fa-box', color: '#ffd23f',
+              blurb: 'A rooftop parkour courier game: sprint, vault and leap across the city to deliver parcels. Cel-shaded, cartoony look, with the movement system already built.',
+              tags: ['Roblox', 'Parkour', 'Own models & UI'], latest: true },
+            { name: 'Tethr Link', cat: 'web', status: 'live', icon: 'fa-mobile-screen-button', color: '#4cc9f0',
+              blurb: 'Open-source Phone Link alternative for Android, iPhone and Windows. Notifications, texts, mirroring, hotspot, calls and files.',
+              tags: ['Kotlin', 'Swift', 'C#'], latest: true,
+              links: [['Website', 'https://fatalquackers.github.io/tethr-link/'], ['GitHub', 'https://github.com/FatalQuackers/tethr-link']] },
+            { name: 'RUSHED', cat: 'web', status: 'live', icon: 'fa-bolt', color: '#f472b6',
+              blurb: 'Website for RUSHED, an independent Roblox studio: a multi-page site with a built-in scouting dashboard for reviewing game submissions.',
+              tags: ['Web', 'JavaScript', 'GitHub Pages'],
+              links: [['GitHub', 'https://github.com/FatalQuackers/rushed']] },
+            { name: 'Quick Commands', cat: 'roblox', status: 'dev', icon: 'fa-terminal', color: '#a78bfa',
+              blurb: 'A plugin for the Exe 6 admin panel that maps panel actions and custom plugins to / chat commands. I also made the Better Announcements plugin for Exe 6.',
+              tags: ['Roblox', 'Luau', 'Plugin'] },
+            { name: 'Fly and Smash Eggs', cat: 'roblox', status: 'dev', icon: 'fa-egg', color: '#4ade80',
+              blurb: 'Take to the sky to reach eggs scattered around the map, then smash them.',
+              tags: ['Roblox', 'Simulator'] },
+            { name: 'Basketball tycoon (working title)', cat: 'roblox', status: 'dev', icon: 'fa-basketball', color: '#fb923c',
+              blurb: 'Every plot is a basketball court that earns you money. Upgrade the pull-up bars out front and progress to unlock new areas.',
+              tags: ['Roblox', 'Tycoon'] }
+        ];
+        const STATUS = { live: ['s-live', 'Live'], dev: ['s-dev', 'In development'], past: ['s-past', 'Past'] };
+        const nowBuilding = ['HAZARDOUS CORP.', 'Parcel Dash', 'Tethr Link', 'Quick Commands', 'Fly and Smash Eggs', 'RUSHED'];
+        const priceBuild = [['Simple assets', '50 – 100 R$'], ['Detailed props', '250 – 400 R$'], ['Exterior build', '500 – 800 R$'], ['Interior build', '800 – 1.2k R$'], ['Small map / lobby', '1.5k – 2.5k R$'], ['Large map', '3.5k – 10k R$']];
+        const priceAnim = [['Basic loops', '50 – 250 R$'], ['Action / combat moves', '150 – 600 R$'], ['Dances / emotes', '350 – 1.2k R$'], ['Action sets (combos)', '500 – 1.5k R$']];
+        // Gallery: add files to the repo and list them here (newest last)
+        const mediaData = [
+            { type: 'video', src: 'Video1.mp4' },
+            ...Array.from({ length: 11 }, (_, i) => ({ type: 'image', src: `Image${i + 1}.png` }))
+        ].map((m, i) => ({ ...m, num: i }));
+
+        /* ---------- RENDER ---------- */
+        const projectCard = (p) => {
+            const [cls, label] = STATUS[p.status];
+            const links = (p.links || []).map(([t, u]) =>
+                `<a href="${u}" target="_blank" rel="noopener" class="text-sm font-semibold text-slate-300 hover:text-duck">${t} <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-0.5"></i></a>`).join('');
+            return `<article class="card glow lift p-6 flex flex-col" data-cat="${p.cat}">
+                <div class="flex items-start justify-between mb-5">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl" style="background:${p.color}1f;color:${p.color}"><i class="fa-solid ${p.icon}"></i></div>
+                    <span class="status ${cls}">${label}</span>
+                </div>
+                <h3 class="font-display font-bold text-xl mb-2">${p.name}</h3>
+                <p class="text-slate-400 text-[15px] mb-5">${p.blurb}</p>
+                <div class="flex flex-wrap gap-1.5 mt-auto">${p.tags.map(t => `<span class="chip">${t}</span>`).join('')}</div>
+                ${links ? `<div class="flex gap-4 mt-4 pt-4 border-t border-line">${links}</div>` : ''}
+            </article>`;
         };
-        const revealObserver = new IntersectionObserver(revealCallback, { threshold: 0.15 });
 
-        function initReveals() {
-            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-        }
-
-        /* -----------------------------------------------------
-           PARTICLE NETWORK BACKGROUND
-        ----------------------------------------------------- */
-        const canvas = document.getElementById('hero-particles');
-        const ctx = canvas.getContext('2d');
-        let particlesArray = [];
-        
-        function initParticles() {
-            canvas.width = window.innerWidth;
-            canvas.height = document.getElementById('home').offsetHeight || window.innerHeight;
-            particlesArray = [];
-            const numParticles = Math.min(Math.floor(window.innerWidth / 20), 80);
-            
-            for (let i = 0; i < numParticles; i++) {
-                let size = (Math.random() * 2) + 1;
-                let x = Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2;
-                let y = Math.random() * ((canvas.height - size * 2) - (size * 2)) + size * 2;
-                let directionX = (Math.random() * 1) - 0.5;
-                let directionY = (Math.random() * 1) - 0.5;
-                let color = 'rgba(59, 130, 246, 0.4)';
-                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
-            }
-        }
-
-        class Particle {
-            constructor(x, y, directionX, directionY, size, color) {
-                this.x = x; this.y = y; this.directionX = directionX; this.directionY = directionY; this.size = size; this.color = color;
-            }
-            draw() {
-                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                ctx.fillStyle = this.color; ctx.fill();
-            }
-            update() {
-                if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
-                if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
-                this.x += this.directionX; this.y += this.directionY;
-                this.draw();
-            }
-        }
-
-        function animateParticles() {
-            requestAnimationFrame(animateParticles);
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-            }
-            connectParticles();
-        }
-
-        function connectParticles() {
-            let opacityValue = 1;
-            for (let a = 0; a < particlesArray.length; a++) {
-                for (let b = a; b < particlesArray.length; b++) {
-                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + 
-                                   ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-                    if (distance < (canvas.width/7) * (canvas.height/7)) {
-                        opacityValue = 1 - (distance/20000);
-                        ctx.strokeStyle = `rgba(59, 130, 246, ${opacityValue * 0.2})`;
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        window.addEventListener('resize', () => { if(document.getElementById('home').classList.contains('active')) initParticles(); });
-
-        /* -----------------------------------------------------
-           SETTINGS MENU LOGIC
-        ----------------------------------------------------- */
-        function toggleSettings() {
-            const menu = document.getElementById('settings-menu');
-            const overlay = document.getElementById('settings-overlay');
-            if(menu.classList.contains('open')) {
-                menu.classList.remove('open');
-                overlay.classList.add('opacity-0');
-                setTimeout(() => overlay.classList.add('hidden'), 300);
-            } else {
-                overlay.classList.remove('hidden');
-                setTimeout(() => {
-                    overlay.classList.remove('opacity-0');
-                    menu.classList.add('open');
-                }, 10);
-            }
-        }
-
-        /* -----------------------------------------------------
-           CUSTOM CURSOR
-        ----------------------------------------------------- */
-        const cursorDot = document.getElementById('cursor-dot');
-        const cursorOutline = document.getElementById('cursor-outline');
-        let cursorEnabled = true;
-
-        window.addEventListener('mousemove', function(e) {
-            if(!cursorEnabled) return;
-            const posX = e.clientX; const posY = e.clientY;
-            cursorDot.style.left = `${posX}px`; cursorDot.style.top = `${posY}px`;
-            cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+        let projectFilter = 'all';
+        const renderProjects = () => {
+            document.getElementById('project-grid').innerHTML = projects
+                .filter(p => p.name !== 'Tethr Link' && (projectFilter === 'all' || p.cat === projectFilter))
+                .map(projectCard).join('') || '<p class="text-mute">Nothing here yet.</p>';
+        };
+        document.getElementById('latest-grid').innerHTML = projects.filter(p => p.latest).map(projectCard).join('');
+        document.getElementById('project-filters').addEventListener('click', e => {
+            const b = e.target.closest('.filter-btn'); if (!b) return;
+            projectFilter = b.dataset.f;
+            document.querySelectorAll('#project-filters .filter-btn').forEach(x => x.classList.toggle('active', x === b));
+            renderProjects();
         });
+        renderProjects();
 
-        document.querySelectorAll('button, a, .cursor-pointer, select, input, textarea').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                if(!cursorEnabled) return;
-                cursorOutline.style.width = '60px'; cursorOutline.style.height = '60px';
-                cursorOutline.style.borderColor = 'rgba(239, 68, 68, 0.5)';
-            });
-            el.addEventListener('mouseleave', () => {
-                if(!cursorEnabled) return;
-                cursorOutline.style.width = '40px'; cursorOutline.style.height = '40px';
-                cursorOutline.style.borderColor = 'rgba(59, 130, 246, 0.5)';
-            });
-        });
+        const tickerItems = nowBuilding.map(n => `<span class="px-6 whitespace-nowrap">${n}</span><span class="text-duck">✦</span>`).join('');
+        document.getElementById('ticker').innerHTML = `<span class="px-6 text-duck whitespace-nowrap">NOW BUILDING</span>${tickerItems}<span class="px-6 text-duck whitespace-nowrap">NOW BUILDING</span>${tickerItems}`;
 
-        function toggleCursor() {
-            cursorEnabled = !cursorEnabled;
-            const ball = document.getElementById('cursor-toggle-ball');
-            const bg = document.getElementById('cursor-toggle-bg');
-            if(cursorEnabled) {
-                document.body.classList.add('custom-cursor');
-                ball.classList.add('translate-x-6');
-                bg.classList.replace('bg-slate-300', 'bg-blue-500');
-            } else {
-                document.body.classList.remove('custom-cursor');
-                ball.classList.remove('translate-x-6');
-                bg.classList.replace('bg-blue-500', 'bg-slate-300');
-            }
-        }
+        const priceRows = rows => rows.map(([k, v]) => `<div class="flex justify-between items-center gap-4 bg-panel2 px-4 py-3 rounded-xl"><span>${k}</span><span class="font-mono text-sm text-duck whitespace-nowrap">${v}</span></div>`).join('');
+        document.getElementById('price-build').innerHTML = priceRows(priceBuild);
+        document.getElementById('price-anim').innerHTML = priceRows(priceAnim);
 
-        /* -----------------------------------------------------
-           MAGNETIC GLOW & 3D TILT EFFECT
-        ----------------------------------------------------- */
-        function initCardEffects() {
-            document.querySelectorAll('.glow-card').forEach(card => {
-                card.addEventListener('mousemove', e => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    card.style.setProperty('--mouse-x', `${x}px`);
-                    card.style.setProperty('--mouse-y', `${y}px`);
-                });
-            });
-
-            document.querySelectorAll('.tilt-card').forEach(card => {
-                card.addEventListener('mousemove', e => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left; const y = e.clientY - rect.top;
-                    const centerX = rect.width / 2; const centerY = rect.height / 2;
-                    const tiltX = ((y - centerY) / centerY) * -8;
-                    const tiltY = ((x - centerX) / centerX) * 8;
-                    card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
-                });
-                
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-                    card.style.transition = 'transform 0.5s ease';
-                });
-                
-                card.addEventListener('mouseenter', () => { card.style.transition = 'none'; });
-            });
-        }
-
-        /* -----------------------------------------------------
-           SCROLL PROGRESS
-        ----------------------------------------------------- */
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById("scroll-progress").style.width = scrolled + "%";
-        });
-
-        /* -----------------------------------------------------
-           DYNAMIC GALLERY SYSTEM
-        ----------------------------------------------------- */
-        let mediaData = [];
-        for(let i = 1; i <= 3; i++) { mediaData.push({ id: i, num: i, type: 'video', src: `Video${i}.mp4` }); }
-        for(let i = 1; i <= 11; i++) { mediaData.push({ id: i + 100, num: i, type: 'image', src: `Image${i}.png` }); }
-
+        /* ---------- GALLERY ---------- */
         let currentFilter = 'all';
-
-        function setGalleryFilter(filterType) {
-            currentFilter = filterType;
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(`btn-filter-${filterType}`).classList.add('active');
+        window.setGalleryFilter = (f) => {
+            currentFilter = f;
+            document.querySelectorAll('[id^="btn-filter-"]').forEach(b => b.classList.toggle('active', b.id === `btn-filter-${f}`));
             renderGallery();
-        }
-
-        function renderGallery() {
+        };
+        window.renderGallery = () => {
             const grid = document.getElementById('dynamic-gallery-grid');
-            const sortOrder = document.getElementById('sort-gallery').value;
-            
-            let filtered = mediaData.filter(item => currentFilter === 'all' || item.type === currentFilter);
-            filtered.sort((a, b) => sortOrder === 'newest' ? b.num - a.num : a.num - b.num);
-
+            const order = document.getElementById('sort-gallery').value;
+            const items = mediaData.filter(m => currentFilter === 'all' || m.type === currentFilter)
+                .sort((a, b) => order === 'newest' ? b.num - a.num : a.num - b.num);
             grid.style.opacity = 0;
             setTimeout(() => {
-                grid.innerHTML = '';
-                filtered.forEach((item, index) => {
-                    const isVideo = item.type === 'video';
-                    const spanClass = (isVideo && index === 0 && currentFilter === 'all') ? 'md:col-span-2 md:row-span-2' : '';
-                    
-                    const el = document.createElement('div');
-                    el.className = `aspect-video bg-slate-200 dark:bg-slate-800 rounded-2xl overflow-hidden group border border-slate-200 dark:border-slate-700 relative cursor-pointer shadow-sm hover:shadow-xl transition-all glow-card ${spanClass}`;
-                    el.onclick = () => openMedia(item.src, item.type);
-                    
-                    el.addEventListener('mousemove', e => {
-                        const rect = el.getBoundingClientRect();
-                        el.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-                        el.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-                    });
-                    
-                    let innerHTML = isVideo ? `
-                        <span class="absolute top-3 right-3 text-[10px] font-bold bg-orange-600 text-white px-3 py-1 rounded-full z-20 shadow-lg"><i class="fa-solid fa-video mr-1"></i> VIDEO</span>
-                        <div class="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/50 transition-all duration-300 z-10 flex items-center justify-center backdrop-blur-[0px] group-hover:backdrop-blur-sm">
-                            <i class="fa-solid fa-play text-white opacity-0 group-hover:opacity-100 text-5xl transition-all duration-300 drop-shadow-lg transform scale-50 group-hover:scale-100"></i>
-                        </div>
-                        <video src="${item.src}" class="w-full h-full object-cover transition duration-700 pointer-events-none" muted preload="metadata"></video>
-                    ` : `
-                        <span class="absolute top-3 right-3 text-[10px] font-bold bg-white/90 dark:bg-slate-900/90 text-slate-800 dark:text-white px-3 py-1 rounded-full z-20 shadow-lg backdrop-blur-md border border-slate-200 dark:border-slate-700"><i class="fa-solid fa-image mr-1 text-blue-500"></i> IMAGE</span>
-                        <div class="absolute inset-0 bg-slate-900/0 group-hover:bg-blue-900/40 transition-all duration-300 z-10 flex items-center justify-center">
-                            <i class="fa-solid fa-expand text-white opacity-0 group-hover:opacity-100 text-4xl transition-all duration-300 drop-shadow-lg transform scale-50 group-hover:scale-100"></i>
-                        </div>
-                        <img src="${item.src}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
-                    `;
-                    el.innerHTML = innerHTML;
-                    grid.appendChild(el);
-                });
+                grid.innerHTML = items.map((m, i) => {
+                    const big = m.type === 'video' && currentFilter === 'all' && i === 0 ? 'md:col-span-2 md:row-span-2' : '';
+                    const media = m.type === 'video'
+                        ? `<video src="${m.src}" class="w-full h-full object-cover pointer-events-none" muted preload="metadata"></video>
+                           <div class="absolute inset-0 flex items-center justify-center"><span class="w-16 h-16 rounded-full bg-duck text-ink flex items-center justify-center text-xl group-hover:scale-110 transition"><i class="fa-solid fa-play ml-1"></i></span></div>`
+                        : `<img src="${m.src}" alt="Build screenshot" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">`;
+                    return `<button class="aspect-video bg-panel2 rounded-2xl overflow-hidden group border border-line relative ${big}" data-src="${m.src}" data-type="${m.type}">${media}</button>`;
+                }).join('');
                 grid.style.opacity = 1;
-            }, 200);
-        }
+            }, 150);
+        };
+        document.getElementById('dynamic-gallery-grid').addEventListener('click', e => {
+            const t = e.target.closest('[data-src]'); if (t) openMedia(t.dataset.src, t.dataset.type);
+        });
 
-        /* -----------------------------------------------------
-           MODAL & PAGE NAVIGATION
-        ----------------------------------------------------- */
-        function openMedia(src, type) {
+        const openMedia = (src, type) => {
+            const modal = document.getElementById('media-modal'), img = document.getElementById('modal-img'), video = document.getElementById('modal-video');
+            img.classList.add('hidden'); video.classList.add('hidden'); video.removeAttribute('src');
+            if (type === 'image') { img.src = src; img.classList.remove('hidden'); }
+            else { video.src = src; video.classList.remove('hidden'); video.play().catch(() => {}); }
+            modal.classList.remove('hidden'); setTimeout(() => modal.classList.remove('opacity-0'), 10);
+        };
+        window.closeModal = () => {
             const modal = document.getElementById('media-modal');
-            const img = document.getElementById('modal-img');
-            const video = document.getElementById('modal-video');
+            modal.classList.add('opacity-0'); document.getElementById('modal-video').pause();
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        };
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-            img.classList.add('hidden'); video.classList.add('hidden'); video.src = "";
-
-            if (type === 'image') { img.src = src; img.classList.remove('hidden'); } 
-            else if (type === 'video') { video.src = src; video.classList.remove('hidden'); video.play(); }
-
-            modal.classList.remove('hidden');
-            setTimeout(() => { modal.classList.remove('opacity-0'); }, 10);
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('media-modal');
-            const video = document.getElementById('modal-video');
-            modal.classList.add('opacity-0'); video.pause();
-            setTimeout(() => { modal.classList.add('hidden'); }, 300);
-        }
-
-        function showPage(pageId) {
-            document.querySelectorAll('.page-section').forEach(page => {
-                page.classList.remove('active');
-                page.querySelectorAll('.reveal').forEach(el => {
-                    el.classList.remove('active');
-                    revealObserver.observe(el);
-                    
-                    const bars = el.querySelectorAll('.skill-bar-fill');
-                    bars.forEach(bar => bar.style.width = '0%');
-                });
+        /* ---------- PAGES (hash routing: #work, #pricing …) ---------- */
+        const PAGES = ['home', 'work', 'testing', 'gallery', 'pricing', 'contact'];
+        const revealObserver = new IntersectionObserver((entries, obs) => {
+            entries.forEach(en => {
+                if (!en.isIntersecting) return;
+                en.target.classList.add('active');
+                en.target.querySelectorAll('.skill-bar-fill').forEach(b => b.style.width = b.dataset.width);
+                obs.unobserve(en.target);
             });
-            
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-                if(link.id === 'nav-testing') {
-                    link.classList.remove('text-cyan-600', 'dark:text-cyan-400');
-                    link.querySelector('i').classList.remove('text-cyan-500');
-                    link.querySelector('i').classList.add('text-slate-400');
-                } else {
-                    link.querySelector('i').classList.remove('text-white');
-                    link.querySelector('i').classList.add('text-slate-400');
+        }, { threshold: 0.12 });
+
+        const showPage = (id) => {
+            if (id === 'portfolio') id = 'work'; // old link
+            if (!PAGES.includes(id)) id = 'home';
+            document.querySelectorAll('.page-section').forEach(p => p.classList.toggle('active', p.id === id));
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.toggle('active', l.id === 'nav-' + id));
+            const page = document.getElementById(id);
+            page.querySelectorAll('.reveal').forEach(el => {
+                el.classList.remove('active');
+                el.querySelectorAll('.skill-bar-fill').forEach(b => b.style.width = '0');
+                revealObserver.observe(el);
+            });
+            if (id === 'gallery') renderGallery();
+            window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+        };
+        window.addEventListener('hashchange', () => showPage(location.hash.slice(1)));
+
+        /* ---------- SETTINGS / CURSOR ---------- */
+        window.toggleSettings = () => {
+            const menu = document.getElementById('settings-menu'), ov = document.getElementById('settings-overlay');
+            if (menu.classList.contains('open')) { menu.classList.remove('open'); ov.classList.add('opacity-0'); setTimeout(() => ov.classList.add('hidden'), 300); }
+            else { ov.classList.remove('hidden'); setTimeout(() => { ov.classList.remove('opacity-0'); menu.classList.add('open'); }, 10); }
+        };
+        const dot = document.getElementById('cursor-dot'), outline = document.getElementById('cursor-outline');
+        let cursorOn = true;
+        try { cursorOn = localStorage.getItem('quackers-cursor') !== 'off'; } catch (e) {}
+        const applyCursor = () => {
+            document.body.classList.toggle('custom-cursor', cursorOn);
+            document.getElementById('cursor-toggle-ball').classList.toggle('translate-x-6', cursorOn);
+            document.getElementById('cursor-toggle-bg').classList.toggle('bg-duck', cursorOn);
+            document.getElementById('cursor-toggle-bg').classList.toggle('bg-slate-600', !cursorOn);
+        };
+        window.toggleCursor = () => { cursorOn = !cursorOn; try { localStorage.setItem('quackers-cursor', cursorOn ? 'on' : 'off'); } catch (e) {} applyCursor(); };
+        applyCursor();
+        window.addEventListener('mousemove', e => {
+            const card = e.target.closest('.glow');
+            if (card) { const r = card.getBoundingClientRect(); card.style.setProperty('--mx', (e.clientX - r.left) + 'px'); card.style.setProperty('--my', (e.clientY - r.top) + 'px'); }
+            if (!cursorOn) return;
+            dot.style.opacity = outline.style.opacity = 1;
+            dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
+            outline.animate({ left: e.clientX + 'px', top: e.clientY + 'px' }, { duration: 400, fill: 'forwards' });
+        });
+        document.addEventListener('mouseover', e => outline.classList.toggle('hover', !!e.target.closest('a, button, select, input, textarea, summary, [data-src]')));
+
+        window.addEventListener('scroll', () => {
+            const h = document.documentElement.scrollHeight - innerHeight;
+            document.getElementById('scroll-progress').style.width = (h > 0 ? scrollY / h * 100 : 0) + '%';
+        }, { passive: true });
+
+        /* ---------- MISC ---------- */
+        const showToast = (msg) => {
+            const t = document.createElement('div');
+            t.className = 'bg-panel2 border border-line text-white px-5 py-3 rounded-full font-semibold shadow-2xl transition-all duration-300 -translate-y-4 opacity-0';
+            t.innerHTML = `<i class="fa-solid fa-circle-check text-duck mr-2"></i>`; t.append(msg);
+            document.getElementById('toast-container').appendChild(t);
+            setTimeout(() => t.classList.remove('-translate-y-4', 'opacity-0'), 10);
+            setTimeout(() => { t.classList.add('opacity-0', '-translate-y-4'); setTimeout(() => t.remove(), 300); }, 2800);
+        };
+        window.copyDiscord = () => {
+            const done = () => {
+                showToast('Copied Discord username!');
+                const icon = document.getElementById('copy-icon');
+                if (icon) { icon.classList.replace('fa-copy', 'fa-check'); setTimeout(() => icon.classList.replace('fa-check', 'fa-copy'), 2000); }
+            };
+            if (navigator.clipboard) navigator.clipboard.writeText('Quackers').then(done, () => showToast('Discord: Quackers'));
+            else showToast('Discord: Quackers');
+        };
+
+        const roles = ['World Builder', 'Character Animator', 'QA Tester', 'Game Developer'];
+        let ri = 0, ci = 0, del = false;
+        const typeEl = document.getElementById('typewriter-text');
+        const typeEffect = () => {
+            const word = roles[ri];
+            ci += del ? -1 : 1; typeEl.textContent = word.slice(0, ci);
+            let wait = del ? 45 : 95;
+            if (!del && ci === word.length) { wait = 1800; del = true; }
+            else if (del && ci === 0) { del = false; ri = (ri + 1) % roles.length; wait = 400; }
+            setTimeout(typeEffect, wait);
+        };
+
+        const updateClock = () => {
+            document.getElementById('local-time').textContent = new Date().toLocaleTimeString('en-AU', { timeZone: 'Australia/Sydney', hour: '2-digit', minute: '2-digit', hour12: true });
+        };
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        /* ---------- EASTER EGGS ---------- */
+        let buf = '';
+        document.addEventListener('keydown', e => {
+            if (e.target.matches('input, textarea')) return;
+            if (e.key.length !== 1) return;
+            buf = (buf + e.key.toLowerCase()).slice(-5);
+            if (buf === 'robux') {
+                buf = '';
+                for (let i = 0; i < 50; i++) {
+                    const r = document.createElement('div'); r.textContent = '💵'; r.className = 'robux-rain text-4xl';
+                    r.style.left = Math.random() * 100 + 'vw'; r.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+                    document.body.appendChild(r); setTimeout(() => r.remove(), 4000);
                 }
-            });
-            
-            const activePage = document.getElementById(pageId);
-            activePage.classList.add('active');
-            
-            const navLink = document.getElementById('nav-' + pageId);
-            navLink.classList.add('active');
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-            if(pageId === 'home') {
-                runCounters();
-                initParticles();
-            }
-            if(pageId === 'gallery') renderGallery();
-        }
-
-        function copyDiscord() {
-            navigator.clipboard.writeText("Quackers");
-            showToast("Copied Discord Username!");
-            const icon = document.getElementById("copy-icon");
-            if(icon) {
-                icon.classList.replace("fa-copy", "fa-check");
-                icon.classList.add("text-green-500");
-                setTimeout(() => {
-                    icon.classList.replace("fa-check", "fa-copy");
-                    icon.classList.remove("text-green-500");
-                }, 2000);
-            }
-        }
-
-        function showToast(message) {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = "bg-slate-800 text-white px-6 py-3 rounded-full font-bold shadow-2xl transition-all duration-300 translate-y-[-20px] opacity-0 flex items-center border border-slate-700";
-            toast.innerHTML = `<i class="fa-solid fa-check-circle text-green-400 mr-2"></i> ${message}`;
-            container.appendChild(toast);
-            
-            setTimeout(() => { toast.classList.remove('translate-y-[-20px]', 'opacity-0'); }, 10);
-            setTimeout(() => { 
-                toast.classList.add('opacity-0', 'translate-y-[-20px]'); 
-                setTimeout(() => toast.remove(), 300); 
-            }, 3000);
-        }
-
-        /* -----------------------------------------------------
-           TYPING EFFECT
-        ----------------------------------------------------- */
-        const roles = ["World Builder", "Character Animator", "QA Tester"];
-        let roleIndex = 0; let charIndex = 0; let isDeleting = false;
-        const typeTarget = document.getElementById("typewriter-text");
-
-        function typeEffect() {
-            if(!typeTarget) return;
-            const currentRole = roles[roleIndex];
-            
-            if (isDeleting) { typeTarget.innerText = currentRole.substring(0, charIndex - 1); charIndex--; } 
-            else { typeTarget.innerText = currentRole.substring(0, charIndex + 1); charIndex++; }
-
-            let typeSpeed = isDeleting ? 50 : 100;
-
-            if (!isDeleting && charIndex === currentRole.length) { typeSpeed = 2000; isDeleting = true; } 
-            else if (isDeleting && charIndex === 0) { isDeleting = false; roleIndex = (roleIndex + 1) % roles.length; typeSpeed = 500; }
-            
-            setTimeout(typeEffect, typeSpeed);
-        }
-
-        /* -----------------------------------------------------
-           THEME & CLOCK & COUNTERS & INIT
-        ----------------------------------------------------- */
-        function toggleTheme() {
-            const html = document.documentElement;
-            const icon = document.getElementById('theme-icon');
-            const toggleBall = document.getElementById('theme-toggle-ball');
-            
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                if(icon) icon.classList.replace('fa-moon', 'fa-sun');
-                if(toggleBall) toggleBall.classList.remove('translate-x-6');
-            } else {
-                html.classList.add('dark');
-                if(icon) icon.classList.replace('fa-sun', 'fa-moon');
-                if(toggleBall) toggleBall.classList.add('translate-x-6');
-            }
-        }
-
-        function updateClock() {
-            const timeElement = document.getElementById('local-time');
-            if(timeElement) {
-                const now = new Date();
-                timeElement.innerText = now.toLocaleTimeString('en-AU', { timeZone: 'Australia/Sydney', hour: '2-digit', minute: '2-digit', hour12: true });
-            }
-        }
-
-        function runCounters() {
-            const counters = document.querySelectorAll('.counter');
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                let count = 0; const speed = 30; const inc = target / speed;
-                
-                const updateCount = () => {
-                    count += inc;
-                    if (count < target) {
-                        counter.innerText = Math.ceil(count);
-                        requestAnimationFrame(updateCount);
-                    } else {
-                        counter.innerText = target.toLocaleString();
-                    }
-                };
-                counter.innerText = '0'; 
-                updateCount();
-            });
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            initReveals();
-            initCardEffects();
-            runCounters();
-            updateClock();
-            typeEffect();
-            renderGallery();
-            
-            if(document.getElementById('home').classList.contains('active')) {
-                initParticles();
-                animateParticles();
             }
         });
+        let clicks = 0, clickTimer;
+        window.triggerSecretClick = () => {
+            if (location.hash && location.hash !== '#home') location.hash = 'home';
+            clicks++; clearTimeout(clickTimer);
+            if (clicks === 5) { document.body.classList.add('shake-screen'); setTimeout(() => document.body.classList.remove('shake-screen'), 500); showToast('🎮 Developer mode unlocked!'); clicks = 0; }
+            clickTimer = setTimeout(() => clicks = 0, 2000);
+        };
 
-        /* -----------------------------------------------------
-           EASTER EGGS
-        ----------------------------------------------------- */
-        let secretBuffer = "";
-        document.addEventListener('keydown', (e) => {
-            if (e.key.length === 1) {
-                secretBuffer += e.key.toLowerCase();
-                if (secretBuffer.length > 5) secretBuffer = secretBuffer.slice(-5);
-                if (secretBuffer === "robux") { triggerRobuxRain(); secretBuffer = ""; }
-            }
-        });
-
-        function triggerRobuxRain() {
-            for(let i=0; i<50; i++) {
-                let r = document.createElement('div'); r.innerText = '💵'; r.className = 'robux-rain text-4xl';
-                r.style.left = Math.random() * 100 + 'vw'; r.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
-                document.body.appendChild(r);
-                setTimeout(() => r.remove(), 4000);
-            }
-        }
-
-        let clickCount = 0; let clickTimer;
-        function triggerSecretClick() {
-            clickCount++; clearTimeout(clickTimer);
-            if(clickCount === 5) {
-                document.body.classList.add('shake-screen');
-                setTimeout(() => document.body.classList.remove('shake-screen'), 500);
-                showToast("🎮 Developer Mode Unlocked!");
-                clickCount = 0;
-            }
-            clickTimer = setTimeout(() => clickCount = 0, 2000);
-        }
+        /* ---------- INIT ---------- */
+        showPage(location.hash.slice(1) || 'home');
+        updateClock(); setInterval(updateClock, 30000);
+        typeEffect();
+    }
     </script>
 </body>
 </html>
