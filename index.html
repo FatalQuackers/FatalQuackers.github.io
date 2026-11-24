@@ -780,7 +780,11 @@
                         ${g.created ? `<span><i class="fa-regular fa-calendar mr-1.5"></i>Created ${new Date(g.created).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}</span>` : ''}
                         ${g.updated ? `<span><i class="fa-solid fa-rotate mr-1.5"></i>Updated ${ago(g.updated)}</span>` : ''}
                     </div>
-                    <a href="https://www.roblox.com/games/${encodeURIComponent(g.placeId)}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold px-6 py-3 rounded-xl"><i class="fa-solid fa-play"></i>Play on Roblox</a>
+                    ${(g.platforms || []).length ? `<div class="flex flex-wrap gap-2 mb-6">${g.platforms.map(p => `<span class="chip"><i class="fa-solid ${{ desktop: 'fa-desktop', mobile: 'fa-mobile-screen', tablet: 'fa-tablet-screen-button', console: 'fa-gamepad', vr: 'fa-vr-cardboard' }[p] || 'fa-circle'} mr-1.5"></i>${p === 'vr' ? 'VR' : p[0].toUpperCase() + p.slice(1)}</span>`).join('')}${g.ageRating && !/UNSPECIFIED/.test(g.ageRating) ? `<span class="chip">${esc(g.ageRating.replace('AGE_RATING_', '').replace('_PLUS', '+').replace(/_/g, ' '))}</span>` : ''}</div>` : ''}
+                    <div class="flex flex-wrap gap-3">
+                        <a href="https://www.roblox.com/games/${encodeURIComponent(g.placeId)}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold px-6 py-3 rounded-xl"><i class="fa-solid fa-play"></i>Play on Roblox</a>
+                        ${[['discord', 'fa-brands fa-discord', 'Discord'], ['group', 'fa-solid fa-users', 'Group'], ['youtube', 'fa-brands fa-youtube', 'YouTube']].map(([k, ic, t]) => /^https:\/\//.test(g.links?.[k] || '') ? `<a href="${esc(g.links[k])}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-panel2 border border-line hover:border-duck font-bold px-5 py-3 rounded-xl"><i class="${ic}"></i>${t}</a>` : '').join('')}
+                    </div>
                 </div>`;
             $('game-modal').classList.remove('hidden'); $('game-modal').classList.add('flex');
         };

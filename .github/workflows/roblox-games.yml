@@ -24,6 +24,8 @@ jobs:
         with:
           node-version: 20
       - run: node scripts/fetch-games.mjs
+        env:
+          ROBLOX_API_KEY: ${{ secrets.ROBLOX_API_KEY }}
       - name: Commit if changed
         run: |
           if git diff --quiet data/games.json; then echo "No changes"; exit 0; fi

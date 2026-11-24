@@ -54,6 +54,24 @@ for (const part of chunk(ids, 50)) {
     });
   }
 }
+// Optional: Roblox Open Cloud key (GitHub secret ROBLOX_API_KEY) adds platforms, age rating and social links.
+const KEY = process.env.ROBLOX_API_KEY;
+if (KEY) {
+  for (const g of games) {
+    try {
+      const r = await fetch(`https://apis.roblox.com/cloud/v2/universes/${g.universeId}`, { headers: { 'x-api-key': KEY } });
+      if (!r.ok) { console.warn('open cloud', g.universeId, r.status); continue; }
+      const u = await r.json();
+      g.platforms = ['desktop', 'mobile', 'tablet', 'console', 'vr'].filter(k => u[k + 'Enabled']);
+      g.ageRating = u.ageRating || '';
+      g.visibility = u.visibility || '';
+      const link = k => u[k]?.uri || '';
+      g.links = { discord: link('discordSocialLink'), group: link('robloxGroupSocialLink'), youtube: link('youtubeSocialLink'), twitter: link('twitterSocialLink') };
+    } catch (e) { console.warn('open cloud', g.universeId, e.message); }
+  }
+  console.log('Open Cloud details added');
+}
+
 games.sort((a, b) => b.visits - a.visits);
 await writeFile('data/games.json', JSON.stringify({ updated: new Date().toISOString(), games }, null, 2) + '\n');
 console.log(`Wrote ${games.length} games`);

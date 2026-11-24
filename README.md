@@ -12,6 +12,10 @@ List your games in `data/games.config.json`:
 
 The **Update Roblox game stats** GitHub Action (`.github/workflows/roblox-games.yml`) fetches visits, players, likes, favourites, icons and screenshots every 6 hours and saves them to `data/games.json`. Run it any time from the **Actions** tab → *Update Roblox game stats* → *Run workflow*. Game screenshots also show up in the Gallery under "My games".
 
+### Optional: Roblox Open Cloud key
+
+Add a repo secret named `ROBLOX_API_KEY` (Settings → Secrets and variables → Actions) and the Action also pulls each game's platforms, age rating and social links (Discord, group, YouTube) from Open Cloud. The key never goes into the website itself.
+
 ## Other content
 
 Everything else is in `index.html`, in the `DATA` section near the bottom of the script: the "Currently on" bar, QA roster, RUSHED / Tethr Link screenshot rows (`projects/`), pricing and gallery files.
