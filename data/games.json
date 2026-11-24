@@ -1,4 +1,73 @@
 {
-  "updated": null,
-  "games": []
+  "updated": "2026-11-24T01:25:12.908Z",
+  "games": [
+    {
+      "universeId": 10209610068,
+      "placeId": 122389212847304,
+      "name": "[🎊 RELEASE] Sunkun",
+      "description": "🎣 Cast your line. Build your aquarium. Become a legend.\n\nExplore a vibrant fishing world filled with rare catches, \npowerful mutations, and surprises lurking beneath the surface.\nEvery fish tells a story — what will yours be?\n\n🐟 FISHING\n- Dozens of unique fish to discover across different biomes\n- Rare Mutations that change everything\n- Special weather events that shake up the world\n\n🏠 AQUARIUM\n- Build and customize your personal Aquarium\n- Place fish to earn passive Shellies over time\n- Claim offline earnings when you return\n\n🌦️ WEATHER EVENTS\n- Dynamic weather system with real effects\n- Bee Events, Frost, Rain and more\n- Server-wide Luck boosts for everyone\n\n🛒 SHOP\n- Upgrade your Rods, Bobbers & Baits\n- Unlock rare equipment from the Equipment Bag\n- Trade and collect to complete your collection\n\n✨ RECENT UPDATES\n🪲 Bee Event — Pollinated mutations now live\n❄️ Frost Weather — Freeze your catches\n🌊 Aquarium System — Passive income overhaul\n💰 Offline Earnings — Your fish work whi",
+      "creator": "Toaster Productionz",
+      "creatorType": "Group",
+      "genre": "All",
+      "playing": 0,
+      "visits": 806,
+      "favorites": 9,
+      "maxPlayers": 6,
+      "upVotes": 28,
+      "downVotes": 4,
+      "created": "2026-05-23T14:14:10.928Z",
+      "updated": "2026-10-23T13:01:00.018Z",
+      "icon": "https://tr.rbxcdn.com/180DAY-fce36b6f11991a69ca2cd4d438c92945/512/512/Image/Png/noFilter",
+      "thumbnails": [
+        "https://tr.rbxcdn.com/180DAY-3328d0d659157325a57e4133d5a19eca/768/432/Image/Png/noFilter"
+      ]
+    },
+    {
+      "universeId": 9987937044,
+      "placeId": 136622842983476,
+      "name": "Punch  For Power",
+      "description": "",
+      "creator": "kianmeister",
+      "creatorType": "User",
+      "genre": "All",
+      "playing": 0,
+      "visits": 694,
+      "favorites": 7,
+      "maxPlayers": 50,
+      "upVotes": 7,
+      "downVotes": 2,
+      "created": "2026-04-04T10:06:30.525Z",
+      "updated": "2026-08-22T06:10:51.712Z",
+      "icon": "https://tr.rbxcdn.com/180DAY-47bb74f5dcbe4f223692be22d1d4b2c5/512/512/Image/Png/noFilter",
+      "thumbnails": [
+        "https://tr.rbxcdn.com/180DAY-87200f720b9a8c2deb45573e39373800/768/432/Image/Png/noFilter",
+        "https://tr.rbxcdn.com/180DAY-8996ef4f0154a0a92b086136d6721b22/768/432/Image/Png/noFilter",
+        "https://tr.rbxcdn.com/180DAY-fe6168acf6039582fbf212ca04863dc7/768/432/Image/Png/noFilter"
+      ]
+    },
+    {
+      "universeId": 10034989417,
+      "placeId": 107246293141946,
+      "name": "Race for Power",
+      "description": "⚡ RACE FOR POWER ⚡\nWelcome to Race for Power, the ultimate test of speed and strategy! Train your heart out, hatch legendary companions, and leave your competition in the dust to become the fastest legend in the universe!\n\n🔥 HOW TO PLAY:\n\n💪 TRAIN: Click to build up your Power and increase your top speed!\n\n🏁 RACE: Enter the racing gates and sprint to the finish line before time runs out!\n\n🏆 WIN: Earn Wins for every race you complete to unlock epic new Worlds!\n\n🐾 COLLECT: Hatch eggs to find powerful pets that multiply your gains!\n\n🛠️ CRAFT: Combine your pets to create Golden and Void versions for insane boosts!\n\n🎡 SPIN: Try your luck at the Daily Wheel for free boosts and secret rewards!\n\n✨ FEATURES:\n\n🌍 Explore unique zones with specialized training areas.\n\n📈 Rank up from a \"Slowpoke\" to a \"Speed God.\"\n\n🐱 Pet System: Hundreds of pets to collect and trade.\n\n💎 Daily Rewards: The more you play, the more you earn!\n\n🚀 THE CORE LOOP:\nTrain → Race → Win → Upgrade → Repeat. Do you ha",
+      "creator": "Quackers Interactive",
+      "creatorType": "Group",
+      "genre": "All",
+      "playing": 0,
+      "visits": 83,
+      "favorites": 3,
+      "maxPlayers": 50,
+      "upVotes": 2,
+      "downVotes": 1,
+      "created": "2026-04-14T07:26:43.004Z",
+      "updated": "2026-07-11T09:04:17.55Z",
+      "icon": "https://tr.rbxcdn.com/180DAY-56477319894d62ad5669924dcdc4ae94/512/512/Image/Png/noFilter",
+      "thumbnails": [
+        "https://tr.rbxcdn.com/180DAY-cdff2bb863c886cc8d421d5d0adca9fa/768/432/Image/Png/noFilter",
+        "https://tr.rbxcdn.com/180DAY-1ef79222b5162d4e1be65b7489165810/768/432/Image/Png/noFilter",
+        "https://tr.rbxcdn.com/180DAY-ef7acb4dd6482501b6c7f3c15b30f837/768/432/Image/Png/noFilter",
+        "https://tr.rbxcdn.com/180DAY-19c5745a138d8b209b842c618c897548/768/432/Image/Png/noFilter"
+      ]
+    }
+  ]
 }
