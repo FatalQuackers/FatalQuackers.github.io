@@ -1,39 +1,44 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Quackers - Professional Game Developer, Builder, Animator, and QA Tester specializing in Roblox Studio, Unreal Engine, and UEFN.">
-    
-    <title>Quackers | Pro Developer & QA</title>
-    
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
-    
+    <meta name="description" content="Quackers — owner of RUSHED Studio. OCE multi-engine developer: world building, character animation and pro QA for Roblox, UEFN and Unreal Engine.">
+    <meta property="og:title" content="Quackers | Owner @ RUSHED">
+    <meta property="og:description" content="World builder, animator and QA tester. Owner of RUSHED, founder of Soul Forge.">
+    <meta property="og:image" content="https://fatalquackers.github.io/Image6.png">
+    <title>Quackers | Owner @ RUSHED</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2224%22 fill=%22%23ffd23f%22/><text x=%2250%22 y=%2272%22 font-size=%2264%22 font-family=%22Arial Black,Arial%22 font-weight=%22900%22 text-anchor=%22middle%22 fill=%22%230b0d10%22>Q</text></svg>">
+
+    <!-- Theme before paint: saved choice, else the device setting -->
+    <script>
+        try { const t = localStorage.getItem('quackers-theme') || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'); if (t === 'light') document.documentElement.classList.add('light'); } catch (e) {}
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+        const v = n => `rgb(var(--${n}) / <alpha-value>)`;
         tailwind.config = {
-            darkMode: 'class',
-            theme: { 
-                extend: { 
-                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['Fira Code', 'monospace'] },
-                    animation: {
-                        'float-slow': 'float 6s ease-in-out infinite',
-                        'float-fast': 'float 4s ease-in-out infinite reverse',
+            theme: {
+                extend: {
+                    colors: {
+                        bg: v('bg'), panel: v('panel'), panel2: v('panel2'), line: v('line'),
+                        fg: v('fg'), fg2: v('fg2'), fg3: v('fg3'), acc: v('acc'), skyt: v('skyt'),
+                        ink: '#0b0d10', duck: '#ffd23f', sky: '#4cc9f0', rush: '#f34b3f', rushy: '#ffdf61'
                     },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        }
+                    fontFamily: {
+                        display: ['Unbounded', 'system-ui', 'sans-serif'],
+                        sans: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace']
                     }
-                } 
+                }
             }
         }
     </script>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
     <script>
         window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
         formspree('initForm', { formElement: '#contact-form', formId: 'maqapryg' });
@@ -41,1108 +46,1071 @@
     <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
     <style>
-        body { transition: background-color 0.3s ease, color 0.3s ease; scroll-behavior: smooth; overflow-x: hidden; }
-        
-        /* Custom Cursor */
-        body.custom-cursor { cursor: none; }
-        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 99999; pointer-events: none; transition: opacity 0.2s; }
-        .cursor-dot { width: 8px; height: 8px; background-color: #3b82f6; }
-        .cursor-outline { width: 40px; height: 40px; border: 2px solid rgba(59, 130, 246, 0.5); transition: width 0.2s, height 0.2s, border-color 0.2s; }
+        :root { --bg: 11 13 16; --panel: 19 22 27; --panel2: 27 31 38; --line: 40 45 54; --fg: 241 245 249; --fg2: 200 207 217; --fg3: 142 151 164; --acc: 255 210 63; --skyt: 76 201 240; color-scheme: dark; }
+        html.light { --bg: 246 243 236; --panel: 255 255 255; --panel2: 239 235 226; --line: 222 216 204; --fg: 18 20 24; --fg2: 58 64 74; --fg3: 98 106 118; --acc: 168 106 0; --skyt: 3 105 161; color-scheme: light; }
+        html { scroll-behavior: smooth; }
+        body { overflow-x: hidden; transition: background-color .3s, color .3s; }
+        ::selection { background: #ffd23f; color: #0b0d10; }
+
+        /* Join screen */
+        #joining { position: fixed; inset: 0; z-index: 200; background: rgb(var(--bg)); display: flex; align-items: center; justify-content: center; transition: opacity .45s, visibility .45s; }
+        #joining.done { opacity: 0; visibility: hidden; }
+        #join-bar { width: 0; transition: width 1s cubic-bezier(.3,.7,.2,1); }
+
+        /* Custom cursor */
+        body.custom-cursor, body.custom-cursor * { cursor: none !important; }
+        .cursor-dot, .cursor-outline { opacity: 0; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 99999; pointer-events: none; }
+        .cursor-dot { width: 8px; height: 8px; background: rgb(var(--acc)); }
+        .cursor-outline { width: 38px; height: 38px; border: 2px solid rgb(var(--acc) / .45); transition: width .2s, height .2s, border-color .2s; }
+        .cursor-outline.hover { width: 60px; height: 60px; border-color: rgb(var(--skyt) / .6); }
         body:not(.custom-cursor) .cursor-dot, body:not(.custom-cursor) .cursor-outline { display: none; }
-        
-        /* Scroll Progress Bar */
-        #scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: #3b82f6; z-index: 9999; transition: width 0.1s; box-shadow: 0 0 10px #3b82f6; }
+        @media (hover: none) { .cursor-dot, .cursor-outline { display: none !important; } body.custom-cursor, body.custom-cursor * { cursor: auto !important; } }
 
-        /* Navigation */
-        .nav-link { cursor: pointer; transition: 0.3s; padding: 0.5rem 1rem; border-radius: 99px; font-weight: 600; display: inline-flex; items-center; gap: 0.3rem; }
-        .nav-link:hover { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
-        .nav-link.active { background: #3b82f6; color: white; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); }
-        .nav-link.active i { color: white !important; }
-        
-        /* Page Transitions */
+        #scroll-progress { position: fixed; top: 0; left: 0; width: 0; height: 3px; background: #ffd23f; z-index: 9999; box-shadow: 0 0 10px #ffd23f; }
+
+        .nav-link { cursor: pointer; padding: .5rem .85rem; border-radius: 999px; font-weight: 600; color: rgb(var(--fg2)); transition: .2s; white-space: nowrap; display: inline-flex; align-items: center; gap: .4rem; }
+        .nav-link i { color: rgb(var(--fg3)); font-size: .85em; }
+        .nav-link:hover { color: rgb(var(--fg)); background: rgb(var(--fg) / .06); }
+        .nav-link.active { background: #ffd23f; color: #0b0d10; }
+        .nav-link.active i { color: #0b0d10; }
+
+        .eq { display: inline-flex; align-items: flex-end; gap: 2px; height: 14px; }
+        .eq span { width: 3px; height: 4px; background: currentColor; border-radius: 1px; }
+        .playing .eq span { animation: eq .9s ease-in-out infinite; }
+        .playing .eq span:nth-child(2) { animation-delay: -.3s; } .playing .eq span:nth-child(3) { animation-delay: -.6s; } .playing .eq span:nth-child(4) { animation-delay: -.15s; }
+        @keyframes eq { 0%,100% { height: 4px; } 50% { height: 14px; } }
+
         .page-section { display: none; }
-        .page-section.active { display: block; animation: slideUpFade 0.4s ease forwards; }
-        @keyframes slideUpFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .page-section.active { display: block; animation: rise .45s ease both; }
+        @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,0,1); }
+        .reveal.active { opacity: 1; transform: none; }
 
-        /* Scroll Reveal Animation */
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        .badge-ico { width: 56px; height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; border: 1px solid; margin: 0 auto 1rem; transform: rotate(-6deg); }
 
-        /* Glassmorphism */
-        .glass-panel { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); }
-        .dark .glass-panel { background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.05); }
-        
-        /* 3D Tilt & Magnetic Glow Cards */
-        .tilt-card { transform-style: preserve-3d; transform: perspective(1000px); }
-        .tilt-card-content { transform: translateZ(30px); }
-        
-        .glow-card { position: relative; overflow: hidden; }
-        .glow-card::before {
-            content: ""; position: absolute; inset: 0; border-radius: inherit;
-            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 40%);
-            z-index: 0; pointer-events: none; opacity: 0; transition: opacity 0.3s;
+        /* Game-style label: "> PORTFOLIO" with a corner bracket */
+        .hud-label { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 12px; letter-spacing: .04em; color: rgb(var(--acc)); display: inline-flex; align-items: center; gap: .5rem; }
+        .hud-label::before { content: ""; width: 10px; height: 10px; border-left: 2px solid currentColor; border-top: 2px solid currentColor; }
+
+        .hero-bg { background: radial-gradient(ellipse at 20% 10%, rgb(var(--acc) / .14), transparent 50%), radial-gradient(ellipse at 90% 90%, rgb(var(--skyt) / .12), transparent 55%), rgb(var(--bg)); }
+        .shot { box-shadow: 0 30px 60px -20px rgba(0,0,0,.55), 0 0 0 1px rgb(var(--fg) / .08); }
+        .float-a { animation: floatA 7s ease-in-out infinite; }
+        .float-b { animation: floatB 8s ease-in-out infinite; }
+        @keyframes floatA { 0%,100% { transform: rotate(-4deg) translateY(0); } 50% { transform: rotate(-4deg) translateY(-12px); } }
+        @keyframes floatB { 0%,100% { transform: rotate(5deg) translateY(0); } 50% { transform: rotate(5deg) translateY(10px); } }
+        .sticker { transform: rotate(-8deg); box-shadow: 0 6px 0 rgba(0,0,0,.25); }
+
+        .ticker { display: flex; width: max-content; animation: ticker 30s linear infinite; }
+        @keyframes ticker { to { transform: translateX(-50%); } }
+
+        .card { background: rgb(var(--panel)); border: 1px solid rgb(var(--line)); border-radius: 22px; transition: border-color .25s, background-color .3s; }
+        .card:hover { border-color: rgb(var(--fg3) / .5); }
+        .glow { position: relative; overflow: hidden; }
+        .glow::before { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .3s; z-index: 1;
+            background: radial-gradient(500px circle at var(--mx, 50%) var(--my, 50%), rgb(var(--acc) / .08), transparent 40%); }
+        .glow:hover::before { opacity: 1; }
+        .tilt { transform-style: preserve-3d; transform: perspective(1000px); }
+        .tilt-inner { transform: translateZ(24px); }
+
+        .status { font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: .25rem .6rem; border-radius: 999px; display: inline-flex; align-items: center; gap: .4rem; white-space: nowrap; }
+        .status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+        .s-live { color: #16a34a; background: rgba(34,197,94,.12); }
+        html:not(.light) .s-live { color: #4ade80; }
+        .chip { font-size: 12px; font-weight: 600; padding: .3rem .65rem; border-radius: 8px; background: rgb(var(--panel2)); color: rgb(var(--fg2)); border: 1px solid rgb(var(--line)); white-space: nowrap; }
+
+        .filter-btn { padding: .5rem 1.1rem; border-radius: 999px; font-weight: 600; font-size: .875rem; color: rgb(var(--fg2)); background: rgb(var(--panel2)); border: 1px solid rgb(var(--line)); transition: .2s; }
+        .filter-btn:hover { color: rgb(var(--fg)); }
+        .filter-btn.active { background: #ffd23f; color: #0b0d10; border-color: #ffd23f; }
+
+        .strip { display: flex; gap: .75rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: .5rem; }
+        .strip > button { flex: 0 0 auto; width: min(78%, 420px); scroll-snap-align: start; }
+
+        .skill-bar-fill { transition: width 1.4s cubic-bezier(.1,.6,.1,1); width: 0; }
+        .timeline { position: relative; border-left: 2px solid rgb(var(--line)); margin-left: 8px; padding-left: 28px; }
+        .t-dot { position: absolute; left: -37px; top: 4px; width: 16px; height: 16px; border-radius: 50%; border: 3px solid rgb(var(--bg)); }
+
+        /* Stat tiles */
+        .stat-num { font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: clamp(1.6rem, 3.5vw, 2.4rem); line-height: 1.05; font-variant-numeric: tabular-nums; }
+        .skeleton { background: linear-gradient(90deg, rgb(var(--panel2)), rgb(var(--line)), rgb(var(--panel2))); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+        @keyframes shimmer { to { background-position: -200% 0; } }
+        .live-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 0 rgba(34,197,94,.6); animation: ping 1.8s infinite; }
+        @keyframes ping { 70% { box-shadow: 0 0 0 8px rgba(34,197,94,0); } 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); } }
+
+        [data-fs-error]:not(:empty) { display: block; color: #ef4444; font-size: .875rem; margin-top: .25rem; }
+        details > summary { list-style: none; } details > summary::-webkit-details-marker { display: none; }
+
+        #settings-menu { transform: translateX(100%); transition: transform .3s ease; }
+        #settings-menu.open { transform: none; }
+        .switch { width: 48px; height: 26px; border-radius: 999px; position: relative; background: rgb(var(--line)); transition: background .2s; flex: none; }
+        .switch span { position: absolute; top: 4px; left: 4px; width: 18px; height: 18px; border-radius: 50%; background: rgb(var(--panel)); box-shadow: 0 1px 3px rgba(0,0,0,.3); transition: transform .2s; }
+        .switch.on { background: #ffd23f; } .switch.on span { transform: translateX(22px); background: #0b0d10; }
+
+        ::-webkit-scrollbar { width: 8px; height: 8px; } ::-webkit-scrollbar-track { background: rgb(var(--bg)); }
+        ::-webkit-scrollbar-thumb { background: rgb(var(--line)); border-radius: 10px; } ::-webkit-scrollbar-thumb:hover { background: #ffd23f; }
+
+        .cursor-blink { animation: blink 1s step-end infinite; } @keyframes blink { 50% { opacity: 0; } }
+        .robux-rain { position: fixed; top: -60px; z-index: 9998; pointer-events: none; animation: fall linear forwards; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+        .shake-screen { animation: shake .45s; }
+        @keyframes shake { 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-5px); } 80% { transform: translateX(5px); } }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            .reveal { opacity: 1; transform: none; }
         }
-        .dark .glow-card::before { background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.04), transparent 40%); }
-        .glow-card:hover::before { opacity: 1; }
-        .glow-card > * { position: relative; z-index: 1; }
-        
-        /* Glowing Texts */
-        .glow-robux { text-shadow: 0 0 15px rgba(74, 222, 128, 0.6); }
-        .glow-blue { text-shadow: 0 0 15px rgba(59, 130, 246, 0.7); }
-
-        /* Progress Bars */
-        .skill-bar-fill { transition: width 1.5s cubic-bezier(0.1, 0.5, 0.1, 1); width: 0%; }
-
-        /* Formspree */
-        [data-fs-error]:not(:empty) { display: block; color: #ef4444; font-size: 0.875rem; margin-top: 0.25rem; }
-        details > summary { list-style: none; }
-        details > summary::-webkit-details-marker { display: none; }
-        
-        /* Animated Hero Background */
-        @keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        .hero-bg { background: linear-gradient(-45deg, #0f172a, #1e3a8a, #020617, #0f172a); background-size: 400% 400%; animation: gradientMove 15s ease infinite; }
-
-        /* Developer Grid Background */
-        .bg-grid-pattern {
-            background-image: linear-gradient(to right, rgba(148, 163, 184, 0.07) 1px, transparent 1px), linear-gradient(to bottom, rgba(148, 163, 184, 0.07) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
-        
-        /* Engine Tags & Buttons */
-        .tag-roblox { background: rgba(220, 38, 38, 0.1); color: #ef4444; border: 1px solid rgba(220, 38, 38, 0.3); }
-        .filter-btn { padding: 0.5rem 1.5rem; border-radius: 9999px; font-weight: 600; font-size: 0.875rem; transition: all 0.2s; border: 1px solid transparent; }
-        .filter-btn.active { background-color: #3b82f6; color: white; box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.39); }
-        .filter-btn:not(.active) { background-color: rgba(148, 163, 184, 0.1); color: #64748b; }
-        .dark .filter-btn:not(.active) { color: #cbd5e1; }
-        .filter-btn:not(.active):hover { background-color: rgba(148, 163, 184, 0.2); }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #2563eb; }
-
-        /* Typing Cursor & Timeline */
-        .cursor-blink { animation: blink 1s step-end infinite; }
-        @keyframes blink { 50% { opacity: 0; } }
-        
-        #settings-menu { transform: translateX(100%); transition: transform 0.3s ease-in-out; }
-        #settings-menu.open { transform: translateX(0); }
-        .timeline-dot { position: absolute; left: -29px; width: 16px; height: 16px; border-radius: 50%; background: #3b82f6; border: 3px solid #0f172a; box-shadow: 0 0 10px rgba(59,130,246,0.5); }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 antialiased font-sans relative custom-cursor">
+<body class="bg-bg text-fg antialiased font-sans custom-cursor">
 
-    <!-- Custom Cursor -->
+    <!-- Join screen (first visit per session) -->
+    <div id="joining" class="done" aria-hidden="true">
+        <div class="w-72 text-center">
+            <div class="w-16 h-16 mx-auto mb-5 rounded-2xl bg-duck text-ink font-display font-black text-3xl flex items-center justify-center rotate-[-6deg]">Q</div>
+            <p class="font-mono font-bold text-sm text-fg2 mb-3">JOINING QUACKERS' SERVER<span class="cursor-blink">…</span></p>
+            <div class="h-2 bg-panel2 rounded-full overflow-hidden"><div id="join-bar" class="h-full bg-duck rounded-full"></div></div>
+        </div>
+    </div>
+
     <div class="cursor-dot" id="cursor-dot"></div>
     <div class="cursor-outline" id="cursor-outline"></div>
     <div id="scroll-progress"></div>
 
-    <!-- Media Modal -->
-    <div id="media-modal" class="fixed inset-0 z-[100] bg-slate-900/95 backdrop-blur-md hidden flex justify-center items-center opacity-0 transition-opacity duration-300" onclick="closeModal()">
-        <span class="absolute top-6 right-6 text-white text-5xl cursor-pointer hover:text-red-500 transition-colors z-[110]">&times;</span>
-        <div class="max-w-[90%] max-h-[90%] flex justify-center items-center" onclick="event.stopPropagation()">
-            <img id="modal-img" class="hidden rounded-xl shadow-2xl object-contain max-h-[85vh] border border-slate-700" src="">
-            <video id="modal-video" controls class="hidden rounded-xl shadow-2xl max-h-[85vh] w-full max-w-5xl border border-slate-700"></video>
+    <!-- Media modal -->
+    <div id="media-modal" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md hidden flex justify-center items-center opacity-0 transition-opacity duration-300" onclick="closeModal()">
+        <button class="absolute top-5 right-6 text-white/80 hover:text-duck text-5xl leading-none" aria-label="Close">&times;</button>
+        <div class="max-w-[92%] max-h-[90%] flex flex-col justify-center items-center gap-3" onclick="event.stopPropagation()">
+            <img id="modal-img" class="hidden rounded-2xl shadow-2xl object-contain max-h-[82vh]" src="" alt="">
+            <video id="modal-video" controls class="hidden rounded-2xl shadow-2xl max-h-[82vh] w-full max-w-5xl"></video>
+            <p id="modal-cap" class="text-white/80 text-sm"></p>
         </div>
     </div>
 
-    <!-- Floating Action Buttons -->
-    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
-        <button onclick="toggleSettings()" class="bg-slate-800 dark:bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform flex items-center justify-center group" title="Settings">
+    <!-- Game details modal -->
+    <div id="game-modal" class="fixed inset-0 z-[100] bg-black/70 backdrop-blur-md hidden items-center justify-center p-4" onclick="closeGame()">
+        <div class="card w-full max-w-3xl max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()" id="game-modal-body"></div>
+    </div>
+
+    <!-- Floating buttons -->
+    <div class="fixed bottom-5 right-5 z-50 flex flex-col gap-3">
+        <button onclick="toggleSettings()" class="w-12 h-12 bg-panel2 border border-line hover:border-duck rounded-full shadow-lg flex items-center justify-center group" title="Settings" aria-label="Settings">
             <i class="fa-solid fa-gear group-hover:rotate-90 transition-transform duration-500"></i>
         </button>
-        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="bg-slate-800 dark:bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform flex items-center justify-center opacity-70 hover:opacity-100">
+        <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="w-12 h-12 bg-panel2 border border-line hover:border-duck rounded-full shadow-lg flex items-center justify-center" aria-label="Back to top">
             <i class="fa-solid fa-chevron-up"></i>
         </button>
     </div>
 
-    <!-- Settings Sidebar -->
+    <!-- Settings -->
     <div id="settings-overlay" class="fixed inset-0 bg-black/50 z-[101] hidden opacity-0 transition-opacity" onclick="toggleSettings()"></div>
-    <div id="settings-menu" class="fixed top-0 right-0 w-80 h-full bg-white dark:bg-slate-900 z-[102] shadow-[-10px_0_30px_rgba(0,0,0,0.3)] border-l border-slate-200 dark:border-slate-800 p-6 flex flex-col">
-        <div class="flex justify-between items-center mb-8 border-b border-slate-200 dark:border-slate-800 pb-4">
-            <h3 class="text-xl font-bold"><i class="fa-solid fa-sliders mr-2 text-blue-500"></i> Preferences</h3>
-            <button onclick="toggleSettings()" class="text-slate-500 hover:text-red-500 text-2xl">&times;</button>
+    <aside id="settings-menu" class="fixed top-0 right-0 w-80 max-w-[85vw] h-full bg-panel z-[102] border-l border-line p-6 flex flex-col">
+        <div class="flex justify-between items-center mb-8 pb-4 border-b border-line">
+            <h3 class="text-lg font-bold"><i class="fa-solid fa-sliders mr-2 text-acc"></i>Preferences</h3>
+            <button onclick="toggleSettings()" class="text-fg3 hover:text-acc text-3xl leading-none" aria-label="Close">&times;</button>
         </div>
         <div class="space-y-6">
-            <div class="flex justify-between items-center">
-                <span class="font-medium">Dark Mode</span>
-                <button onclick="toggleTheme()" class="w-12 h-6 bg-slate-300 dark:bg-blue-500 rounded-full relative transition-colors">
-                    <div id="theme-toggle-ball" class="w-4 h-4 bg-white rounded-full absolute top-1 left-1 dark:translate-x-6 transition-transform"></div>
-                </button>
+            <div class="flex justify-between items-center gap-4">
+                <span class="font-medium">Dark mode</span>
+                <button onclick="toggleTheme()" id="theme-switch" class="switch" aria-label="Toggle dark mode"><span></span></button>
             </div>
-            <div class="flex justify-between items-center">
-                <span class="font-medium">Custom Cursor</span>
-                <button onclick="toggleCursor()" class="w-12 h-6 bg-blue-500 rounded-full relative transition-colors" id="cursor-toggle-bg">
-                    <div id="cursor-toggle-ball" class="w-4 h-4 bg-white rounded-full absolute top-1 left-1 translate-x-6 transition-transform"></div>
-                </button>
+            <div class="flex justify-between items-center gap-4">
+                <span class="font-medium">Background music</span>
+                <button onclick="toggleMusic()" id="music-switch" class="switch" aria-label="Toggle background music"><span></span></button>
             </div>
-            <div class="pt-6 border-t border-slate-200 dark:border-slate-800">
-                <h4 class="text-sm font-bold text-slate-500 mb-4 uppercase">Quick Links</h4>
-                <div class="flex flex-col gap-3">
-                    <a href="https://www.youtube.com/@Fatalquackers" target="_blank" class="flex items-center text-slate-600 dark:text-slate-300 hover:text-red-500 transition-colors"><i class="fa-brands fa-youtube w-6"></i> YouTube Channel</a>
-                    <button onclick="copyDiscord(); toggleSettings();" class="flex items-center text-slate-600 dark:text-slate-300 hover:text-indigo-500 transition-colors text-left"><i class="fa-brands fa-discord w-6"></i> Copy Discord ID</button>
-                </div>
+            <label class="block">
+                <span class="flex justify-between text-sm text-fg3 mb-2"><span>Volume</span><span id="vol-label">40%</span></span>
+                <input type="range" id="volume" min="0" max="100" value="40" class="w-full accent-[#ffd23f]">
+            </label>
+            <div class="flex justify-between items-center gap-4">
+                <span class="font-medium">Custom cursor</span>
+                <button onclick="toggleCursor()" id="cursor-switch" class="switch on" aria-label="Toggle custom cursor"><span></span></button>
             </div>
         </div>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="glass-panel sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0">
-            <div class="flex items-center gap-4">
-                <div class="text-2xl font-black tracking-widest text-slate-900 dark:text-white cursor-pointer select-none" onclick="triggerSecretClick()">
-                    QUACKERS<span class="text-blue-500 text-3xl leading-none">.</span>
-                </div>
+        <div class="mt-8 pt-6 border-t border-line">
+            <h4 class="text-sm font-semibold text-fg3 mb-4">Quick links</h4>
+            <div class="flex flex-col gap-3">
+                <a href="https://fatalquackers.github.io/rushed/" target="_blank" rel="noopener" class="text-fg2 hover:text-acc"><img src="projects/rushed-mark.svg" alt="" class="inline w-4 h-4 mr-2 rounded">RUSHED Studio</a>
+                <a href="https://www.youtube.com/@Fatalquackers" target="_blank" rel="noopener" class="text-fg2 hover:text-acc"><i class="fa-brands fa-youtube w-6"></i>YouTube channel</a>
+                <button onclick="copyDiscord(); toggleSettings();" class="text-left text-fg2 hover:text-acc"><i class="fa-brands fa-discord w-6"></i>Copy Discord username</button>
             </div>
-            
-            <div class="flex flex-wrap justify-center items-center gap-2 md:gap-4 font-semibold text-sm md:text-base text-slate-600 dark:text-slate-300">
-                <a onclick="showPage('home')" class="nav-link active" id="nav-home"><i class="fa-solid fa-house text-slate-400"></i> Home</a>
-                <a onclick="showPage('portfolio')" class="nav-link" id="nav-portfolio"><i class="fa-solid fa-folder-open text-slate-400"></i> Portfolio</a>
-                <a onclick="showPage('gallery')" class="nav-link" id="nav-gallery"><i class="fa-solid fa-images text-slate-400"></i> Gallery</a>
-                <a onclick="showPage('pricing')" class="nav-link" id="nav-pricing"><i class="fa-solid fa-tags text-slate-400"></i> Pricing</a>
-                <a onclick="showPage('testing')" class="nav-link" id="nav-testing"><i class="fa-solid fa-vial-virus text-cyan-500"></i> QA</a>
-                <a onclick="showPage('contact')" class="nav-link" id="nav-contact"><i class="fa-solid fa-paper-plane text-slate-400"></i> Contact</a>
+        </div>
+        <p class="mt-auto text-xs text-fg3">Psst: try typing <span class="font-mono text-acc">robux</span> anywhere.</p>
+    </aside>
+
+    <!-- Nav -->
+    <nav class="sticky top-0 z-50 bg-bg/80 backdrop-blur-xl border-b border-line">
+        <div class="max-w-6xl mx-auto px-5 py-3 flex flex-col lg:flex-row lg:justify-between items-center gap-3">
+            <div class="flex items-center gap-2">
+                <button class="font-display font-black text-xl tracking-tight select-none mr-1" onclick="triggerSecretClick()">QUACKERS<span class="text-acc">.</span></button>
+                <button onclick="toggleMusic()" id="music-btn" class="flex items-center gap-2 text-xs font-semibold text-fg2 hover:text-acc bg-panel2 border border-line rounded-full px-3 py-1.5" aria-label="Play background music">
+                    <span class="eq"><span></span><span></span><span></span><span></span></span><span id="music-label">Music</span>
+                </button>
+                <button onclick="toggleTheme()" class="w-8 h-8 text-sm text-fg2 hover:text-acc bg-panel2 border border-line rounded-full flex items-center justify-center" aria-label="Toggle light or dark mode">
+                    <i class="fa-solid fa-moon" id="theme-icon"></i>
+                </button>
+            </div>
+            <div class="flex gap-1 overflow-x-auto max-w-full text-sm pb-1 lg:pb-0">
+                <a href="#home" class="nav-link active" id="nav-home"><i class="fa-solid fa-house"></i>Home</a>
+                <a href="#portfolio" class="nav-link" id="nav-portfolio"><i class="fa-solid fa-folder-open"></i>Portfolio</a>
+                <a href="#games" class="nav-link" id="nav-games"><i class="fa-solid fa-gamepad"></i>Games</a>
+                <a href="#gallery" class="nav-link" id="nav-gallery"><i class="fa-solid fa-images"></i>Gallery</a>
+                <a href="#pricing" class="nav-link" id="nav-pricing"><i class="fa-solid fa-tags"></i>Pricing</a>
+                <a href="#testing" class="nav-link" id="nav-testing"><i class="fa-solid fa-vial-virus"></i>QA</a>
+                <a href="#contact" class="nav-link" id="nav-contact"><i class="fa-solid fa-paper-plane"></i>Contact</a>
             </div>
         </div>
     </nav>
 
-    <!-- SECTION: HOME -->
+    <!-- ================= HOME ================= -->
     <main id="home" class="page-section active">
-        <div class="hero-bg py-32 px-6 text-center text-white relative overflow-hidden">
-            <!-- Particle Canvas -->
-            <canvas id="hero-particles" class="absolute inset-0 z-0 opacity-50"></canvas>
-            
-            <!-- Floating Ambient Shapes -->
-            <div class="absolute top-10 left-10 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl animate-float-slow pointer-events-none z-0"></div>
-            <div class="absolute bottom-10 right-20 w-48 h-48 bg-blue-400/20 rounded-full blur-3xl animate-float-fast pointer-events-none z-0"></div>
-            
-            <div class="max-w-6xl mx-auto relative z-10 reveal active">
-                <div class="inline-flex items-center glass-panel px-4 py-1.5 rounded-full mb-8 shadow-lg">
-                    <i class="fa-solid fa-code text-blue-400 mr-2"></i>
-                    <span class="text-sm font-bold uppercase tracking-wider text-slate-200">OCE Based Multi-Engine Dev</span>
+        <section class="hero-bg relative overflow-hidden">
+            <canvas id="hero-particles" class="absolute inset-0 w-full h-full pointer-events-none opacity-60"></canvas>
+            <div class="relative max-w-6xl mx-auto px-5 pt-14 pb-20 md:pt-20 md:pb-24 grid md:grid-cols-[1.1fr_.9fr] gap-12 items-center">
+                <div>
+                    <div class="flex flex-wrap gap-2 mb-7">
+                        <span class="inline-flex items-center gap-2 bg-panel/80 border border-line px-3 py-1.5 rounded-full text-sm text-fg2"><i class="fa-solid fa-earth-oceania text-acc"></i>OCE based multi-engine dev</span>
+                        <a href="#portfolio" class="inline-flex items-center gap-2 bg-rush text-white px-3 py-1.5 rounded-full text-sm font-semibold hover:brightness-110"><img src="projects/rushed-mark.svg" alt="" class="w-4 h-4 rounded">Owner @ RUSHED</a>
+                    </div>
+                    <h1 class="font-display font-black text-5xl sm:text-6xl lg:text-7xl leading-[1.02] tracking-tight mb-5">Hi, I'm<br><span class="text-acc">Quackers.</span></h1>
+                    <p class="font-mono text-lg sm:text-xl text-fg2 mb-6 h-8">&gt; <span id="typewriter-text" class="text-fg"></span><span class="cursor-blink text-acc">_</span></p>
+                    <p class="text-lg text-fg2 max-w-xl leading-relaxed mb-9">
+                        Determined to push the boundaries of multiplayer experiences. I run my own studio, <strong class="text-fg">RUSHED</strong>, craft competitive maps in <strong class="text-fg">UEFN</strong>, develop in <strong class="text-fg">Unreal Engine</strong> and build massive <strong class="text-fg">Roblox</strong> projects. I focus on world building, animation and breaking games through professional QA testing.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="#games" class="bg-duck text-ink hover:brightness-105 hover:-translate-y-0.5 px-7 py-3.5 rounded-full font-bold transition shadow-[0_6px_0_#c9a42e]"><i class="fa-solid fa-play mr-2"></i>Play my games</a>
+                        <a href="#portfolio" class="bg-panel border border-line hover:border-duck px-7 py-3.5 rounded-full font-bold transition">Portfolio</a>
+                        <a href="https://www.youtube.com/@Fatalquackers" target="_blank" rel="noopener" class="px-4 py-3.5 rounded-full font-bold text-fg2 hover:text-fg transition"><i class="fa-brands fa-youtube text-red-500 mr-2"></i>YouTube</a>
+                    </div>
                 </div>
-                
-                <h1 class="text-5xl md:text-7xl font-black mb-4 drop-shadow-2xl tracking-tight">HI, I'M <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">QUACKERS</span></h1>
-                
-                <h2 class="text-2xl md:text-3xl text-slate-300 mb-8 font-mono h-10">
-                    > <span id="typewriter-text" class="text-white font-bold"></span><span class="cursor-blink text-blue-400">_</span>
-                </h2>
-                
-                <p class="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed mb-10 drop-shadow-md">
-                    Determined to push the boundaries of multiplayer experiences. Specializing in crafting competitive maps in <strong>UEFN</strong>, developing in <strong>Unreal Engine</strong>, and creating massive <strong>Roblox projects</strong>. I focus strictly on world building, animation, and breaking games through professional QA testing.
-                </p>
 
-                <div class="flex justify-center gap-4 flex-wrap mb-12">
-                    <button onclick="showPage('portfolio')" class="bg-white text-slate-900 hover:bg-slate-200 px-8 py-3 rounded-full font-bold transition shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:-translate-y-1">View Portfolio</button>
-                    <a href="https://www.youtube.com/@Fatalquackers" target="_blank" class="glass-panel hover:bg-white/20 text-white px-8 py-3 rounded-full font-bold transition flex items-center hover:-translate-y-1">
-                        <i class="fa-brands fa-youtube mr-2 text-red-500 text-xl"></i> YouTube
-                    </a>
+                <div class="relative h-[360px] sm:h-[440px]">
+                    <img src="Image6.png" alt="Aquarium island build" class="shot float-a absolute right-0 top-0 w-[86%] rounded-2xl object-cover aspect-[16/10]">
+                    <img src="Image8.png" alt="Park build" class="shot float-b absolute left-0 bottom-12 w-[58%] rounded-2xl object-cover aspect-[16/10]">
+                    <span class="sticker absolute -top-3 left-2 sm:left-6 bg-duck text-ink font-display font-black text-xs px-3 py-2 rounded-lg z-10">OPEN FOR COMMISSIONS</span>
+                    <!-- Player card HUD -->
+                    <div class="absolute right-0 bottom-0 w-[250px] bg-panel/95 backdrop-blur border border-line rounded-2xl p-4 shadow-2xl z-10">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-xl bg-duck text-ink font-display font-black flex items-center justify-center">Q</div>
+                            <div class="min-w-0"><div class="font-bold leading-tight">Quackers</div><div class="text-xs text-fg3">Owner @ RUSHED</div></div>
+                            <span class="ml-auto font-mono text-[11px] font-bold bg-acc/15 text-acc px-2 py-1 rounded-md">LV. 99</span>
+                        </div>
+                        <div class="flex justify-between text-xs text-fg3 mb-1.5"><span>Visits across my games</span><span class="flex items-center gap-1.5"><span class="live-dot"></span>live</span></div>
+                        <div class="font-display font-bold text-xl" id="hud-visits"><span class="skeleton inline-block w-24 h-5 rounded"></span></div>
+                        <div class="h-1.5 bg-panel2 rounded-full overflow-hidden mt-3"><div class="h-full w-[78%] bg-gradient-to-r from-duck to-rush rounded-full"></div></div>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="relative border-y border-line bg-panel/90 overflow-hidden py-3">
+                <div class="ticker font-display font-bold text-sm sm:text-base text-fg2" id="ticker"></div>
+            </div>
+        </section>
 
-        <div class="max-w-6xl mx-auto px-6 py-20">
-            <!-- Expertise Section -->
+        <!-- RUSHED banner -->
+        <section class="max-w-6xl mx-auto px-5 pt-20 reveal">
+            <a href="#portfolio" class="block rounded-[26px] overflow-hidden bg-rush relative group">
+                <div class="grid md:grid-cols-[1fr_1.1fr] items-center">
+                    <div class="p-8 md:p-12 relative z-10">
+                        <div class="flex items-center gap-3 mb-5">
+                            <img src="projects/rushed-mark.svg" alt="RUSHED logo" class="w-12 h-12 rounded-xl shadow-lg">
+                            <span class="font-mono text-xs bg-black/25 text-white px-3 py-1 rounded-full">My studio · Owner</span>
+                        </div>
+                        <h2 class="font-display font-black text-4xl md:text-5xl text-white leading-[1.02] mb-4">RUSHED<span class="text-rushy">.</span></h2>
+                        <p class="text-white/90 text-lg max-w-md mb-6">The independent Roblox studio I own, built around finding a game's potential and helping it take the next step. Discover, develop, grow.</p>
+                        <span class="inline-flex items-center gap-2 bg-ink text-white font-bold px-5 py-3 rounded-full group-hover:bg-white group-hover:text-ink transition">See the studio <i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
+                    <img src="projects/rushed-home.jpg" alt="RUSHED studio website" class="w-full h-full object-cover md:min-h-[340px] md:rounded-l-2xl group-hover:scale-[1.02] transition duration-700">
+                </div>
+            </a>
+        </section>
+
+        <!-- Live from Roblox -->
+        <section class="max-w-6xl mx-auto px-5 pt-20 reveal">
+            <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+                <div>
+                    <span class="hud-label mb-2">LIVE FROM ROBLOX</span>
+                    <h2 class="font-display font-bold text-3xl md:text-4xl">My games right now</h2>
+                </div>
+                <a href="#games" class="font-semibold text-fg2 hover:text-acc">All games &amp; stats <i class="fa-solid fa-arrow-right ml-1"></i></a>
+            </div>
+            <div id="home-games" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+        </section>
+
+        <section class="max-w-6xl mx-auto px-5 py-20">
             <div class="text-center mb-12 reveal">
-                <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 border border-blue-200 dark:border-blue-800 shadow-sm">
-                    <i class="fa-solid fa-star"></i>
-                </div>
-                <h3 class="text-4xl font-black text-slate-900 dark:text-white">Core Expertise</h3>
+                <div class="badge-ico bg-acc/10 border-acc/30 text-acc"><i class="fa-solid fa-star"></i></div>
+                <h2 class="font-display font-bold text-3xl md:text-4xl">Core expertise</h2>
             </div>
-            
-            <div class="grid md:grid-cols-3 gap-8 mb-20 reveal">
-                <div class="tilt-card glow-card bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl relative group">
-                    <div class="tilt-card-content">
-                        <div class="absolute top-0 right-0 p-4 opacity-5 text-8xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-hammer"></i></div>
-                        <i class="fa-solid fa-hammer text-4xl text-blue-500 mb-6 relative z-10"></i>
-                        <h4 class="text-xl font-bold mb-3 text-slate-900 dark:text-white relative z-10">World Building</h4>
-                        <p class="text-slate-600 dark:text-slate-400 relative z-10">Designing immersive environments and structured level layouts for Roblox and UEFN.</p>
-                    </div>
-                </div>
-                
-                <div class="tilt-card glow-card bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl relative group">
-                    <div class="tilt-card-content">
-                        <div class="absolute top-0 right-0 p-4 opacity-5 text-8xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-person-running"></i></div>
-                        <i class="fa-solid fa-person-running text-4xl text-orange-500 mb-6 relative z-10"></i>
-                        <h4 class="text-xl font-bold mb-3 text-slate-900 dark:text-white relative z-10">Character Animation</h4>
-                        <p class="text-slate-600 dark:text-slate-400 relative z-10">Bringing characters to life with fluid R6 and R15 animations, from traversal loops to heavy combat sequences.</p>
-                    </div>
-                </div>
-                
-                <div class="tilt-card glow-card bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl cursor-pointer relative group" onclick="showPage('testing')">
-                    <div class="tilt-card-content">
-                        <div class="absolute top-0 right-0 p-4 opacity-5 text-8xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-vial-virus"></i></div>
-                        <i class="fa-solid fa-vial-virus text-4xl text-cyan-500 mb-6 relative z-10"></i>
-                        <h4 class="text-xl font-bold mb-3 text-slate-900 dark:text-white relative z-10">QA & Playtesting</h4>
-                        <p class="text-slate-600 dark:text-slate-400 relative z-10">Strict bug hunting, balancing, and game-feel testing for hit unreleased titles.</p>
-                        <span class="text-cyan-500 font-bold block mt-4 relative z-10 group-hover:translate-x-2 transition-transform">See QA Details &rarr;</span>
-                    </div>
-                </div>
+            <div class="grid md:grid-cols-3 gap-5 mb-16 reveal">
+                <div class="card glow tilt p-8 group"><div class="tilt-inner relative z-[2]">
+                    <i class="fa-solid fa-hammer absolute -top-2 -right-2 text-7xl opacity-5 group-hover:scale-110 transition-transform"></i>
+                    <i class="fa-solid fa-hammer text-3xl text-acc mb-5"></i>
+                    <h3 class="text-xl font-bold mb-2">World building</h3>
+                    <p class="text-fg3">Designing immersive environments and structured level layouts for Roblox and UEFN.</p>
+                </div></div>
+                <div class="card glow tilt p-8 group"><div class="tilt-inner relative z-[2]">
+                    <i class="fa-solid fa-person-running absolute -top-2 -right-2 text-7xl opacity-5 group-hover:scale-110 transition-transform"></i>
+                    <i class="fa-solid fa-person-running text-3xl text-orange-500 mb-5"></i>
+                    <h3 class="text-xl font-bold mb-2">Character animation</h3>
+                    <p class="text-fg3">Bringing characters to life with fluid R6 and R15 animations, from traversal loops to heavy combat sequences.</p>
+                </div></div>
+                <a href="#testing" class="card glow tilt p-8 group block"><div class="tilt-inner relative z-[2]">
+                    <i class="fa-solid fa-vial-virus absolute -top-2 -right-2 text-7xl opacity-5 group-hover:scale-110 transition-transform"></i>
+                    <i class="fa-solid fa-vial-virus text-3xl text-skyt mb-5"></i>
+                    <h3 class="text-xl font-bold mb-2">QA &amp; playtesting</h3>
+                    <p class="text-fg3">Strict bug hunting, balancing and game-feel testing for hit unreleased titles.</p>
+                    <span class="text-skyt font-bold mt-4 inline-block group-hover:translate-x-2 transition-transform">See QA details →</span>
+                </div></a>
             </div>
-
-            <!-- Software Skills w/ Progress Bars -->
-            <div class="bg-slate-100 dark:bg-slate-900/50 p-8 md:p-12 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-inner reveal">
-                <h4 class="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-10 text-center">Engines I Operate</h4>
-                
-                <div class="grid md:grid-cols-3 gap-10">
-                    <div class="flex flex-col">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-white dark:bg-slate-800 rounded-xl flex items-center justify-center shadow-md mr-4 border border-slate-200 dark:border-slate-700">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Roblox_player_icon_black.svg" class="w-6 h-6 dark:invert" alt="Roblox">
-                            </div>
-                            <span class="font-bold text-lg text-slate-800 dark:text-slate-200">Roblox Studio</span>
-                        </div>
-                        <div class="h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
-                            <div class="h-full bg-blue-500 skill-bar-fill" data-width="95%"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="flex flex-col">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-white dark:bg-slate-800 rounded-xl flex items-center justify-center shadow-md mr-4 border border-slate-200 dark:border-slate-700">
-                                <i class="fa-brands fa-uncharted text-2xl text-orange-500"></i>
-                            </div>
-                            <span class="font-bold text-lg text-slate-800 dark:text-slate-200">Unreal Engine</span>
-                        </div>
-                        <div class="h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
-                            <div class="h-full bg-orange-500 skill-bar-fill" data-width="75%"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="flex flex-col">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-white dark:bg-slate-800 rounded-xl flex items-center justify-center shadow-md mr-4 border border-slate-200 dark:border-slate-700">
-                                <i class="fa-solid fa-map-location-dot text-2xl text-blue-400"></i>
-                            </div>
-                            <span class="font-bold text-lg text-slate-800 dark:text-slate-200">UEFN</span>
-                        </div>
-                        <div class="h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
-                            <div class="h-full bg-blue-400 skill-bar-fill" data-width="85%"></div>
-                        </div>
-                    </div>
+            <div class="card p-7 md:p-10 reveal">
+                <h3 class="text-sm font-semibold text-fg3 mb-8 text-center">Engines I operate</h3>
+                <div class="grid md:grid-cols-3 gap-8 mb-10">
+                    <div><div class="flex justify-between mb-3"><span class="font-bold">Roblox Studio</span><span class="font-mono text-sm text-fg3">95%</span></div><div class="h-2 bg-panel2 rounded-full overflow-hidden"><div class="h-full bg-duck skill-bar-fill rounded-full" data-width="95%"></div></div></div>
+                    <div><div class="flex justify-between mb-3"><span class="font-bold">UEFN</span><span class="font-mono text-sm text-fg3">85%</span></div><div class="h-2 bg-panel2 rounded-full overflow-hidden"><div class="h-full bg-sky skill-bar-fill rounded-full" data-width="85%"></div></div></div>
+                    <div><div class="flex justify-between mb-3"><span class="font-bold">Unreal Engine</span><span class="font-mono text-sm text-fg3">75%</span></div><div class="h-2 bg-panel2 rounded-full overflow-hidden"><div class="h-full bg-orange-400 skill-bar-fill rounded-full" data-width="75%"></div></div></div>
+                </div>
+                <div class="flex flex-wrap justify-center gap-2">
+                    <span class="chip"><i class="fa-solid fa-cube mr-1.5 text-orange-500"></i>Blender</span>
+                    <span class="chip"><i class="fa-brands fa-figma mr-1.5 text-pink-500"></i>Figma</span>
+                    <span class="chip"><i class="fa-solid fa-gem mr-1.5 text-purple-500"></i>Obsidian</span>
                 </div>
             </div>
-        </div>
+        </section>
     </main>
 
-    <!-- SECTION: PORTFOLIO & TIMELINE -->
-    <main id="portfolio" class="page-section max-w-6xl mx-auto px-6 py-20 bg-grid-pattern">
-        <div class="text-center mb-16 reveal">
-            <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 border border-purple-200 dark:border-purple-800 shadow-sm">
-                <i class="fa-solid fa-folder-open"></i>
-            </div>
-            <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white">Portfolio & Timeline</h2>
-        </div>
-        
-        <!-- Featured Project: Garden Maniac -->
-        <div class="tilt-card glow-card bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-1 relative shadow-[0_20px_50px_rgba(0,0,0,0.3)] mb-20 group reveal">
-            <div class="absolute inset-0 bg-gradient-to-r from-emerald-500 to-lime-500 opacity-20 blur-xl group-hover:opacity-30 transition-opacity"></div>
-            <div class="tilt-card-content bg-slate-900 rounded-[22px] p-8 md:p-12 relative z-10 border border-slate-700/50 flex flex-col md:flex-row items-center gap-8">
-                <div class="flex-1 text-center md:text-left">
-                    <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-4 inline-block">Active Title</span>
-                    <h3 class="text-4xl md:text-5xl font-black mb-4 text-white drop-shadow-[0_0_15px_rgba(16,185,129,0.4)]">Garden Maniac</h3>
-                    <p class="text-slate-300 mb-6 text-lg">Currently in active, core development. Focusing on custom environmental layouts, high-detail prop creation, polished animation sequences, and extensive mechanical testing.</p>
-                    <div class="flex flex-wrap gap-2 justify-center md:justify-start">
-                        <span class="text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700 px-3 py-1.5 rounded uppercase">Roblox</span>
-                        <span class="text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700 px-3 py-1.5 rounded uppercase">World Building</span>
-                        <span class="text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700 px-3 py-1.5 rounded uppercase">QA & Balancing</span>
-                    </div>
-                </div>
-                <div class="w-full md:w-1/3 flex justify-center">
-                    <div class="w-48 h-48 bg-slate-800 rounded-full border-4 border-emerald-500 shadow-[0_0_30px_rgba(16,185,129,0.3)] flex items-center justify-center animate-pulse">
-                        <i class="fa-solid fa-seedling text-7xl text-emerald-400"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-12 reveal">
-            <!-- Timeline -->
-            <div>
-                <h3 class="text-2xl font-bold mb-8 text-slate-900 dark:text-white flex items-center">
-                    <i class="fa-solid fa-route text-blue-500 mr-3"></i> The Journey
-                </h3>
-                <div class="relative border-l-2 border-slate-200 dark:border-slate-700 pl-8 ml-3 space-y-10">
-                    <div class="relative">
-                        <div class="timeline-dot bg-yellow-400 shadow-[0_0_15px_rgba(250,204,21,0.6)] flex items-center justify-center text-[8px] text-black border-yellow-200"><i class="fa-solid fa-crown"></i></div>
-                        <h4 class="text-lg font-bold text-slate-900 dark:text-white">The Goal</h4>
-                        <p class="text-sm text-yellow-600 dark:text-yellow-400 font-medium mb-1">Future</p>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">To be the absolute best developer in the space.</p>
-                    </div>
-                    <div class="relative">
-                        <div class="timeline-dot bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]"></div>
-                        <h4 class="text-lg font-bold text-slate-900 dark:text-white">Developer @ Garden Maniac</h4>
-                        <p class="text-sm text-emerald-600 dark:text-emerald-400 font-medium mb-1">Current • Active Development</p>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">Handling core environmental construction, world assets, and QA balancing.</p>
-                    </div>
-                    <div class="relative">
-                        <div class="timeline-dot bg-green-400 shadow-[0_0_10px_rgba(74,222,128,0.5)]"></div>
-                        <h4 class="text-lg font-bold text-slate-900 dark:text-white">Developer @ Catch a plant</h4>
-                        <p class="text-sm text-green-600 dark:text-green-400 font-medium mb-1">Current • In Development</p>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">Building environmental assets.</p>
-                    </div>
-                    <div class="relative">
-                        <div class="timeline-dot bg-blue-500"></div>
-                        <h4 class="text-lg font-bold text-slate-900 dark:text-white">Developer @ Toaster Productions</h4>
-                        <p class="text-sm text-blue-600 dark:text-blue-400 font-medium mb-1">Current</p>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">Building and managing core studio projects.</p>
-                    </div>
-                    <div class="relative">
-                        <div class="timeline-dot bg-slate-400 dark:bg-slate-600 border-slate-300 dark:border-slate-500"></div>
-                        <h4 class="text-lg font-bold text-slate-700 dark:text-slate-300">Ex-Developer @ GARP (Grow A Random Plant)</h4>
-                        <p class="text-sm text-slate-500 font-medium mb-1">Past</p>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">Worked on core environmental building, map setups, and testing for community release.</p>
-                    </div>
-                    <div class="relative">
-                        <div class="timeline-dot bg-slate-300 dark:bg-slate-600 border-slate-200 dark:border-slate-500 box-shadow-none"></div>
-                        <h4 class="text-lg font-bold text-slate-600 dark:text-slate-400">Past Developer</h4>
-                        <p class="text-sm text-slate-500 font-medium">@ Astrax Interactive & Spawnpoint Studios</p>
-                    </div>
-                </div>
+    <!-- ================= PORTFOLIO ================= -->
+    <main id="portfolio" class="page-section">
+        <section class="max-w-6xl mx-auto px-5 py-16 md:py-20">
+            <div class="text-center mb-14 reveal">
+                <div class="badge-ico bg-purple-500/10 border-purple-500/30 text-purple-500"><i class="fa-solid fa-folder-open"></i></div>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-3">Portfolio &amp; timeline</h2>
+                <p class="text-fg3 max-w-xl mx-auto">My studio, the projects I've founded and the teams I've built for.</p>
             </div>
 
-            <div class="space-y-8">
-                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-lg glow-card">
-                    <h3 class="text-xl font-bold mb-6 text-slate-900 dark:text-white flex items-center">
-                        <i class="fa-solid fa-gamepad text-orange-500 mr-3"></i> Released Titles
-                    </h3>
-                    <ul class="space-y-4">
-                        <li class="flex items-center justify-between p-3 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-lg transition-colors">
-                            <a href="https://www.roblox.com/games/122389212847304/Sunkun" target="_blank" class="text-slate-800 dark:text-slate-200 hover:text-blue-500 font-bold flex items-center"><i class="fa-solid fa-arrow-up-right-from-square text-xs mr-2 text-blue-400"></i> Sunkun</a>
-                            <span class="text-[10px] font-bold tag-roblox px-2 py-0.5 rounded">ROBLOX</span>
-                        </li>
-                        <li class="flex items-center justify-between p-3 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-lg transition-colors">
-                            <a href="https://www.roblox.com/games/136622842983476/Punch-For-Power" target="_blank" class="text-slate-800 dark:text-slate-200 hover:text-blue-500 font-bold flex items-center"><i class="fa-solid fa-arrow-up-right-from-square text-xs mr-2 text-blue-400"></i> Punch For Power</a>
-                            <span class="text-[10px] font-bold tag-roblox px-2 py-0.5 rounded">ROBLOX</span>
-                        </li>
-                        <li class="flex items-center justify-between p-3 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-lg transition-colors">
-                            <a href="https://www.roblox.com/games/107246293141946/Race-for-Power" target="_blank" class="text-slate-800 dark:text-slate-200 hover:text-blue-500 font-bold flex items-center"><i class="fa-solid fa-arrow-up-right-from-square text-xs mr-2 text-blue-400"></i> Race For Power</a>
-                            <span class="text-[10px] font-bold tag-roblox px-2 py-0.5 rounded">ROBLOX</span>
-                        </li>
-                    </ul>
+            <!-- RUSHED featured -->
+            <article class="rounded-[26px] overflow-hidden bg-rush text-white mb-8 reveal">
+                <div class="p-7 md:p-10">
+                    <div class="flex flex-wrap items-center gap-4 mb-5">
+                        <img src="projects/rushed-mark.svg" alt="RUSHED logo" class="w-14 h-14 rounded-xl shadow-lg">
+                        <div>
+                            <div class="flex flex-wrap gap-2 mb-1"><span class="font-mono text-[11px] bg-black/25 px-2.5 py-1 rounded-full">Owner</span><span class="font-mono text-[11px] bg-black/25 px-2.5 py-1 rounded-full">Independent Roblox studio</span></div>
+                            <h3 class="font-display font-black text-3xl md:text-4xl">RUSHED<span class="text-rushy">.</span></h3>
+                        </div>
+                    </div>
+                    <p class="text-white/90 text-lg max-w-3xl mb-6">The studio I own. RUSHED looks past a game's current player count to find its potential: we scout ideas, shape them into playable experiences and help games grow.</p>
+                    <div class="grid sm:grid-cols-3 gap-3 mb-7">
+                        <div class="bg-black/20 rounded-xl p-4"><div class="font-display font-bold text-rushy mb-1">Discover</div><p class="text-sm text-white/85">Look past surface numbers to the core loop, audience and team.</p></div>
+                        <div class="bg-black/20 rounded-xl p-4"><div class="font-display font-bold text-rushy mb-1">Develop</div><p class="text-sm text-white/85">Make it playable and prove the idea is fun before going bigger.</p></div>
+                        <div class="bg-black/20 rounded-xl p-4"><div class="font-display font-bold text-rushy mb-1">Grow</div><p class="text-sm text-white/85">Updates, community events and listening to players.</p></div>
+                    </div>
+                    <div class="strip mb-6" data-strip="rushed"></div>
+                    <a href="https://fatalquackers.github.io/rushed/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-ink hover:bg-white hover:text-ink text-white font-bold px-6 py-3 rounded-full transition">Visit RUSHED <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i></a>
                 </div>
+            </article>
 
-                <div class="bg-gradient-to-r from-blue-900/80 to-slate-900 p-6 rounded-2xl border border-blue-500/30 shadow-lg text-white">
-                    <h3 class="text-lg font-bold mb-2 flex items-center">
-                        <i class="fa-solid fa-map-location-dot text-blue-400 mr-2"></i> Engine Prototypes
-                    </h3>
-                    <p class="text-sm text-blue-200">Developing various competitive maps and structured environments within <strong class="text-white bg-blue-500/20 px-1 rounded">UEFN</strong>. Check out the visual gallery to see standard workflow results.</p>
+            <div class="grid md:grid-cols-2 gap-5 mb-14 reveal">
+                <!-- Soul Forge -->
+                <article class="card glow p-7 md:p-8 flex flex-col">
+                    <div class="flex items-center gap-4 mb-5 relative z-[2]">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-orange-500 to-rose-600 text-white flex items-center justify-center text-2xl"><i class="fa-solid fa-fire-flame-curved"></i></div>
+                        <div><span class="font-mono text-[11px] bg-orange-500/15 text-orange-500 px-2.5 py-1 rounded-full">Founder</span><h3 class="font-display font-bold text-2xl mt-1">Soul Forge</h3></div>
+                    </div>
+                    <p class="text-fg2 mb-4 relative z-[2]">A Roblox game I founded, originally called <strong class="text-fg">Garden Maniac</strong>. It mixes gardening, mining, forging and fighting.</p>
+                    <div class="flex flex-wrap gap-1.5 mt-auto relative z-[2]"><span class="chip">Roblox</span><span class="chip">Formerly Garden Maniac</span></div>
+                </article>
+                <!-- Tethr Link -->
+                <article class="card glow p-7 md:p-8 flex flex-col">
+                    <div class="flex items-center gap-4 mb-5 relative z-[2]">
+                        <img src="projects/tethr-icon.png" alt="Tethr Link icon" class="w-14 h-14 rounded-xl">
+                        <div><span class="status s-live">Live · Free</span><h3 class="font-display font-bold text-2xl mt-1">Tethr Link</h3></div>
+                    </div>
+                    <p class="text-fg2 mb-4 relative z-[2]">A free, open-source app I created that links any Android phone or iPhone to a Windows PC: notifications, texts, screen mirroring, hotspot, calls, photos and files.</p>
+                    <div class="flex flex-wrap gap-3 mt-auto relative z-[2]">
+                        <a href="https://fatalquackers.github.io/tethr-link/" target="_blank" rel="noopener" class="bg-sky text-ink hover:brightness-105 px-4 py-2 rounded-full font-bold text-sm">Website</a>
+                        <a href="https://fatalquackers.github.io/tethr-link/videos.html" target="_blank" rel="noopener" class="bg-panel2 border border-line hover:border-sky px-4 py-2 rounded-full font-bold text-sm"><i class="fa-solid fa-play mr-1"></i>Trailer</a>
+                    </div>
+                </article>
+            </div>
+            <div class="strip mb-16 reveal" data-strip="tethr"></div>
+
+            <div class="grid md:grid-cols-2 gap-10 reveal">
+                <div>
+                    <h3 class="font-display font-bold text-2xl mb-8"><i class="fa-solid fa-route text-acc mr-2"></i>The journey</h3>
+                    <div class="timeline space-y-9">
+                        <div class="relative"><span class="t-dot bg-duck"></span><h4 class="font-bold text-lg">The goal</h4><p class="text-sm text-acc mb-1">Future</p><p class="text-sm text-fg3">To be the absolute best developer in the space.</p></div>
+                        <div class="relative"><span class="t-dot bg-rush"></span><h4 class="font-bold text-lg">Owner @ RUSHED</h4><p class="text-sm text-rush mb-1">Current · My studio</p><p class="text-sm text-fg3">Running the studio: scouting ideas and building our games.</p></div>
+                        <div class="relative"><span class="t-dot bg-orange-500"></span><h4 class="font-bold text-lg">Founder @ Soul Forge</h4><p class="text-sm text-orange-500 mb-1">Founded as Garden Maniac</p><p class="text-sm text-fg3">Founded the game and handled environmental construction, world assets and QA balancing.</p></div>
+                        <div class="relative"><span class="t-dot bg-sky"></span><h4 class="font-bold text-lg">Developer @ Toaster Productions</h4><p class="text-sm text-skyt mb-1">Current</p><p class="text-sm text-fg3">Building and managing core studio projects.</p></div>
+                        <div class="relative"><span class="t-dot bg-slate-400"></span><h4 class="font-bold text-lg text-fg2">Ex-developer @ GARP (Grow A Random Plant)</h4><p class="text-sm text-fg3 mb-1">Past</p><p class="text-sm text-fg3">Core environmental building, map setups and testing for community release.</p></div>
+                        <div class="relative"><span class="t-dot bg-slate-500"></span><h4 class="font-bold text-lg text-fg3">Past developer</h4><p class="text-sm text-fg3">@ Astrax Interactive &amp; Spawnpoint Studios</p></div>
+                    </div>
+                </div>
+                <div class="space-y-5">
+                    <a href="#games" class="card glow p-7 block bg-gradient-to-br from-duck/15 to-transparent">
+                        <div class="relative z-[2]">
+                            <h3 class="font-display font-bold text-xl mb-2"><i class="fa-solid fa-gamepad text-acc mr-2"></i>My Roblox games</h3>
+                            <p class="text-sm text-fg2 mb-3">Fly and Smash Eggs, Sunkun, Punch For Power, Race For Power and more, with live player counts and stats pulled straight from Roblox.</p>
+                            <span class="font-bold text-acc">Open the Games page →</span>
+                        </div>
+                    </a>
+                    <div class="card p-7 bg-gradient-to-br from-sky/10 to-transparent">
+                        <h3 class="font-bold text-lg mb-2"><i class="fa-solid fa-map-location-dot text-skyt mr-2"></i>Engine prototypes</h3>
+                        <p class="text-sm text-fg2">Competitive maps and structured environments built in UEFN. Check out the <a href="#gallery" class="text-skyt hover:underline">gallery</a> to see workflow results.</p>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
     </main>
 
-    <!-- SECTION: QA & TESTING -->
-    <main id="testing" class="page-section max-w-6xl mx-auto px-6 py-20">
-        <div class="text-center mb-16 reveal">
-            <div class="w-16 h-16 bg-cyan-100 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 border border-cyan-200 dark:border-cyan-800 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
-                <i class="fa-solid fa-vial-virus"></i>
+    <!-- ================= GAMES ================= -->
+    <main id="games" class="page-section">
+        <section class="max-w-6xl mx-auto px-5 py-16 md:py-20">
+            <div class="text-center mb-12 reveal">
+                <div class="badge-ico bg-green-500/10 border-green-500/30 text-green-500"><i class="fa-solid fa-gamepad"></i></div>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-3">My games</h2>
+                <p class="text-fg3 max-w-xl mx-auto">Pulled straight from Roblox: live player counts, visits, likes and favourites.</p>
             </div>
-            <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-4 tracking-tight">Pro QA & Playtesting</h2>
-            <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg">I actively test and balance some of the most highly anticipated games on the platform. As a pure tester, my job is to find the holes, exploits, and bad flow before your players do.</p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-8 mb-16 reveal">
-            <div class="tilt-card glow-card glass-panel p-8 rounded-2xl border-t-4 border-cyan-500 shadow-xl group hover:bg-white dark:hover:bg-slate-800 transition-colors">
-                <div class="tilt-card-content text-center">
-                    <i class="fa-solid fa-shield-halved text-5xl text-cyan-500 mb-6 group-hover:scale-110 transition-transform"></i>
-                    <h4 class="text-xl font-black text-slate-900 dark:text-white mb-3">Exploit Hunting</h4>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">Finding map holes, logical loops, and oversight vulnerabilities so you can patch them before launch day.</p>
-                </div>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10 reveal" id="game-totals"></div>
+            <div class="flex flex-wrap justify-between items-center gap-4 mb-6 reveal">
+                <p class="text-sm text-fg3 flex items-center gap-2" id="games-updated"><span class="live-dot"></span>Loading from Roblox…</p>
+                <label class="flex items-center gap-2 text-sm font-semibold text-fg2">Sort by
+                    <select id="games-sort" class="bg-panel2 border border-line rounded-full px-4 py-2 text-sm font-semibold focus:outline-none focus:border-duck">
+                        <option value="visits">Most visits</option>
+                        <option value="playing">Playing now</option>
+                        <option value="updated">Recently updated</option>
+                        <option value="rating">Top rated</option>
+                    </select>
+                </label>
             </div>
-            <div class="tilt-card glow-card glass-panel p-8 rounded-2xl border-t-4 border-purple-500 shadow-xl group hover:bg-white dark:hover:bg-slate-800 transition-colors">
-                <div class="tilt-card-content text-center">
-                    <i class="fa-solid fa-scale-balanced text-5xl text-purple-500 mb-6 group-hover:scale-110 transition-transform"></i>
-                    <h4 class="text-xl font-black text-slate-900 dark:text-white mb-3">Economy Balancing</h4>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">Testing progression pacing and item values to ensure long-term player retention without grinding frustration.</p>
-                </div>
-            </div>
-            <div class="tilt-card glow-card glass-panel p-8 rounded-2xl border-t-4 border-blue-500 shadow-xl group hover:bg-white dark:hover:bg-slate-800 transition-colors">
-                <div class="tilt-card-content text-center">
-                    <i class="fa-solid fa-gamepad text-5xl text-blue-500 mb-6 group-hover:scale-110 transition-transform"></i>
-                    <h4 class="text-xl font-black text-slate-900 dark:text-white mb-3">Game Feel & UX</h4>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">Providing actionable feedback on UI flow, combat weight, input latency, and general player enjoyment.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl overflow-hidden mb-16 reveal">
-            <div class="bg-slate-100 dark:bg-slate-900/80 px-8 py-6 border-b border-slate-200 dark:border-slate-700">
-                <h3 class="text-xl font-bold text-slate-900 dark:text-white"><i class="fa-solid fa-list-check mr-2 text-cyan-500"></i> Active / Past Test Roster</h3>
-            </div>
-            <div class="p-8">
-                <div class="flex flex-wrap gap-4 font-medium">
-                    <span class="bg-slate-50 dark:bg-slate-700/50 px-4 py-2 rounded-lg text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-600 shadow-sm hover:-translate-y-1 transition-transform cursor-default">🌱 Garden Maniac</span>
-                    <span class="bg-slate-50 dark:bg-slate-700/50 px-4 py-2 rounded-lg text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-600 shadow-sm hover:-translate-y-1 transition-transform cursor-default">🌿 Plants vs Brainrots</span>
-                    <span class="bg-slate-50 dark:bg-slate-700/50 px-4 py-2 rounded-lg text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-600 shadow-sm hover:-translate-y-1 transition-transform cursor-default">⚔️ Jandels Battlegrounds</span>
-                    <span class="bg-slate-50 dark:bg-slate-700/50 px-4 py-2 rounded-lg text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-600 shadow-sm hover:-translate-y-1 transition-transform cursor-default">🌊 Brainrot Seas</span>
-                    <span class="bg-slate-50 dark:bg-slate-700/50 px-4 py-2 rounded-lg text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-600 shadow-sm hover:-translate-y-1 transition-transform cursor-default">🌾 Grow a random plant (Past QA)</span>
-                    <span class="bg-slate-50 dark:bg-slate-700/50 px-4 py-2 rounded-lg text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-600 shadow-sm hover:-translate-y-1 transition-transform cursor-default">🪴 Catch a plant</span>
-                    <span class="bg-slate-50 dark:bg-slate-700/50 px-4 py-2 rounded-lg text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-600 shadow-sm hover:-translate-y-1 transition-transform cursor-default">🦎 Chameleon by SPS</span>
-                    <span class="bg-slate-50 dark:bg-slate-700/50 px-4 py-2 rounded-lg text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-600 shadow-sm hover:-translate-y-1 transition-transform cursor-default">🔫 Strike Force</span>
-                    <span class="bg-slate-50 dark:bg-slate-700/50 px-4 py-2 rounded-lg text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-600 shadow-sm hover:-translate-y-1 transition-transform cursor-default">🍀 +1 SPEED LUCKY BLOCK</span>
-                    <span class="bg-gradient-to-r from-cyan-100 to-blue-100 dark:from-cyan-900/40 dark:to-blue-900/40 px-4 py-2 rounded-lg text-cyan-800 dark:text-cyan-300 border border-cyan-300 dark:border-cyan-700 italic font-bold">...and unreleased NDA titles 🤫</span>
-                </div>
-            </div>
-        </div>
+            <div id="games-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+        </section>
     </main>
 
-    <!-- SECTION: GALLERY (DYNAMIC JS) -->
-    <main id="gallery" class="page-section max-w-6xl mx-auto px-6 py-20">
-        <div class="text-center mb-12 reveal">
-            <div class="w-16 h-16 bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 border border-pink-200 dark:border-pink-800 shadow-sm">
-                <i class="fa-solid fa-images"></i>
+    <!-- ================= GALLERY ================= -->
+    <main id="gallery" class="page-section">
+        <section class="max-w-6xl mx-auto px-5 py-16 md:py-20">
+            <div class="text-center mb-10 reveal">
+                <div class="badge-ico bg-pink-500/10 border-pink-500/30 text-pink-500"><i class="fa-solid fa-images"></i></div>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-3">Media gallery</h2>
+                <p class="text-fg3">My builds, clips, games and project shots. Click any media to expand.</p>
             </div>
-            <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-4">Media Gallery</h2>
-            <p class="text-slate-600 dark:text-slate-400 max-w-xl mx-auto">A collection of my latest builds and fluid animations. Click any media to expand.</p>
-        </div>
-
-        <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4 bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm reveal">
-            <div class="flex gap-2 bg-slate-100 dark:bg-slate-900 p-1.5 rounded-full">
-                <button onclick="setGalleryFilter('all')" id="btn-filter-all" class="filter-btn active">All</button>
-                <button onclick="setGalleryFilter('image')" id="btn-filter-image" class="filter-btn">Images</button>
-                <button onclick="setGalleryFilter('video')" id="btn-filter-video" class="filter-btn">Videos</button>
-            </div>
-            
-            <div class="flex items-center gap-3">
-                <label for="sort-gallery" class="text-sm font-bold text-slate-600 dark:text-slate-400"><i class="fa-solid fa-sort mr-1"></i> Sort:</label>
-                <select id="sort-gallery" onchange="renderGallery()" class="bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-white border border-slate-300 dark:border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500 font-medium cursor-pointer transition-colors">
-                    <option value="newest">Newest First</option>
-                    <option value="oldest">Oldest First</option>
+            <div class="flex flex-wrap justify-between items-center gap-4 mb-8 card p-3 reveal">
+                <div class="flex flex-wrap gap-2" id="gallery-filters">
+                    <button class="filter-btn active" data-g="all">All</button>
+                    <button class="filter-btn" data-g="game">My games</button>
+                    <button class="filter-btn" data-g="build">Builds</button>
+                    <button class="filter-btn" data-g="video">Videos</button>
+                    <button class="filter-btn" data-g="project">Projects</button>
+                </div>
+                <select id="sort-gallery" class="bg-panel2 border border-line rounded-full px-4 py-2 text-sm font-semibold focus:outline-none focus:border-duck">
+                    <option value="newest">Newest first</option>
+                    <option value="oldest">Oldest first</option>
                 </select>
             </div>
-        </div>
-
-        <div id="dynamic-gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 transition-opacity duration-300 reveal">
-            <!-- Rendered via JS -->
-        </div>
+            <div id="dynamic-gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 transition-opacity duration-300"></div>
+        </section>
     </main>
 
-    <!-- SECTION: PRICING -->
-    <main id="pricing" class="page-section bg-grid-pattern relative">
-        <div class="max-w-6xl mx-auto px-6 py-20 relative z-10">
-            <div class="text-center mb-16 reveal">
-                <div class="w-16 h-16 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 border border-green-200 dark:border-green-800 shadow-sm">
-                    <i class="fa-solid fa-tags"></i>
-                </div>
-                <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white bg-white/80 dark:bg-slate-900/80 backdrop-blur-md inline-block px-10 py-3 rounded-full border border-slate-200 dark:border-slate-800 shadow-sm">Pricing Rates</h2>
+    <!-- ================= PRICING ================= -->
+    <main id="pricing" class="page-section">
+        <section class="max-w-6xl mx-auto px-5 py-16 md:py-20">
+            <div class="text-center mb-14 reveal">
+                <div class="badge-ico bg-green-500/10 border-green-500/30 text-green-500"><i class="fa-solid fa-tags"></i></div>
+                <h2 class="font-display font-bold text-4xl md:text-5xl">Pricing rates</h2>
             </div>
-            
-            <div class="grid md:grid-cols-2 gap-8 mb-16 reveal">
-                <div class="tilt-card glow-card bg-slate-900 p-8 rounded-2xl border border-slate-700 shadow-xl relative group">
-                    <div class="tilt-card-content">
-                        <div class="absolute top-0 right-0 p-4 opacity-5 text-8xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-hammer"></i></div>
-                        <h3 class="text-2xl font-black mb-8 text-white relative z-10 flex items-center border-b border-slate-800 pb-4"><i class="fa-solid fa-hammer mr-3 text-blue-500"></i> Building</h3>
-                        <div class="space-y-4 text-slate-300 font-medium relative z-10">
-                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Simple Assets</span><span class="font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded">50 - 100 R$</span></div>
-                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Detailed Props</span><span class="font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded">250 - 400 R$</span></div>
-                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Exterior Build</span><span class="font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded">500 - 800 R$</span></div>
-                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Interior Build</span><span class="font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded">800 - 1.2k R$</span></div>
-                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Small Map / Lobby</span><span class="font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded">1.5k - 2.5k R$</span></div>
-                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Large Map</span><span class="font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded">3.5k - 10k R$</span></div>
-                        </div>
-                    </div>
+            <div class="grid md:grid-cols-2 gap-5 mb-16 reveal">
+                <div class="card glow tilt p-7 md:p-8"><div class="tilt-inner relative z-[2]">
+                    <h3 class="font-display font-bold text-xl mb-6 pb-4 border-b border-line"><i class="fa-solid fa-hammer mr-2 text-acc"></i>Building</h3>
+                    <div class="space-y-2" id="price-build"></div>
+                </div></div>
+                <div class="card glow tilt p-7 md:p-8"><div class="tilt-inner relative z-[2]">
+                    <h3 class="font-display font-bold text-xl mb-6 pb-4 border-b border-line"><i class="fa-solid fa-person-running mr-2 text-orange-500"></i>Animation (R6/R15)</h3>
+                    <div class="space-y-2" id="price-anim"></div>
+                </div></div>
+            </div>
+            <h3 class="font-display font-bold text-2xl mb-8 text-center reveal">Payment structures</h3>
+            <div class="grid md:grid-cols-3 gap-5 mb-16 reveal">
+                <div class="card p-7 text-center">
+                    <div class="w-14 h-14 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4 text-green-500 text-xl"><i class="fa-solid fa-lock"></i></div>
+                    <h4 class="font-bold text-lg mb-2">100% upfront</h4><p class="text-sm text-fg3">Guarantees your priority spot and rapid delivery.</p>
                 </div>
-
-                <div class="tilt-card glow-card bg-slate-900 p-8 rounded-2xl border border-slate-700 shadow-xl relative group">
-                    <div class="tilt-card-content">
-                        <div class="absolute top-0 right-0 p-4 opacity-5 text-8xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-person-running"></i></div>
-                        <h3 class="text-2xl font-black mb-8 text-white relative z-10 flex items-center border-b border-slate-800 pb-4"><i class="fa-solid fa-person-running mr-3 text-orange-500"></i> Animation (R6/R15)</h3>
-                        <div class="space-y-4 text-slate-300 font-medium relative z-10">
-                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Basic Loops</span><span class="font-bold text-orange-400 bg-orange-500/10 px-3 py-1 rounded">50 - 250 R$</span></div>
-                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Action / Combat Moves</span><span class="font-bold text-orange-400 bg-orange-500/10 px-3 py-1 rounded">150 - 600 R$</span></div>
-                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Dances / Emotes</span><span class="font-bold text-orange-400 bg-orange-500/10 px-3 py-1 rounded">350 - 1.2k R$</span></div>
-                            <div class="flex justify-between items-center bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800 transition-colors"><span>Action Sets (Combos)</span><span class="font-bold text-orange-400 bg-orange-500/10 px-3 py-1 rounded">500 - 1.5k R$</span></div>
-                        </div>
-                    </div>
+                <div class="card p-7 text-center !border-duck relative md:-translate-y-3">
+                    <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-duck text-ink text-xs font-bold px-3 py-1 rounded-full">Most popular</span>
+                    <div class="w-14 h-14 bg-duck/15 rounded-full flex items-center justify-center mx-auto mb-4 text-acc text-xl"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <h4 class="font-bold text-lg mb-2">50 / 50 split</h4><p class="text-sm text-fg3">Pay a 50% deposit. Preview and approve the work, then pay the remaining 50% for handoff.</p>
+                </div>
+                <div class="card p-7 text-center">
+                    <div class="w-14 h-14 bg-purple-500/10 rounded-full flex items-center justify-center mx-auto mb-4 text-purple-500 text-xl"><i class="fa-solid fa-handshake-angle"></i></div>
+                    <h4 class="font-bold text-lg mb-2">Pay after</h4><p class="text-sm text-fg3">For trusted clients. View the final product in a locked showcase, pay before handoff.</p>
                 </div>
             </div>
-
-            <!-- Payment Structures -->
-            <h3 class="text-3xl font-bold mb-8 text-center text-slate-900 dark:text-white reveal">Payment Structures</h3>
-            <div class="grid md:grid-cols-3 gap-6 mb-16 reveal">
-                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 text-center shadow-lg transition-transform hover:-translate-y-2">
-                    <div class="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4 text-green-500 text-2xl"><i class="fa-solid fa-lock"></i></div>
-                    <h4 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">100% Upfront</h4>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">Guarantees your priority spot and rapid delivery.</p>
-                </div>
-                
-                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border-2 border-blue-500 text-center shadow-[0_0_20px_rgba(59,130,246,0.2)] transition-transform hover:-translate-y-2 relative transform md:-translate-y-4">
-                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider">Most Popular</div>
-                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-500 text-2xl mt-2"><i class="fa-solid fa-scale-balanced"></i></div>
-                    <h4 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">50 / 50 Split</h4>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">Pay 50% deposit. Preview and approve the work, then pay the remaining 50% for handoff.</p>
-                </div>
-
-                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 text-center shadow-lg transition-transform hover:-translate-y-2">
-                    <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-4 text-purple-500 text-2xl"><i class="fa-solid fa-handshake-angle"></i></div>
-                    <h4 class="text-xl font-bold mb-2 text-slate-900 dark:text-white">Pay After</h4>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">For trusted clients. View final product in a locked showcase, pay prior to handoff.</p>
-                </div>
-            </div>
-            
-            <!-- FAQs -->
-            <div class="max-w-3xl mx-auto space-y-4 reveal">
-                <details class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 group cursor-pointer overflow-hidden">
-                    <summary class="p-6 font-bold text-lg text-slate-900 dark:text-white flex justify-between items-center outline-none hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-                        <span><i class="fa-solid fa-code mr-2 text-blue-500"></i> Do you also do scripting or UI design?</span>
-                        <i class="fa-solid fa-chevron-down transition-transform group-open:rotate-180 text-slate-400"></i>
-                    </summary>
-                    <div class="p-6 pt-0 border-t border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 text-sm mt-4 bg-slate-50 dark:bg-slate-900/50">
-                        No. I focus strictly on what I am best at: World Building, Character Animation, and QA Playtesting. By not spreading myself thin over scripts and UI, you get the absolute highest quality visual and mechanical testing work.
-                    </div>
+            <div class="max-w-3xl mx-auto space-y-3 reveal">
+                <details class="card group overflow-hidden">
+                    <summary class="p-6 font-bold text-lg flex justify-between items-center cursor-pointer hover:bg-panel2"><span><i class="fa-solid fa-code mr-2 text-acc"></i>Do you also do scripting or UI design?</span><i class="fa-solid fa-chevron-down transition-transform group-open:rotate-180 text-fg3"></i></summary>
+                    <div class="px-6 pb-6 text-fg3 text-[15px]">No. I focus strictly on what I'm best at: world building, character animation and QA playtesting. By not spreading myself thin over scripts and UI, you get the highest quality visual and mechanical testing work.</div>
                 </details>
-                
-                <details class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 group cursor-pointer overflow-hidden">
-                    <summary class="p-6 font-bold text-lg text-slate-900 dark:text-white flex justify-between items-center outline-none hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-                        <span><i class="fa-solid fa-coins mr-2 text-yellow-500"></i> What payment methods do you accept?</span>
-                        <i class="fa-solid fa-chevron-down transition-transform group-open:rotate-180 text-slate-400"></i>
-                    </summary>
-                    <div class="p-6 pt-0 border-t border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 text-sm mt-4 bg-slate-50 dark:bg-slate-900/50">
-                        I accept Robux (via Roblox group payouts or T-Shirt with the 30% tax covered by the client). Direct cash equivalents are accepted depending on project scope. Open to Rev-Share ONLY for established, highly promising studios.
-                    </div>
+                <details class="card group overflow-hidden">
+                    <summary class="p-6 font-bold text-lg flex justify-between items-center cursor-pointer hover:bg-panel2"><span><i class="fa-solid fa-coins mr-2 text-yellow-500"></i>What payment methods do you accept?</span><i class="fa-solid fa-chevron-down transition-transform group-open:rotate-180 text-fg3"></i></summary>
+                    <div class="px-6 pb-6 text-fg3 text-[15px]">Robux, via Roblox group payouts or a T-shirt with the 30% tax covered by the client. Direct cash equivalents are accepted depending on project scope. Open to rev-share only for established, highly promising studios.</div>
                 </details>
             </div>
-        </div>
+        </section>
     </main>
 
-    <!-- SECTION: CONTACT -->
-    <main id="contact" class="page-section max-w-5xl mx-auto px-6 py-20">
-        <div class="text-center mb-12 reveal">
-            <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 border border-blue-200 dark:border-blue-800 shadow-sm">
-                <i class="fa-solid fa-paper-plane"></i>
+    <!-- ================= QA ================= -->
+    <main id="testing" class="page-section">
+        <section class="max-w-6xl mx-auto px-5 py-16 md:py-20">
+            <div class="text-center mb-14 reveal">
+                <div class="badge-ico bg-sky/10 border-sky/30 text-skyt"><i class="fa-solid fa-vial-virus"></i></div>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-4">Pro QA &amp; playtesting</h2>
+                <p class="text-fg3 max-w-2xl mx-auto text-lg">I actively test and balance some of the most anticipated games on the platform. My job is to find the holes, exploits and bad flow before your players do.</p>
             </div>
-            <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-6">Let's Work Together</h2>
-            
-            <div class="inline-flex items-center gap-6 glass-panel px-8 py-4 rounded-full border border-slate-300 dark:border-slate-700 shadow-md">
-                <div class="flex items-center">
-                    <i class="fa-regular fa-clock text-blue-500 mr-2 animate-pulse text-lg"></i> 
-                    <span class="text-slate-600 dark:text-slate-300 font-medium">Local Time (OCE): <strong id="local-time" class="text-slate-900 dark:text-white font-mono ml-1">...</strong></span>
-                </div>
-                <div class="w-px h-6 bg-slate-300 dark:bg-slate-700"></div>
-                <button onclick="copyDiscord()" class="flex items-center text-slate-600 dark:text-slate-300 hover:text-indigo-500 transition-colors group">
-                    <i class="fa-brands fa-discord text-indigo-500 mr-2 text-lg"></i>
-                    <span class="font-medium">Quackers<span class="text-xs text-slate-400 dark:text-slate-500">#0000</span></span>
-                    <i id="copy-icon" class="fa-regular fa-copy ml-2 text-sm opacity-50 group-hover:opacity-100 transition-opacity"></i>
-                </button>
+            <div class="grid md:grid-cols-3 gap-5 mb-12 reveal">
+                <div class="card glow tilt p-8 border-t-4 !border-t-sky text-center group"><div class="tilt-inner relative z-[2]"><i class="fa-solid fa-shield-halved text-4xl text-skyt mb-5 group-hover:scale-110 transition-transform"></i><h3 class="text-lg font-bold mb-2">Exploit hunting</h3><p class="text-fg3 text-[15px]">Finding map holes, logic loops and oversights so you can patch them before launch day.</p></div></div>
+                <div class="card glow tilt p-8 border-t-4 !border-t-purple-400 text-center group"><div class="tilt-inner relative z-[2]"><i class="fa-solid fa-scale-balanced text-4xl text-purple-500 mb-5 group-hover:scale-110 transition-transform"></i><h3 class="text-lg font-bold mb-2">Economy balancing</h3><p class="text-fg3 text-[15px]">Testing progression pacing and item values for long-term retention without grind frustration.</p></div></div>
+                <div class="card glow tilt p-8 border-t-4 !border-t-duck text-center group"><div class="tilt-inner relative z-[2]"><i class="fa-solid fa-gamepad text-4xl text-acc mb-5 group-hover:scale-110 transition-transform"></i><h3 class="text-lg font-bold mb-2">Game feel &amp; UX</h3><p class="text-fg3 text-[15px]">Actionable feedback on UI flow, combat weight, input latency and general player enjoyment.</p></div></div>
             </div>
-        </div>
-        
-        <div class="glow-card bg-white dark:bg-slate-800 p-8 md:p-12 rounded-3xl shadow-2xl max-w-3xl mx-auto border border-slate-200 dark:border-slate-700 relative reveal">
-            <div class="absolute -top-20 -right-20 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
-            
-            <div data-fs-success style="display: none;" class="bg-green-500 text-white p-4 rounded-xl font-bold text-center mb-8 shadow-lg">
-                <i class="fa-solid fa-check-circle mr-2"></i> Message sent successfully! I will get back to you soon.
+            <div class="card overflow-hidden reveal">
+                <div class="px-7 py-5 border-b border-line bg-panel2"><h3 class="font-display font-bold text-xl"><i class="fa-solid fa-list-check mr-2 text-skyt"></i>Active / past test roster</h3></div>
+                <div class="p-7 flex flex-wrap gap-3 font-medium" id="qa-roster"></div>
             </div>
-            
-            <form id="contact-form" class="space-y-6 relative z-10">
-                <div data-fs-error class="font-bold"></div>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Name / Roblox ID</label>
-                        <input type="text" name="name" required data-fs-field class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-4 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-slate-900 dark:text-white transition-all shadow-inner">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Email or Discord</label>
-                        <input type="text" name="contact_info" required data-fs-field class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-4 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-slate-900 dark:text-white transition-all shadow-inner">
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Message (Project details, budget, timeline)</label>
-                    <textarea id="contact-message-box" name="message" rows="5" required data-fs-field class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-4 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-slate-900 dark:text-white placeholder-slate-400 transition-all shadow-inner resize-y"></textarea>
-                </div>
-                <button type="submit" data-fs-submit-btn class="w-full bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-black py-5 rounded-xl transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] flex justify-center items-center group text-lg mt-4 cursor-none">
-                    Send Transmission <i class="fa-solid fa-paper-plane ml-3 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
-                </button>
-            </form>
-        </div>
+        </section>
     </main>
 
-    <footer class="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 mt-10 transition-colors pb-24 md:pb-8">
-        <div class="max-w-6xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-6">
+    <!-- ================= CONTACT ================= -->
+    <main id="contact" class="page-section">
+        <section class="max-w-3xl mx-auto px-5 py-16 md:py-20">
+            <div class="text-center mb-10 reveal">
+                <div class="badge-ico bg-acc/10 border-acc/30 text-acc"><i class="fa-solid fa-paper-plane"></i></div>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">Let's work together</h2>
+                <div class="flex flex-wrap justify-center items-center gap-3 text-fg2">
+                    <span class="bg-panel border border-line px-4 py-2 rounded-full"><i class="fa-regular fa-clock text-acc mr-2"></i>Local time (OCE): <strong id="local-time" class="font-mono text-fg">…</strong></span>
+                    <button onclick="copyDiscord()" class="bg-panel border border-line hover:border-duck px-4 py-2 rounded-full"><i class="fa-brands fa-discord text-indigo-500 mr-2"></i>Quackers <i id="copy-icon" class="fa-regular fa-copy ml-1.5 text-sm text-fg3"></i></button>
+                </div>
+            </div>
+            <div class="card glow p-7 md:p-10 reveal">
+                <div data-fs-success style="display:none" class="bg-green-500/15 border border-green-500/40 text-green-600 p-4 rounded-xl font-bold mb-6 relative z-[2]"><i class="fa-solid fa-circle-check mr-2"></i>Message sent! I'll get back to you soon.</div>
+                <form id="contact-form" class="space-y-5 relative z-[2]">
+                    <div data-fs-error class="font-bold"></div>
+                    <div class="grid sm:grid-cols-2 gap-5">
+                        <label class="block"><span class="block text-sm font-semibold text-fg3 mb-2">Name / Roblox ID</span><input type="text" name="name" required data-fs-field class="w-full bg-bg border border-line rounded-xl px-4 py-3.5 text-base focus:outline-none focus:border-duck"></label>
+                        <label class="block"><span class="block text-sm font-semibold text-fg3 mb-2">Email or Discord</span><input type="text" name="contact_info" required data-fs-field class="w-full bg-bg border border-line rounded-xl px-4 py-3.5 text-base focus:outline-none focus:border-duck"></label>
+                    </div>
+                    <label class="block"><span class="block text-sm font-semibold text-fg3 mb-2">Message: project details, budget, timeline</span><textarea name="message" rows="5" required data-fs-field class="w-full bg-bg border border-line rounded-xl px-4 py-3.5 text-base focus:outline-none focus:border-duck resize-y"></textarea></label>
+                    <button type="submit" data-fs-submit-btn class="w-full bg-duck hover:brightness-105 disabled:opacity-50 text-ink font-bold py-4 rounded-xl transition text-lg shadow-[0_5px_0_#c9a42e]">Send transmission <i class="fa-solid fa-paper-plane ml-2"></i></button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-line mt-10 pb-24 md:pb-8">
+        <div class="max-w-6xl mx-auto px-5 py-10 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="text-center md:text-left">
-                <div class="text-xl font-black tracking-widest text-slate-900 dark:text-white mb-2">QUACKERS.</div>
-                <p class="text-slate-500 dark:text-slate-400 text-sm">Changing the foundation of Multiplayer Gaming.</p>
+                <div class="font-display font-black text-lg">QUACKERS<span class="text-acc">.</span></div>
+                <p class="text-fg3 text-sm">Changing the foundation of multiplayer gaming. Owner of <a href="https://fatalquackers.github.io/rushed/" target="_blank" rel="noopener" class="text-rush font-semibold hover:underline">RUSHED</a>.</p>
             </div>
-            <div class="flex gap-4">
-                <a href="https://www.youtube.com/@Fatalquackers" target="_blank" class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-red-500 hover:text-white transition-all shadow-sm">
-                    <i class="fa-brands fa-youtube"></i>
-                </a>
+            <div class="flex gap-3">
+                <a href="https://www.youtube.com/@Fatalquackers" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-panel2 border border-line flex items-center justify-center hover:bg-red-500 hover:text-white hover:border-red-500 transition" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <button onclick="copyDiscord()" class="w-10 h-10 rounded-full bg-panel2 border border-line flex items-center justify-center hover:bg-indigo-500 hover:text-white hover:border-indigo-500 transition" aria-label="Copy Discord username"><i class="fa-brands fa-discord"></i></button>
             </div>
-            <div class="text-slate-400 dark:text-slate-500 text-sm">
-                &copy; 2026 Quackers Creative. All rights reserved.
-            </div>
+            <div class="text-fg3 text-sm">&copy; <span id="year">2026</span> Quackers Creative. All rights reserved.</div>
         </div>
     </footer>
 
-    <!-- Toast Notification Container -->
-    <div id="toast-container" class="fixed top-24 left-1/2 transform -translate-x-1/2 z-[100] flex flex-col gap-2 pointer-events-none"></div>
+    <button id="music-hint" onclick="toggleMusic(); hideHint();" class="fixed bottom-5 left-5 z-50 bg-panel2 border border-line hover:border-duck rounded-2xl pl-4 pr-5 py-3 shadow-2xl flex items-center gap-3 text-left opacity-0 translate-y-4 pointer-events-none transition-all duration-500">
+        <span class="w-9 h-9 rounded-full bg-duck text-ink flex items-center justify-center"><i class="fa-solid fa-music"></i></span>
+        <span><span class="block font-bold text-sm">Play the soundtrack?</span><span class="block text-xs text-fg3">Chill beats while you look around</span></span>
+    </button>
+
+    <div id="toast-container" class="fixed top-20 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-2 pointer-events-none"></div>
 
     <script>
-        /* -----------------------------------------------------
-           INTERSECTION OBSERVER (SCROLL REVEAL & SKILL BARS)
-        ----------------------------------------------------- */
-        const revealCallback = function(entries, observer) {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    
-                    const bars = entry.target.querySelectorAll('.skill-bar-fill');
-                    bars.forEach(bar => {
-                        bar.style.width = bar.getAttribute('data-width');
-                    });
-                    
-                    observer.unobserve(entry.target);
-                }
-            });
+    {
+        /* ===================== DATA: edit these to update the site ===================== */
+        // Roblox games are listed in data/games.config.json (stats update automatically).
+        const nowBuilding = ['RUSHED Studio', 'Fly and Smash Eggs', 'Soul Forge', 'Toaster Productions', 'Tethr Link'];
+        const qaRoster = ['⚒️ Soul Forge (formerly Garden Maniac)', '🌿 Plants vs Brainrots', '⚔️ Jandels Battlegrounds', '🌊 Brainrot Seas', '🌾 Grow a random plant (past QA)', '🦎 Chameleon by SPS', '🔫 Strike Force', '🍀 +1 SPEED LUCKY BLOCK'];
+        const strips = {
+            rushed: [['projects/rushed-home.jpg', 'RUSHED: home'], ['projects/rushed-games.jpg', 'RUSHED: game lineup'], ['projects/rushed-team.jpg', 'RUSHED: the team'], ['projects/rushed-dash.jpg', 'RUSHED: scouting dashboard']],
+            tethr: [['projects/tethr-trailer.jpg', 'Tethr Link: notifications on your PC'], ['projects/tethr-reveal.jpg', 'Tethr Link: reveal trailer'], ['projects/tethr-hype.jpg', 'Tethr Link: launch'], ['projects/tethr-setup.jpg', 'Tethr Link: setup guide']]
         };
-        const revealObserver = new IntersectionObserver(revealCallback, { threshold: 0.15 });
+        const priceBuild = [['Simple assets', '50 – 100 R$'], ['Detailed props', '250 – 400 R$'], ['Exterior build', '500 – 800 R$'], ['Interior build', '800 – 1.2k R$'], ['Small map / lobby', '1.5k – 2.5k R$'], ['Large map', '3.5k – 10k R$']];
+        const priceAnim = [['Basic loops', '50 – 250 R$'], ['Action / combat moves', '150 – 600 R$'], ['Dances / emotes', '350 – 1.2k R$'], ['Action sets (combos)', '500 – 1.5k R$']];
+        const staticMedia = [
+            { type: 'video', group: 'build', src: 'Video1.mp4', cap: 'Build clip' },
+            ...Array.from({ length: 11 }, (_, i) => ({ type: 'image', group: 'build', src: `Image${i + 1}.png`, cap: '' })),
+            ...strips.rushed.map(([src, cap]) => ({ type: 'image', group: 'project', src, cap })),
+            ...strips.tethr.map(([src, cap]) => ({ type: 'image', group: 'project', src, cap }))
+        ];
 
-        function initReveals() {
-            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-        }
+        /* ===================== HELPERS ===================== */
+        const $ = id => document.getElementById(id);
+        const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        const fmt = n => new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(n || 0);
+        const fmtFull = n => new Intl.NumberFormat('en').format(n || 0);
+        const ago = iso => {
+            if (!iso) return '';
+            const s = (Date.now() - new Date(iso)) / 1000;
+            for (const [u, n] of [['year', 31536e3], ['month', 2592e3], ['day', 864e2], ['hour', 3600], ['minute', 60]]) if (s >= n) { const v = Math.floor(s / n); return `${v} ${u}${v > 1 ? 's' : ''} ago`; }
+            return 'just now';
+        };
+        const safeUrl = u => /^https:\/\/[a-z0-9.-]*rbxcdn\.com\//i.test(u || '') ? u : '';
+        const rating = g => (g.upVotes + g.downVotes) ? Math.round(g.upVotes / (g.upVotes + g.downVotes) * 100) : null;
 
-        /* -----------------------------------------------------
-           PARTICLE NETWORK BACKGROUND
-        ----------------------------------------------------- */
-        const canvas = document.getElementById('hero-particles');
-        const ctx = canvas.getContext('2d');
-        let particlesArray = [];
-        
-        function initParticles() {
-            canvas.width = window.innerWidth;
-            canvas.height = document.getElementById('home').offsetHeight || window.innerHeight;
-            particlesArray = [];
-            const numParticles = Math.min(Math.floor(window.innerWidth / 20), 80);
-            
-            for (let i = 0; i < numParticles; i++) {
-                let size = (Math.random() * 2) + 1;
-                let x = Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2;
-                let y = Math.random() * ((canvas.height - size * 2) - (size * 2)) + size * 2;
-                let directionX = (Math.random() * 1) - 0.5;
-                let directionY = (Math.random() * 1) - 0.5;
-                let color = 'rgba(59, 130, 246, 0.4)';
-                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+        /* ===================== ROBLOX DATA ===================== */
+        // 1) data/games.json, refreshed every 6 hours by a GitHub Action.
+        // 2) If that is empty, a live fetch through roproxy (a public proxy for Roblox's API).
+        let gamesPromise = null;
+        const loadGames = () => gamesPromise ||= (async () => {
+            try {
+                const r = await fetch('data/games.json', { cache: 'no-cache' });
+                const d = await r.json();
+                if (d.games?.length) return { ...d, source: 'cache' };
+            } catch (e) {}
+            try {
+                const cfg = await (await fetch('data/games.config.json', { cache: 'no-cache' })).json();
+                const j = async u => { const r = await fetch(u); if (!r.ok) throw new Error(r.status); return r.json(); };
+                const ids = new Set();
+                await Promise.all((cfg.places || []).map(p => j(`https://apis.roproxy.com/universes/v1/places/${p}/universe`).then(x => ids.add(x.universeId)).catch(() => {})));
+                for (const [k, list] of [['groups', cfg.groups || []], ['users', cfg.users || []]])
+                    for (const id of list) await j(`https://games.roproxy.com/v2/${k}/${id}/games?accessFilter=2&limit=50`).then(x => x.data.forEach(g => ids.add(g.id))).catch(() => {});
+                const q = [...ids].filter(Boolean).slice(0, 50).join(',');
+                if (!q) throw new Error('no games');
+                const [det, vot, ico, th] = await Promise.all([
+                    j(`https://games.roproxy.com/v1/games?universeIds=${q}`),
+                    j(`https://games.roproxy.com/v1/games/votes?universeIds=${q}`).catch(() => ({ data: [] })),
+                    j(`https://thumbnails.roproxy.com/v1/games/icons?universeIds=${q}&size=512x512&format=Png&isCircular=false`).catch(() => ({ data: [] })),
+                    j(`https://thumbnails.roproxy.com/v1/games/multiget/thumbnails?universeIds=${q}&countPerUniverse=4&defaults=true&size=768x432&format=Png&isCircular=false`).catch(() => ({ data: [] }))
+                ]);
+                const games = det.data.map(d => {
+                    const v = vot.data.find(x => x.id === d.id) || {};
+                    return { universeId: d.id, placeId: d.rootPlaceId, name: d.name, description: d.description || '', creator: d.creator?.name || '', genre: d.genre || '',
+                        playing: d.playing || 0, visits: d.visits || 0, favorites: d.favoritedCount || 0, maxPlayers: d.maxPlayers || 0,
+                        upVotes: v.upVotes || 0, downVotes: v.downVotes || 0, created: d.created, updated: d.updated,
+                        icon: ico.data.find(x => x.targetId === d.id)?.imageUrl || '',
+                        thumbnails: (th.data.find(x => x.universeId === d.id)?.thumbnails || []).filter(t => t.state === 'Completed').map(t => t.imageUrl) };
+                }).sort((a, b) => b.visits - a.visits);
+                return { updated: new Date().toISOString(), games, source: 'live' };
+            } catch (e) {
+                return { updated: null, games: [], source: 'none' };
             }
-        }
+        })();
 
-        class Particle {
-            constructor(x, y, directionX, directionY, size, color) {
-                this.x = x; this.y = y; this.directionX = directionX; this.directionY = directionY; this.size = size; this.color = color;
-            }
-            draw() {
-                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                ctx.fillStyle = this.color; ctx.fill();
-            }
-            update() {
-                if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
-                if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
-                this.x += this.directionX; this.y += this.directionY;
-                this.draw();
-            }
-        }
+        const gameCard = (g, compact) => {
+            const thumb = safeUrl(g.thumbnails?.[0]) || safeUrl(g.icon);
+            const r = rating(g);
+            return `<article class="card glow overflow-hidden flex flex-col group">
+                <button class="relative aspect-video bg-panel2 overflow-hidden text-left" data-game="${g.universeId}" aria-label="Details for ${esc(g.name)}">
+                    ${thumb ? `<img src="${thumb}" alt="" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">` : `<div class="w-full h-full flex items-center justify-center text-5xl text-fg3"><i class="fa-solid fa-cube"></i></div>`}
+                    <span class="absolute top-3 left-3 flex items-center gap-1.5 bg-black/70 text-white text-xs font-bold px-2.5 py-1 rounded-full"><span class="live-dot"></span>${fmtFull(g.playing)} playing</span>
+                </button>
+                <div class="p-5 flex flex-col flex-1 relative z-[2]">
+                    <div class="flex items-center gap-3 mb-4">
+                        ${safeUrl(g.icon) ? `<img src="${safeUrl(g.icon)}" alt="" class="w-11 h-11 rounded-xl border border-line">` : ''}
+                        <div class="min-w-0"><h3 class="font-bold text-lg leading-tight truncate">${esc(g.name)}</h3><p class="text-xs text-fg3 truncate">by ${esc(g.creator)}</p></div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 text-center mb-4">
+                        <div class="bg-panel2 rounded-xl py-2"><div class="font-display font-bold text-sm">${fmt(g.visits)}</div><div class="text-[11px] text-fg3">visits</div></div>
+                        <div class="bg-panel2 rounded-xl py-2"><div class="font-display font-bold text-sm">${r === null ? '—' : r + '%'}</div><div class="text-[11px] text-fg3">liked</div></div>
+                        <div class="bg-panel2 rounded-xl py-2"><div class="font-display font-bold text-sm">${fmt(g.favorites)}</div><div class="text-[11px] text-fg3">favourites</div></div>
+                    </div>
+                    <div class="flex items-center gap-2 mt-auto">
+                        <a href="https://www.roblox.com/games/${encodeURIComponent(g.placeId)}" target="_blank" rel="noopener" class="flex-1 text-center bg-green-600 hover:bg-green-500 text-white font-bold py-2.5 rounded-xl transition"><i class="fa-solid fa-play mr-1.5"></i>Play</a>
+                        ${compact ? '' : `<button data-game="${g.universeId}" class="px-4 py-2.5 rounded-xl bg-panel2 border border-line hover:border-duck font-semibold text-sm">Details</button>`}
+                    </div>
+                    ${compact ? '' : `<p class="text-xs text-fg3 mt-3">Updated ${ago(g.updated)}</p>`}
+                </div>
+            </article>`;
+        };
+        const skeletonCards = n => Array.from({ length: n }, () => `<div class="card overflow-hidden"><div class="aspect-video skeleton"></div><div class="p-5 space-y-3"><div class="h-5 w-2/3 skeleton rounded"></div><div class="h-12 skeleton rounded-xl"></div><div class="h-10 skeleton rounded-xl"></div></div></div>`).join('');
+        const emptyGames = `<div class="card p-8 text-center sm:col-span-2 lg:col-span-3"><i class="fa-solid fa-satellite-dish text-3xl text-acc mb-3"></i><p class="font-bold mb-1">Couldn't reach Roblox right now</p><p class="text-sm text-fg3">Stats refresh automatically every few hours. Check back soon.</p></div>`;
 
-        function animateParticles() {
-            requestAnimationFrame(animateParticles);
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-            }
-            connectParticles();
-        }
+        let gamesData = null;
+        const renderGames = () => {
+            if (!gamesData) return;
+            const sort = $('games-sort').value;
+            const key = { visits: g => g.visits, playing: g => g.playing, updated: g => +new Date(g.updated), rating: g => rating(g) ?? -1 }[sort];
+            const list = [...gamesData.games].sort((a, b) => key(b) - key(a));
+            $('games-grid').innerHTML = list.length ? list.map(g => gameCard(g)).join('') : emptyGames;
+        };
+        const animateNum = (el, target) => {
+            const t0 = performance.now();
+            const step = t => { const p = Math.min(1, (t - t0) / 1100), e = 1 - Math.pow(1 - p, 3); el.textContent = fmt(target * e); if (p < 1) requestAnimationFrame(step); else el.textContent = fmt(target); };
+            requestAnimationFrame(step);
+        };
+        const renderTotals = (d) => {
+            const g = d.games;
+            const tiles = [['fa-gamepad', 'Games', g.length], ['fa-eye', 'Total visits', g.reduce((s, x) => s + x.visits, 0)], ['fa-user-group', 'Playing now', g.reduce((s, x) => s + x.playing, 0)], ['fa-star', 'Favourites', g.reduce((s, x) => s + x.favorites, 0)]];
+            $('game-totals').innerHTML = tiles.map(([ic, label, n], i) => `<div class="card p-5"><div class="text-fg3 text-sm mb-2"><i class="fa-solid ${ic} mr-1.5 text-acc"></i>${label}</div><div class="stat-num" data-n="${n}">${d.games.length ? '0' : '—'}</div></div>`).join('');
+            if (d.games.length) $('game-totals').querySelectorAll('[data-n]').forEach(el => animateNum(el, +el.dataset.n));
+            $('games-updated').innerHTML = d.games.length
+                ? `<span class="live-dot"></span>${d.source === 'live' ? 'Live from Roblox' : 'Stats updated ' + ago(d.updated)}`
+                : `<span class="w-2 h-2 rounded-full bg-fg3"></span>Waiting for stats from Roblox`;
+        };
 
-        function connectParticles() {
-            let opacityValue = 1;
-            for (let a = 0; a < particlesArray.length; a++) {
-                for (let b = a; b < particlesArray.length; b++) {
-                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + 
-                                   ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-                    if (distance < (canvas.width/7) * (canvas.height/7)) {
-                        opacityValue = 1 - (distance/20000);
-                        ctx.strokeStyle = `rgba(59, 130, 246, ${opacityValue * 0.2})`;
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        window.addEventListener('resize', () => { if(document.getElementById('home').classList.contains('active')) initParticles(); });
-
-        /* -----------------------------------------------------
-           SETTINGS MENU LOGIC
-        ----------------------------------------------------- */
-        function toggleSettings() {
-            const menu = document.getElementById('settings-menu');
-            const overlay = document.getElementById('settings-overlay');
-            if(menu.classList.contains('open')) {
-                menu.classList.remove('open');
-                overlay.classList.add('opacity-0');
-                setTimeout(() => overlay.classList.add('hidden'), 300);
-            } else {
-                overlay.classList.remove('hidden');
-                setTimeout(() => {
-                    overlay.classList.remove('opacity-0');
-                    menu.classList.add('open');
-                }, 10);
-            }
-        }
-
-        /* -----------------------------------------------------
-           CUSTOM CURSOR
-        ----------------------------------------------------- */
-        const cursorDot = document.getElementById('cursor-dot');
-        const cursorOutline = document.getElementById('cursor-outline');
-        let cursorEnabled = true;
-
-        window.addEventListener('mousemove', function(e) {
-            if(!cursorEnabled) return;
-            const posX = e.clientX; const posY = e.clientY;
-            cursorDot.style.left = `${posX}px`; cursorDot.style.top = `${posY}px`;
-            cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+        $('games-grid').innerHTML = skeletonCards(3);
+        $('home-games').innerHTML = skeletonCards(3);
+        $('game-totals').innerHTML = Array.from({ length: 4 }, () => '<div class="card p-5"><div class="h-4 w-20 skeleton rounded mb-3"></div><div class="h-8 w-24 skeleton rounded"></div></div>').join('');
+        loadGames().then(d => {
+            gamesData = d;
+            renderTotals(d); renderGames();
+            $('home-games').innerHTML = d.games.length ? d.games.slice(0, 3).map(g => gameCard(g, true)).join('') : emptyGames;
+            $('hud-visits').textContent = d.games.length ? fmtFull(d.games.reduce((s, x) => s + x.visits, 0)) : '—';
+            if ($('gallery').classList.contains('active')) renderGallery();
         });
+        $('games-sort').addEventListener('change', renderGames);
 
-        document.querySelectorAll('button, a, .cursor-pointer, select, input, textarea').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                if(!cursorEnabled) return;
-                cursorOutline.style.width = '60px'; cursorOutline.style.height = '60px';
-                cursorOutline.style.borderColor = 'rgba(239, 68, 68, 0.5)';
-            });
-            el.addEventListener('mouseleave', () => {
-                if(!cursorEnabled) return;
-                cursorOutline.style.width = '40px'; cursorOutline.style.height = '40px';
-                cursorOutline.style.borderColor = 'rgba(59, 130, 246, 0.5)';
-            });
+        // Game details modal
+        const openGame = id => {
+            const g = gamesData?.games.find(x => String(x.universeId) === String(id)); if (!g) return;
+            const r = rating(g);
+            const shots = (g.thumbnails || []).map(safeUrl).filter(Boolean);
+            $('game-modal-body').innerHTML = `
+                ${shots.length ? `<div class="strip p-4 pb-2">${shots.map(s => `<button data-src="${s}" data-type="image" data-cap="${esc(g.name)}" class="aspect-video rounded-xl overflow-hidden"><img src="${s}" alt="" class="w-full h-full object-cover"></button>`).join('')}</div>` : ''}
+                <div class="p-6 md:p-8">
+                    <div class="flex items-start gap-4 mb-5">
+                        ${safeUrl(g.icon) ? `<img src="${safeUrl(g.icon)}" alt="" class="w-16 h-16 rounded-2xl border border-line">` : ''}
+                        <div class="min-w-0 flex-1"><h3 class="font-display font-bold text-2xl leading-tight">${esc(g.name)}</h3><p class="text-sm text-fg3">by ${esc(g.creator)}${g.genre && g.genre !== 'All' ? ' · ' + esc(g.genre) : ''}</p></div>
+                        <button onclick="closeGame()" class="text-3xl leading-none text-fg3 hover:text-acc" aria-label="Close">&times;</button>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+                        ${[['Playing', fmtFull(g.playing)], ['Visits', fmtFull(g.visits)], ['Liked', r === null ? '—' : r + '%'], ['Favourites', fmtFull(g.favorites)]].map(([k, v]) => `<div class="bg-panel2 rounded-xl p-3"><div class="text-xs text-fg3">${k}</div><div class="font-display font-bold">${v}</div></div>`).join('')}
+                    </div>
+                    ${g.description ? `<p class="text-fg2 whitespace-pre-line mb-6 max-h-48 overflow-y-auto">${esc(g.description)}</p>` : ''}
+                    <div class="flex flex-wrap gap-x-6 gap-y-1 text-sm text-fg3 mb-6">
+                        ${g.maxPlayers ? `<span><i class="fa-solid fa-users mr-1.5"></i>${g.maxPlayers} per server</span>` : ''}
+                        ${g.created ? `<span><i class="fa-regular fa-calendar mr-1.5"></i>Created ${new Date(g.created).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}</span>` : ''}
+                        ${g.updated ? `<span><i class="fa-solid fa-rotate mr-1.5"></i>Updated ${ago(g.updated)}</span>` : ''}
+                    </div>
+                    ${(g.platforms || []).length ? `<div class="flex flex-wrap gap-2 mb-6">${g.platforms.map(p => `<span class="chip"><i class="fa-solid ${{ desktop: 'fa-desktop', mobile: 'fa-mobile-screen', tablet: 'fa-tablet-screen-button', console: 'fa-gamepad', vr: 'fa-vr-cardboard' }[p] || 'fa-circle'} mr-1.5"></i>${p === 'vr' ? 'VR' : p[0].toUpperCase() + p.slice(1)}</span>`).join('')}${g.ageRating && !/UNSPECIFIED/.test(g.ageRating) ? `<span class="chip">${esc(g.ageRating.replace('AGE_RATING_', '').replace('_PLUS', '+').replace(/_/g, ' '))}</span>` : ''}</div>` : ''}
+                    <div class="flex flex-wrap gap-3">
+                        <a href="https://www.roblox.com/games/${encodeURIComponent(g.placeId)}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold px-6 py-3 rounded-xl"><i class="fa-solid fa-play"></i>Play on Roblox</a>
+                        ${[['discord', 'fa-brands fa-discord', 'Discord'], ['group', 'fa-solid fa-users', 'Group'], ['youtube', 'fa-brands fa-youtube', 'YouTube']].map(([k, ic, t]) => /^https:\/\//.test(g.links?.[k] || '') ? `<a href="${esc(g.links[k])}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-panel2 border border-line hover:border-duck font-bold px-5 py-3 rounded-xl"><i class="${ic}"></i>${t}</a>` : '').join('')}
+                    </div>
+                </div>`;
+            $('game-modal').classList.remove('hidden'); $('game-modal').classList.add('flex');
+        };
+        window.closeGame = () => { $('game-modal').classList.add('hidden'); $('game-modal').classList.remove('flex'); };
+
+        /* ===================== RENDER STATIC BITS ===================== */
+        document.querySelectorAll('[data-strip]').forEach(el => {
+            el.innerHTML = strips[el.dataset.strip].map(([src, cap]) =>
+                `<button class="aspect-video rounded-xl overflow-hidden border border-black/10 bg-black/20 group" data-src="${src}" data-type="image" data-cap="${esc(cap)}"><img src="${src}" alt="${esc(cap)}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition duration-500"></button>`).join('');
         });
+        const tickerItems = nowBuilding.map(n => `<span class="px-6 whitespace-nowrap">${esc(n)}</span><span class="text-acc">✦</span>`).join('');
+        $('ticker').innerHTML = `<span class="px-6 text-acc whitespace-nowrap">CURRENTLY ON</span>${tickerItems}<span class="px-6 text-acc whitespace-nowrap">CURRENTLY ON</span>${tickerItems}`;
+        const priceRows = rows => rows.map(([k, v]) => `<div class="flex justify-between items-center gap-4 bg-panel2 px-4 py-3 rounded-xl"><span>${k}</span><span class="font-mono text-sm text-acc font-bold whitespace-nowrap">${v}</span></div>`).join('');
+        $('price-build').innerHTML = priceRows(priceBuild);
+        $('price-anim').innerHTML = priceRows(priceAnim);
+        $('qa-roster').innerHTML = qaRoster.map(q => `<span class="bg-panel2 border border-line px-4 py-2 rounded-xl hover:-translate-y-1 transition-transform">${esc(q)}</span>`).join('')
+            + '<span class="bg-sky/10 border border-sky/40 text-skyt px-4 py-2 rounded-xl italic font-bold">…and unreleased NDA titles 🤫</span>';
 
-        function toggleCursor() {
-            cursorEnabled = !cursorEnabled;
-            const ball = document.getElementById('cursor-toggle-ball');
-            const bg = document.getElementById('cursor-toggle-bg');
-            if(cursorEnabled) {
-                document.body.classList.add('custom-cursor');
-                ball.classList.add('translate-x-6');
-                bg.classList.replace('bg-slate-300', 'bg-blue-500');
-            } else {
-                document.body.classList.remove('custom-cursor');
-                ball.classList.remove('translate-x-6');
-                bg.classList.replace('bg-blue-500', 'bg-slate-300');
-            }
-        }
-
-        /* -----------------------------------------------------
-           MAGNETIC GLOW & 3D TILT EFFECT
-        ----------------------------------------------------- */
-        function initCardEffects() {
-            document.querySelectorAll('.glow-card').forEach(card => {
-                card.addEventListener('mousemove', e => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    card.style.setProperty('--mouse-x', `${x}px`);
-                    card.style.setProperty('--mouse-y', `${y}px`);
-                });
-            });
-
-            document.querySelectorAll('.tilt-card').forEach(card => {
-                card.addEventListener('mousemove', e => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left; const y = e.clientY - rect.top;
-                    const centerX = rect.width / 2; const centerY = rect.height / 2;
-                    const tiltX = ((y - centerY) / centerY) * -8;
-                    const tiltY = ((x - centerX) / centerX) * 8;
-                    card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
-                });
-                
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-                    card.style.transition = 'transform 0.5s ease';
-                });
-                
-                card.addEventListener('mouseenter', () => { card.style.transition = 'none'; });
-            });
-        }
-
-        /* -----------------------------------------------------
-           SCROLL PROGRESS
-        ----------------------------------------------------- */
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById("scroll-progress").style.width = scrolled + "%";
-        });
-
-        /* -----------------------------------------------------
-           DYNAMIC GALLERY SYSTEM
-        ----------------------------------------------------- */
-        let mediaData = [];
-        for(let i = 1; i <= 3; i++) { mediaData.push({ id: i, num: i, type: 'video', src: `Video${i}.mp4` }); }
-        for(let i = 1; i <= 11; i++) { mediaData.push({ id: i + 100, num: i, type: 'image', src: `Image${i}.png` }); }
-
-        let currentFilter = 'all';
-
-        function setGalleryFilter(filterType) {
-            currentFilter = filterType;
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(`btn-filter-${filterType}`).classList.add('active');
-            renderGallery();
-        }
-
-        function renderGallery() {
-            const grid = document.getElementById('dynamic-gallery-grid');
-            const sortOrder = document.getElementById('sort-gallery').value;
-            
-            let filtered = mediaData.filter(item => currentFilter === 'all' || item.type === currentFilter);
-            filtered.sort((a, b) => sortOrder === 'newest' ? b.num - a.num : a.num - b.num);
-
+        /* ===================== GALLERY ===================== */
+        let gFilter = 'all';
+        const allMedia = () => {
+            const gameShots = (gamesData?.games || []).flatMap(g => (g.thumbnails || []).map(safeUrl).filter(Boolean).map(src => ({ type: 'image', group: 'game', src, cap: g.name, ts: +new Date(g.updated) })));
+            return [...staticMedia.map((m, i) => ({ ...m, num: i })), ...gameShots.map((m, i) => ({ ...m, num: 1000 + i }))];
+        };
+        const renderGallery = () => {
+            const grid = $('dynamic-gallery-grid');
+            const order = $('sort-gallery').value;
+            const items = allMedia().filter(m => gFilter === 'all' || (gFilter === 'video' ? m.type === 'video' : m.group === gFilter && (gFilter !== 'build' || m.type === 'image')))
+                .sort((a, b) => order === 'newest' ? b.num - a.num : a.num - b.num);
             grid.style.opacity = 0;
             setTimeout(() => {
-                grid.innerHTML = '';
-                filtered.forEach((item, index) => {
-                    const isVideo = item.type === 'video';
-                    const spanClass = (isVideo && index === 0 && currentFilter === 'all') ? 'md:col-span-2 md:row-span-2' : '';
-                    
-                    const el = document.createElement('div');
-                    el.className = `aspect-video bg-slate-200 dark:bg-slate-800 rounded-2xl overflow-hidden group border border-slate-200 dark:border-slate-700 relative cursor-pointer shadow-sm hover:shadow-xl transition-all glow-card ${spanClass}`;
-                    el.onclick = () => openMedia(item.src, item.type);
-                    
-                    el.addEventListener('mousemove', e => {
-                        const rect = el.getBoundingClientRect();
-                        el.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-                        el.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-                    });
-                    
-                    let innerHTML = isVideo ? `
-                        <span class="absolute top-3 right-3 text-[10px] font-bold bg-orange-600 text-white px-3 py-1 rounded-full z-20 shadow-lg"><i class="fa-solid fa-video mr-1"></i> VIDEO</span>
-                        <div class="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/50 transition-all duration-300 z-10 flex items-center justify-center backdrop-blur-[0px] group-hover:backdrop-blur-sm">
-                            <i class="fa-solid fa-play text-white opacity-0 group-hover:opacity-100 text-5xl transition-all duration-300 drop-shadow-lg transform scale-50 group-hover:scale-100"></i>
-                        </div>
-                        <video src="${item.src}" class="w-full h-full object-cover transition duration-700 pointer-events-none" muted preload="metadata"></video>
-                    ` : `
-                        <span class="absolute top-3 right-3 text-[10px] font-bold bg-white/90 dark:bg-slate-900/90 text-slate-800 dark:text-white px-3 py-1 rounded-full z-20 shadow-lg backdrop-blur-md border border-slate-200 dark:border-slate-700"><i class="fa-solid fa-image mr-1 text-blue-500"></i> IMAGE</span>
-                        <div class="absolute inset-0 bg-slate-900/0 group-hover:bg-blue-900/40 transition-all duration-300 z-10 flex items-center justify-center">
-                            <i class="fa-solid fa-expand text-white opacity-0 group-hover:opacity-100 text-4xl transition-all duration-300 drop-shadow-lg transform scale-50 group-hover:scale-100"></i>
-                        </div>
-                        <img src="${item.src}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
-                    `;
-                    el.innerHTML = innerHTML;
-                    grid.appendChild(el);
-                });
+                if (!items.length) {
+                    grid.innerHTML = gFilter === 'game' && !gamesData
+                        ? skeletonCards(3)
+                        : '<div class="card p-8 text-center sm:col-span-2 md:col-span-3 text-fg3">Nothing here yet. Game screenshots appear once the Roblox stats load.</div>';
+                } else grid.innerHTML = items.map(m => {
+                    const big = m.type === 'video' && gFilter === 'all' ? 'md:col-span-2 md:row-span-2' : '';
+                    const tag = m.cap && m.type === 'image' ? `<span class="absolute top-3 left-3 z-10 text-[11px] font-bold bg-black/70 text-white px-2.5 py-1 rounded-full">${esc(m.cap.split(':')[0])}</span>` : '';
+                    const media = m.type === 'video'
+                        ? `<video src="${m.src}" class="w-full h-full object-cover pointer-events-none" muted preload="metadata"></video><div class="absolute inset-0 flex items-center justify-center"><span class="w-16 h-16 rounded-full bg-duck text-ink flex items-center justify-center text-xl group-hover:scale-110 transition"><i class="fa-solid fa-play ml-1"></i></span></div>`
+                        : `<img src="${m.src}" alt="${esc(m.cap || 'Build screenshot')}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">`;
+                    return `<button class="aspect-video bg-panel2 rounded-2xl overflow-hidden group border border-line relative ${big}" data-src="${m.src}" data-type="${m.type}" data-cap="${esc(m.cap)}">${tag}${media}</button>`;
+                }).join('');
                 grid.style.opacity = 1;
-            }, 200);
-        }
-
-        /* -----------------------------------------------------
-           MODAL & PAGE NAVIGATION
-        ----------------------------------------------------- */
-        function openMedia(src, type) {
-            const modal = document.getElementById('media-modal');
-            const img = document.getElementById('modal-img');
-            const video = document.getElementById('modal-video');
-
-            img.classList.add('hidden'); video.classList.add('hidden'); video.src = "";
-
-            if (type === 'image') { img.src = src; img.classList.remove('hidden'); } 
-            else if (type === 'video') { video.src = src; video.classList.remove('hidden'); video.play(); }
-
-            modal.classList.remove('hidden');
-            setTimeout(() => { modal.classList.remove('opacity-0'); }, 10);
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('media-modal');
-            const video = document.getElementById('modal-video');
-            modal.classList.add('opacity-0'); video.pause();
-            setTimeout(() => { modal.classList.add('hidden'); }, 300);
-        }
-
-        function showPage(pageId) {
-            document.querySelectorAll('.page-section').forEach(page => {
-                page.classList.remove('active');
-                page.querySelectorAll('.reveal').forEach(el => {
-                    el.classList.remove('active');
-                    revealObserver.observe(el);
-                    
-                    const bars = el.querySelectorAll('.skill-bar-fill');
-                    bars.forEach(bar => bar.style.width = '0%');
-                });
-            });
-            
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-                if(link.id === 'nav-testing') {
-                    link.classList.remove('text-cyan-600', 'dark:text-cyan-400');
-                    link.querySelector('i').classList.remove('text-cyan-500');
-                    link.querySelector('i').classList.add('text-slate-400');
-                } else {
-                    link.querySelector('i').classList.remove('text-white');
-                    link.querySelector('i').classList.add('text-slate-400');
-                }
-            });
-            
-            const activePage = document.getElementById(pageId);
-            activePage.classList.add('active');
-            
-            const navLink = document.getElementById('nav-' + pageId);
-            navLink.classList.add('active');
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-            if(pageId === 'home') {
-                runCounters();
-                initParticles();
-            }
-            if(pageId === 'gallery') renderGallery();
-        }
-
-        function copyDiscord() {
-            navigator.clipboard.writeText("Quackers");
-            showToast("Copied Discord Username!");
-            const icon = document.getElementById("copy-icon");
-            if(icon) {
-                icon.classList.replace("fa-copy", "fa-check");
-                icon.classList.add("text-green-500");
-                setTimeout(() => {
-                    icon.classList.replace("fa-check", "fa-copy");
-                    icon.classList.remove("text-green-500");
-                }, 2000);
-            }
-        }
-
-        function showToast(message) {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = "bg-slate-800 text-white px-6 py-3 rounded-full font-bold shadow-2xl transition-all duration-300 translate-y-[-20px] opacity-0 flex items-center border border-slate-700";
-            toast.innerHTML = `<i class="fa-solid fa-check-circle text-green-400 mr-2"></i> ${message}`;
-            container.appendChild(toast);
-            
-            setTimeout(() => { toast.classList.remove('translate-y-[-20px]', 'opacity-0'); }, 10);
-            setTimeout(() => { 
-                toast.classList.add('opacity-0', 'translate-y-[-20px]'); 
-                setTimeout(() => toast.remove(), 300); 
-            }, 3000);
-        }
-
-        /* -----------------------------------------------------
-           TYPING EFFECT
-        ----------------------------------------------------- */
-        const roles = ["World Builder", "Character Animator", "QA Tester"];
-        let roleIndex = 0; let charIndex = 0; let isDeleting = false;
-        const typeTarget = document.getElementById("typewriter-text");
-
-        function typeEffect() {
-            if(!typeTarget) return;
-            const currentRole = roles[roleIndex];
-            
-            if (isDeleting) { typeTarget.innerText = currentRole.substring(0, charIndex - 1); charIndex--; } 
-            else { typeTarget.innerText = currentRole.substring(0, charIndex + 1); charIndex++; }
-
-            let typeSpeed = isDeleting ? 50 : 100;
-
-            if (!isDeleting && charIndex === currentRole.length) { typeSpeed = 2000; isDeleting = true; } 
-            else if (isDeleting && charIndex === 0) { isDeleting = false; roleIndex = (roleIndex + 1) % roles.length; typeSpeed = 500; }
-            
-            setTimeout(typeEffect, typeSpeed);
-        }
-
-        /* -----------------------------------------------------
-           THEME & CLOCK & COUNTERS & INIT
-        ----------------------------------------------------- */
-        function toggleTheme() {
-            const html = document.documentElement;
-            const icon = document.getElementById('theme-icon');
-            const toggleBall = document.getElementById('theme-toggle-ball');
-            
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                if(icon) icon.classList.replace('fa-moon', 'fa-sun');
-                if(toggleBall) toggleBall.classList.remove('translate-x-6');
-            } else {
-                html.classList.add('dark');
-                if(icon) icon.classList.replace('fa-sun', 'fa-moon');
-                if(toggleBall) toggleBall.classList.add('translate-x-6');
-            }
-        }
-
-        function updateClock() {
-            const timeElement = document.getElementById('local-time');
-            if(timeElement) {
-                const now = new Date();
-                timeElement.innerText = now.toLocaleTimeString('en-AU', { timeZone: 'Australia/Sydney', hour: '2-digit', minute: '2-digit', hour12: true });
-            }
-        }
-
-        function runCounters() {
-            const counters = document.querySelectorAll('.counter');
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                let count = 0; const speed = 30; const inc = target / speed;
-                
-                const updateCount = () => {
-                    count += inc;
-                    if (count < target) {
-                        counter.innerText = Math.ceil(count);
-                        requestAnimationFrame(updateCount);
-                    } else {
-                        counter.innerText = target.toLocaleString();
-                    }
-                };
-                counter.innerText = '0'; 
-                updateCount();
-            });
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            initReveals();
-            initCardEffects();
-            runCounters();
-            updateClock();
-            typeEffect();
+            }, 150);
+        };
+        $('gallery-filters').addEventListener('click', e => {
+            const b = e.target.closest('.filter-btn'); if (!b) return;
+            gFilter = b.dataset.g;
+            document.querySelectorAll('#gallery-filters .filter-btn').forEach(x => x.classList.toggle('active', x === b));
             renderGallery();
-            
-            if(document.getElementById('home').classList.contains('active')) {
-                initParticles();
-                animateParticles();
-            }
         });
+        $('sort-gallery').addEventListener('change', renderGallery);
 
-        /* -----------------------------------------------------
-           EASTER EGGS
-        ----------------------------------------------------- */
-        let secretBuffer = "";
-        document.addEventListener('keydown', (e) => {
-            if (e.key.length === 1) {
-                secretBuffer += e.key.toLowerCase();
-                if (secretBuffer.length > 5) secretBuffer = secretBuffer.slice(-5);
-                if (secretBuffer === "robux") { triggerRobuxRain(); secretBuffer = ""; }
-            }
+        document.addEventListener('click', e => {
+            const gm = e.target.closest('[data-game]'); if (gm) { openGame(gm.dataset.game); return; }
+            const t = e.target.closest('[data-src]'); if (t) openMedia(t.dataset.src, t.dataset.type, t.dataset.cap);
         });
+        const openMedia = (src, type, cap) => {
+            const modal = $('media-modal'), img = $('modal-img'), video = $('modal-video');
+            img.classList.add('hidden'); video.classList.add('hidden'); video.removeAttribute('src');
+            $('modal-cap').textContent = cap || '';
+            if (type === 'image') { img.src = src; img.classList.remove('hidden'); }
+            else { video.src = src; video.classList.remove('hidden'); video.play().catch(() => {}); }
+            modal.classList.remove('hidden'); setTimeout(() => modal.classList.remove('opacity-0'), 10);
+        };
+        window.closeModal = () => {
+            $('media-modal').classList.add('opacity-0'); $('modal-video').pause();
+            setTimeout(() => $('media-modal').classList.add('hidden'), 300);
+        };
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeGame(); } });
 
-        function triggerRobuxRain() {
-            for(let i=0; i<50; i++) {
-                let r = document.createElement('div'); r.innerText = '💵'; r.className = 'robux-rain text-4xl';
-                r.style.left = Math.random() * 100 + 'vw'; r.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
-                document.body.appendChild(r);
-                setTimeout(() => r.remove(), 4000);
+        /* ===================== PAGES (#games, #portfolio …) ===================== */
+        const PAGES = ['home', 'portfolio', 'games', 'gallery', 'pricing', 'testing', 'contact'];
+        const revealObserver = new IntersectionObserver((entries, obs) => {
+            entries.forEach(en => {
+                if (!en.isIntersecting) return;
+                en.target.classList.add('active');
+                en.target.querySelectorAll('.skill-bar-fill').forEach(b => b.style.width = b.dataset.width);
+                obs.unobserve(en.target);
+            });
+        }, { threshold: 0.08 });
+        const showPage = id => {
+            if (id === 'work') id = 'portfolio';
+            if (!PAGES.includes(id)) id = 'home';
+            document.querySelectorAll('.page-section').forEach(p => p.classList.toggle('active', p.id === id));
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.toggle('active', l.id === 'nav-' + id));
+            $(id).querySelectorAll('.reveal').forEach(el => {
+                el.classList.remove('active');
+                el.querySelectorAll('.skill-bar-fill').forEach(b => b.style.width = '0');
+                revealObserver.observe(el);
+            });
+            if (id === 'gallery') renderGallery();
+            if (id === 'games' && gamesData) renderTotals(gamesData);
+            if (id === 'home') sizeParticles();
+            window.scrollTo(0, 0);
+        };
+        window.addEventListener('hashchange', () => showPage(location.hash.slice(1)));
+
+        /* ===================== THEME ===================== */
+        const isLight = () => document.documentElement.classList.contains('light');
+        const setThemeUI = () => {
+            $('theme-icon').className = 'fa-solid ' + (isLight() ? 'fa-sun' : 'fa-moon');
+            $('theme-switch').classList.toggle('on', !isLight());
+            document.querySelector('meta[name=theme-color]')?.remove();
+            const m = document.createElement('meta'); m.name = 'theme-color'; m.content = isLight() ? '#f6f3ec' : '#0b0d10'; document.head.appendChild(m);
+        };
+        window.toggleTheme = () => {
+            document.documentElement.classList.toggle('light');
+            try { localStorage.setItem('quackers-theme', isLight() ? 'light' : 'dark'); } catch (e) {}
+            setThemeUI();
+        };
+        setThemeUI();
+
+        /* ===================== PARTICLE NETWORK ===================== */
+        const canvas = $('hero-particles'), ctx = canvas.getContext('2d');
+        let parts = [], beat = 0;
+        const sizeParticles = () => {
+            const r = canvas.getBoundingClientRect(); if (!r.width) return;
+            canvas.width = r.width; canvas.height = r.height;
+            const n = Math.min(Math.floor(r.width / 18), 80);
+            parts = Array.from({ length: n }, () => ({ x: Math.random() * r.width, y: Math.random() * r.height, vx: Math.random() - .5, vy: Math.random() - .5, s: Math.random() * 2 + 1 }));
+        };
+        const drawParticles = () => {
+            requestAnimationFrame(drawParticles);
+            if (!$('home').classList.contains('active')) return;
+            const c = isLight() ? '168,106,0' : '255,210,63';
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            beat *= 0.92;
+            for (const p of parts) {
+                p.x += p.vx * (1 + beat * 2); p.y += p.vy * (1 + beat * 2);
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.s + beat * 1.5, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${c},${0.45 + beat * 0.4})`; ctx.fill();
             }
+            for (let a = 0; a < parts.length; a++) for (let b = a + 1; b < parts.length; b++) {
+                const dx = parts[a].x - parts[b].x, dy = parts[a].y - parts[b].y, d = dx * dx + dy * dy;
+                if (d < 15000) { ctx.strokeStyle = `rgba(${c},${(1 - d / 15000) * (0.16 + beat * 0.2)})`; ctx.beginPath(); ctx.moveTo(parts[a].x, parts[a].y); ctx.lineTo(parts[b].x, parts[b].y); ctx.stroke(); }
+            }
+        };
+        window.addEventListener('resize', sizeParticles);
+
+        /* ===================== BACKGROUND MUSIC (generated live, no files) ===================== */
+        let ac = null, master = null, musicOn = false, schedTimer = null, nextTime = 0, step = 0, volume = 0.4, noiseBuf = null;
+        const BPM = 78, STEP = 60 / BPM / 4;
+        const midi = n => 440 * Math.pow(2, (n - 69) / 12);
+        const CHORDS = [[65, 69, 72, 76], [64, 67, 71, 74], [62, 65, 69, 72], [60, 64, 67, 71]];
+        const BASS = [41, 40, 38, 36];
+        const MELODY = [76, null, 79, null, 77, 76, null, 72, 74, null, 76, null, null, 72, null, null];
+        const initAudio = () => {
+            ac = new (window.AudioContext || window.webkitAudioContext)();
+            master = ac.createGain(); master.gain.value = 0;
+            const lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2400;
+            master.connect(lp); lp.connect(ac.destination);
+            noiseBuf = ac.createBuffer(1, ac.sampleRate * 2, ac.sampleRate);
+            const d = noiseBuf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+            const crackle = ac.createBufferSource(); crackle.buffer = noiseBuf; crackle.loop = true;
+            const cf = ac.createBiquadFilter(); cf.type = 'highpass'; cf.frequency.value = 3000;
+            const cg = ac.createGain(); cg.gain.value = 0.012;
+            crackle.connect(cf); cf.connect(cg); cg.connect(master); crackle.start();
+        };
+        const note = (freq, t, dur, vol, type = 'sine', detune = 0) => {
+            const o = ac.createOscillator(), g = ac.createGain();
+            o.type = type; o.frequency.value = freq; o.detune.value = detune;
+            g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+            o.connect(g); g.connect(master); o.start(t); o.stop(t + dur + 0.05);
+        };
+        const kick = t => {
+            const o = ac.createOscillator(), g = ac.createGain();
+            o.frequency.setValueAtTime(120, t); o.frequency.exponentialRampToValueAtTime(40, t + 0.25);
+            g.gain.setValueAtTime(0.5, t); g.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
+            o.connect(g); g.connect(master); o.start(t); o.stop(t + 0.4);
+            setTimeout(() => { beat = 1; }, Math.max(0, (t - ac.currentTime) * 1000));
+        };
+        const hiss = (t, dur, vol, freq, type = 'highpass') => {
+            const s = ac.createBufferSource(), f = ac.createBiquadFilter(), g = ac.createGain();
+            s.buffer = noiseBuf; f.type = type; f.frequency.value = freq;
+            g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+            s.connect(f); f.connect(g); g.connect(master); s.start(t, Math.random()); s.stop(t + dur);
+        };
+        const scheduleStep = (s, t) => {
+            const bar = Math.floor(s / 16) % 4, i = s % 16;
+            t += i % 2 ? STEP * 0.18 : 0;
+            if (i === 0) CHORDS[bar].forEach((n, k) => { note(midi(n), t + k * 0.012, STEP * 15, 0.045, 'triangle'); note(midi(n), t, STEP * 15, 0.02, 'sine', 7); });
+            if (i === 0 || i === 10) note(midi(BASS[bar]), t, STEP * 6, 0.16, 'sine');
+            if (i === 0 || i === 7 || i === 10) kick(t);
+            if (i === 4 || i === 12) hiss(t, 0.18, 0.12, 1800, 'bandpass');
+            if (i % 2 === 0) hiss(t, 0.05, i % 4 ? 0.025 : 0.04, 7000);
+            const m = MELODY[i]; if (m && bar % 2 === 1) note(midi(m), t, STEP * 3, 0.035, 'sine');
+        };
+        const scheduler = () => { while (nextTime < ac.currentTime + 0.2) { scheduleStep(step, nextTime); nextTime += STEP; step++; } };
+        const setMusicUI = () => {
+            $('music-btn').classList.toggle('playing', musicOn);
+            $('music-btn').classList.toggle('text-acc', musicOn);
+            $('music-label').textContent = musicOn ? 'Playing' : 'Music';
+            $('music-switch').classList.toggle('on', musicOn);
+        };
+        window.toggleMusic = () => {
+            musicOn = !musicOn;
+            try { localStorage.setItem('quackers-music', musicOn ? 'on' : 'off'); } catch (e) {}
+            if (musicOn) {
+                if (!ac) initAudio();
+                ac.resume(); nextTime = ac.currentTime + 0.1; step = 0;
+                clearInterval(schedTimer); schedTimer = setInterval(scheduler, 50);
+                master.gain.cancelScheduledValues(ac.currentTime); master.gain.linearRampToValueAtTime(volume, ac.currentTime + 1.5);
+            } else if (ac) {
+                master.gain.cancelScheduledValues(ac.currentTime); master.gain.setValueAtTime(master.gain.value, ac.currentTime);
+                master.gain.linearRampToValueAtTime(0, ac.currentTime + 0.6);
+                setTimeout(() => { if (!musicOn) clearInterval(schedTimer); }, 700);
+            }
+            hideHint(); setMusicUI();
+        };
+        $('volume').addEventListener('input', e => {
+            volume = e.target.value / 100; $('vol-label').textContent = e.target.value + '%';
+            if (ac && musicOn) master.gain.setTargetAtTime(volume, ac.currentTime, 0.05);
+        });
+        const hint = $('music-hint');
+        window.hideHint = () => hint.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+        let musicPref = null; try { musicPref = localStorage.getItem('quackers-music'); } catch (e) {}
+        if (musicPref === 'on') {
+            const resume = () => { if (!musicOn) toggleMusic(); window.removeEventListener('pointerdown', resume); };
+            window.addEventListener('pointerdown', resume);
+        } else if (musicPref !== 'off') {
+            setTimeout(() => { if (!musicOn) hint.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none'); }, 3000);
+            setTimeout(hideHint, 15000);
         }
 
-        let clickCount = 0; let clickTimer;
-        function triggerSecretClick() {
-            clickCount++; clearTimeout(clickTimer);
-            if(clickCount === 5) {
-                document.body.classList.add('shake-screen');
-                setTimeout(() => document.body.classList.remove('shake-screen'), 500);
-                showToast("🎮 Developer Mode Unlocked!");
-                clickCount = 0;
+        /* ===================== SETTINGS / CURSOR / TILT ===================== */
+        window.toggleSettings = () => {
+            const menu = $('settings-menu'), ov = $('settings-overlay');
+            if (menu.classList.contains('open')) { menu.classList.remove('open'); ov.classList.add('opacity-0'); setTimeout(() => ov.classList.add('hidden'), 300); }
+            else { ov.classList.remove('hidden'); setTimeout(() => { ov.classList.remove('opacity-0'); menu.classList.add('open'); }, 10); }
+        };
+        const dot = $('cursor-dot'), outline = $('cursor-outline');
+        let cursorOn = true; try { cursorOn = localStorage.getItem('quackers-cursor') !== 'off'; } catch (e) {}
+        const applyCursor = () => { document.body.classList.toggle('custom-cursor', cursorOn); $('cursor-switch').classList.toggle('on', cursorOn); };
+        window.toggleCursor = () => { cursorOn = !cursorOn; try { localStorage.setItem('quackers-cursor', cursorOn ? 'on' : 'off'); } catch (e) {} applyCursor(); };
+        applyCursor();
+        window.addEventListener('mousemove', e => {
+            const card = e.target.closest('.glow');
+            if (card) { const r = card.getBoundingClientRect(); card.style.setProperty('--mx', (e.clientX - r.left) + 'px'); card.style.setProperty('--my', (e.clientY - r.top) + 'px'); }
+            const tilt = e.target.closest('.tilt');
+            if (tilt) {
+                const r = tilt.getBoundingClientRect();
+                tilt.style.transition = 'none';
+                tilt.style.transform = `perspective(1000px) rotateX(${((e.clientY - r.top) / r.height - .5) * -10}deg) rotateY(${((e.clientX - r.left) / r.width - .5) * 10}deg) scale3d(1.02,1.02,1.02)`;
             }
-            clickTimer = setTimeout(() => clickCount = 0, 2000);
+            if (!cursorOn) return;
+            dot.style.opacity = outline.style.opacity = 1;
+            dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
+            outline.animate({ left: e.clientX + 'px', top: e.clientY + 'px' }, { duration: 400, fill: 'forwards' });
+        });
+        document.addEventListener('mouseout', e => {
+            const tilt = e.target.closest('.tilt');
+            if (tilt && !tilt.contains(e.relatedTarget)) { tilt.style.transition = 'transform .5s ease'; tilt.style.transform = 'perspective(1000px)'; }
+        });
+        document.addEventListener('mouseover', e => outline.classList.toggle('hover', !!e.target.closest('a, button, select, input, textarea, summary')));
+        window.addEventListener('scroll', () => {
+            const h = document.documentElement.scrollHeight - innerHeight;
+            $('scroll-progress').style.width = (h > 0 ? scrollY / h * 100 : 0) + '%';
+        }, { passive: true });
+
+        /* ===================== MISC ===================== */
+        const showToast = msg => {
+            const t = document.createElement('div');
+            t.className = 'bg-panel2 border border-line text-fg px-5 py-3 rounded-full font-semibold shadow-2xl transition-all duration-300 -translate-y-4 opacity-0';
+            t.innerHTML = '<i class="fa-solid fa-circle-check text-acc mr-2"></i>'; t.append(msg);
+            $('toast-container').appendChild(t);
+            setTimeout(() => t.classList.remove('-translate-y-4', 'opacity-0'), 10);
+            setTimeout(() => { t.classList.add('opacity-0', '-translate-y-4'); setTimeout(() => t.remove(), 300); }, 2800);
+        };
+        window.copyDiscord = () => {
+            const done = () => {
+                showToast('Copied Discord username!');
+                const icon = $('copy-icon'); if (icon) { icon.classList.replace('fa-copy', 'fa-check'); setTimeout(() => icon.classList.replace('fa-check', 'fa-copy'), 2000); }
+            };
+            if (navigator.clipboard) navigator.clipboard.writeText('Quackers').then(done, () => showToast('Discord: Quackers'));
+            else showToast('Discord: Quackers');
+        };
+        const roles = ['World Builder', 'Character Animator', 'QA Tester', 'Studio Owner'];
+        let ri = 0, ci = 0, del = false;
+        const typeEffect = () => {
+            const word = roles[ri];
+            ci += del ? -1 : 1; $('typewriter-text').textContent = word.slice(0, ci);
+            let wait = del ? 50 : 100;
+            if (!del && ci === word.length) { wait = 2000; del = true; }
+            else if (del && ci === 0) { del = false; ri = (ri + 1) % roles.length; wait = 500; }
+            setTimeout(typeEffect, wait);
+        };
+        const updateClock = () => { $('local-time').textContent = new Date().toLocaleTimeString('en-AU', { timeZone: 'Australia/Sydney', hour: '2-digit', minute: '2-digit', hour12: true }); };
+        $('year').textContent = new Date().getFullYear();
+
+        let buf = '';
+        document.addEventListener('keydown', e => {
+            if (e.target.matches('input, textarea') || e.key.length !== 1) return;
+            buf = (buf + e.key.toLowerCase()).slice(-5);
+            if (buf === 'robux') {
+                buf = '';
+                for (let i = 0; i < 50; i++) {
+                    const r = document.createElement('div'); r.textContent = '💵'; r.className = 'robux-rain text-4xl';
+                    r.style.left = Math.random() * 100 + 'vw'; r.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+                    document.body.appendChild(r); setTimeout(() => r.remove(), 4000);
+                }
+            }
+        });
+        let clicks = 0, clickTimer;
+        window.triggerSecretClick = () => {
+            if (location.hash && location.hash !== '#home') location.hash = 'home';
+            clicks++; clearTimeout(clickTimer);
+            if (clicks === 5) { document.body.classList.add('shake-screen'); setTimeout(() => document.body.classList.remove('shake-screen'), 500); showToast('🎮 Developer mode unlocked!'); clicks = 0; }
+            clickTimer = setTimeout(() => clicks = 0, 2000);
+        };
+
+        /* ===================== INIT ===================== */
+        let seen = false; try { seen = sessionStorage.getItem('quackers-joined'); sessionStorage.setItem('quackers-joined', '1'); } catch (e) {}
+        if (!seen && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            $('joining').classList.remove('done');
+            requestAnimationFrame(() => requestAnimationFrame(() => $('join-bar').style.width = '100%'));
+            setTimeout(() => $('joining').classList.add('done'), 1150);
         }
+        showPage(location.hash.slice(1) || 'home');
+        sizeParticles(); drawParticles();
+        updateClock(); setInterval(updateClock, 30000);
+        typeEffect();
+    }
     </script>
 </body>
 </html>
