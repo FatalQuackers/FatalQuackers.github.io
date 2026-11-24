@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Quackers — multi-engine game developer from OCE. World building, animation and QA for Roblox, UEFN and Unreal, plus my own games and open-source apps like Tethr Link.">
-    <meta property="og:title" content="Quackers | Game Developer & QA">
-    <meta property="og:description" content="Roblox, Unreal & UEFN developer. Now building HAZARDOUS CORP., Parcel Dash and Tethr Link.">
+    <meta name="description" content="Quackers — OCE multi-engine developer at RUSHED. World building, character animation and pro QA testing for Roblox, UEFN and Unreal Engine.">
+    <meta property="og:title" content="Quackers | Developer @ RUSHED">
+    <meta property="og:description" content="World builder, character animator and QA tester across Roblox, UEFN and Unreal Engine.">
     <meta property="og:image" content="https://fatalquackers.github.io/Image6.png">
     <meta name="theme-color" content="#0b0d10">
-    <title>Quackers | Game Developer & QA</title>
+    <title>Quackers | Developer @ RUSHED</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2224%22 fill=%22%23ffd23f%22/><text x=%2250%22 y=%2272%22 font-size=%2264%22 font-family=%22Arial Black,Arial%22 font-weight=%22900%22 text-anchor=%22middle%22 fill=%22%230b0d10%22>Q</text></svg>">
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -18,7 +18,7 @@
                 extend: {
                     colors: {
                         ink: '#0b0d10', panel: '#13161b', panel2: '#1a1e25', line: '#262b34',
-                        duck: '#ffd23f', duckdim: '#c9a42e', sky: '#4cc9f0', mute: '#8b93a1'
+                        duck: '#ffd23f', sky: '#4cc9f0', mute: '#8b93a1', rush: '#f34b3f', rushy: '#ffdf61'
                     },
                     fontFamily: {
                         display: ['Unbounded', 'system-ui', 'sans-serif'],
@@ -44,21 +44,31 @@
         body { overflow-x: hidden; }
         ::selection { background: #ffd23f; color: #0b0d10; }
 
-        /* Custom cursor (toggle in settings) */
+        /* Custom cursor */
         body.custom-cursor, body.custom-cursor * { cursor: none !important; }
         .cursor-dot, .cursor-outline { opacity: 0; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 99999; pointer-events: none; }
         .cursor-dot { width: 8px; height: 8px; background: #ffd23f; }
-        .cursor-outline { width: 38px; height: 38px; border: 2px solid rgba(255, 210, 63, .45); transition: width .2s, height .2s, border-color .2s; }
-        .cursor-outline.hover { width: 60px; height: 60px; border-color: rgba(76, 201, 240, .6); }
+        .cursor-outline { width: 38px; height: 38px; border: 2px solid rgba(255,210,63,.45); transition: width .2s, height .2s, border-color .2s; }
+        .cursor-outline.hover { width: 60px; height: 60px; border-color: rgba(76,201,240,.6); }
         body:not(.custom-cursor) .cursor-dot, body:not(.custom-cursor) .cursor-outline { display: none; }
-        @media (hover: none) { .cursor-dot, .cursor-outline { display: none !important; } }
+        @media (hover: none) { .cursor-dot, .cursor-outline { display: none !important; } body.custom-cursor, body.custom-cursor * { cursor: auto !important; } }
 
-        #scroll-progress { position: fixed; top: 0; left: 0; width: 0; height: 3px; background: #ffd23f; z-index: 9999; }
+        #scroll-progress { position: fixed; top: 0; left: 0; width: 0; height: 3px; background: #ffd23f; z-index: 9999; box-shadow: 0 0 10px #ffd23f; }
 
         /* Nav */
-        .nav-link { cursor: pointer; padding: .55rem 1rem; border-radius: 999px; font-weight: 600; color: #b7bec9; transition: .2s; white-space: nowrap; }
+        .nav-link { cursor: pointer; padding: .5rem .9rem; border-radius: 999px; font-weight: 600; color: #b7bec9; transition: .2s; white-space: nowrap; display: inline-flex; align-items: center; gap: .4rem; }
+        .nav-link i { color: #6b7380; font-size: .85em; }
         .nav-link:hover { color: #fff; background: rgba(255,255,255,.06); }
         .nav-link.active { background: #ffd23f; color: #0b0d10; }
+        .nav-link.active i { color: #0b0d10; }
+
+        /* Music button */
+        .eq { display: inline-flex; align-items: flex-end; gap: 2px; height: 14px; }
+        .eq span { width: 3px; height: 4px; background: currentColor; border-radius: 1px; }
+        .playing .eq span { animation: eq .9s ease-in-out infinite; }
+        .playing .eq span:nth-child(2) { animation-delay: -.3s; } .playing .eq span:nth-child(3) { animation-delay: -.6s; } .playing .eq span:nth-child(4) { animation-delay: -.15s; }
+        @keyframes eq { 0%,100% { height: 4px; } 50% { height: 14px; } }
+        #music-hint { transition: opacity .4s, transform .4s; }
 
         /* Pages */
         .page-section { display: none; }
@@ -67,38 +77,44 @@
         .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,0,1); }
         .reveal.active { opacity: 1; transform: none; }
 
+        /* Section badge (from the original) */
+        .badge-ico { width: 56px; height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; border: 1px solid; margin-bottom: 1rem; }
+
         /* Hero */
-        .hero-grid { background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 48px 48px; mask-image: radial-gradient(ellipse at 30% 40%, #000 30%, transparent 75%); }
-        .shot { box-shadow: 0 30px 60px -20px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.08); }
+        .hero-bg { background: radial-gradient(ellipse at 20% 10%, rgba(255,210,63,.12), transparent 50%), radial-gradient(ellipse at 90% 90%, rgba(76,201,240,.12), transparent 55%), #0b0d10; }
+        .shot { box-shadow: 0 30px 60px -20px rgba(0,0,0,.75), 0 0 0 1px rgba(255,255,255,.08); }
         .float-a { animation: floatA 7s ease-in-out infinite; }
         .float-b { animation: floatB 8s ease-in-out infinite; }
         @keyframes floatA { 0%,100% { transform: rotate(-4deg) translateY(0); } 50% { transform: rotate(-4deg) translateY(-12px); } }
         @keyframes floatB { 0%,100% { transform: rotate(5deg) translateY(0); } 50% { transform: rotate(5deg) translateY(10px); } }
 
-        /* Ticker */
-        .ticker { display: flex; width: max-content; animation: ticker 32s linear infinite; }
+        .ticker { display: flex; width: max-content; animation: ticker 30s linear infinite; }
         @keyframes ticker { to { transform: translateX(-50%); } }
 
         /* Cards */
-        .card { background: #13161b; border: 1px solid #262b34; border-radius: 22px; transition: transform .25s ease, border-color .25s ease; }
+        .card { background: #13161b; border: 1px solid #262b34; border-radius: 22px; transition: border-color .25s ease; }
         .card:hover { border-color: #3a404b; }
-        .lift:hover { transform: translateY(-4px); }
         .glow { position: relative; overflow: hidden; }
-        .glow::before { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .3s;
+        .glow::before { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .3s; z-index: 1;
             background: radial-gradient(500px circle at var(--mx, 50%) var(--my, 50%), rgba(255,210,63,.07), transparent 40%); }
         .glow:hover::before { opacity: 1; }
-        .glow > * { position: relative; }
+        .tilt { transform-style: preserve-3d; transform: perspective(1000px); }
+        .tilt-inner { transform: translateZ(24px); }
 
-        .status { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .02em; padding: .25rem .6rem; border-radius: 999px; display: inline-flex; align-items: center; gap: .4rem; }
+        .status { font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: .25rem .6rem; border-radius: 999px; display: inline-flex; align-items: center; gap: .4rem; white-space: nowrap; }
         .status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
         .s-live { color: #4ade80; background: rgba(74,222,128,.1); }
         .s-dev { color: #ffd23f; background: rgba(255,210,63,.1); }
-        .s-past { color: #8b93a1; background: rgba(139,147,161,.12); }
-        .chip { font-size: 12px; font-weight: 600; padding: .3rem .65rem; border-radius: 8px; background: #1a1e25; color: #c5ccd6; border: 1px solid #262b34; }
+        .chip { font-size: 12px; font-weight: 600; padding: .3rem .65rem; border-radius: 8px; background: #1a1e25; color: #c5ccd6; border: 1px solid #262b34; white-space: nowrap; }
 
         .filter-btn { padding: .5rem 1.1rem; border-radius: 999px; font-weight: 600; font-size: .875rem; color: #b7bec9; background: #1a1e25; border: 1px solid #262b34; transition: .2s; }
         .filter-btn:hover { color: #fff; }
         .filter-btn.active { background: #ffd23f; color: #0b0d10; border-color: #ffd23f; }
+
+        /* Screenshot strip */
+        .strip { display: flex; gap: .75rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: .5rem; }
+        .strip > button { flex: 0 0 auto; width: min(78%, 420px); scroll-snap-align: start; }
+        .strip::-webkit-scrollbar { height: 6px; }
 
         .skill-bar-fill { transition: width 1.4s cubic-bezier(.1,.6,.1,1); width: 0; }
 
@@ -110,13 +126,15 @@
 
         #settings-menu { transform: translateX(100%); transition: transform .3s ease; }
         #settings-menu.open { transform: none; }
+        .switch { width: 48px; height: 26px; border-radius: 999px; position: relative; background: #3a404b; transition: background .2s; flex: none; }
+        .switch span { position: absolute; top: 4px; left: 4px; width: 18px; height: 18px; border-radius: 50%; background: #0b0d10; transition: transform .2s; }
+        .switch.on { background: #ffd23f; } .switch.on span { transform: translateX(22px); }
 
-        ::-webkit-scrollbar { width: 8px; } ::-webkit-scrollbar-track { background: #0b0d10; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; } ::-webkit-scrollbar-track { background: #0b0d10; }
         ::-webkit-scrollbar-thumb { background: #2c323c; border-radius: 10px; } ::-webkit-scrollbar-thumb:hover { background: #ffd23f; }
 
         .cursor-blink { animation: blink 1s step-end infinite; } @keyframes blink { 50% { opacity: 0; } }
 
-        /* Easter eggs */
         .robux-rain { position: fixed; top: -60px; z-index: 9998; pointer-events: none; animation: fall linear forwards; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
         .shake-screen { animation: shake .45s; }
@@ -137,9 +155,10 @@
     <!-- Media modal -->
     <div id="media-modal" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md hidden flex justify-center items-center opacity-0 transition-opacity duration-300" onclick="closeModal()">
         <button class="absolute top-5 right-6 text-white/80 hover:text-duck text-5xl leading-none" aria-label="Close">&times;</button>
-        <div class="max-w-[92%] max-h-[90%] flex justify-center items-center" onclick="event.stopPropagation()">
-            <img id="modal-img" class="hidden rounded-2xl shadow-2xl object-contain max-h-[86vh]" src="" alt="">
-            <video id="modal-video" controls class="hidden rounded-2xl shadow-2xl max-h-[86vh] w-full max-w-5xl"></video>
+        <div class="max-w-[92%] max-h-[90%] flex flex-col justify-center items-center gap-3" onclick="event.stopPropagation()">
+            <img id="modal-img" class="hidden rounded-2xl shadow-2xl object-contain max-h-[82vh]" src="" alt="">
+            <video id="modal-video" controls class="hidden rounded-2xl shadow-2xl max-h-[82vh] w-full max-w-5xl"></video>
+            <p id="modal-cap" class="text-slate-300 text-sm"></p>
         </div>
     </div>
 
@@ -149,7 +168,7 @@
             <i class="fa-solid fa-gear group-hover:rotate-90 transition-transform duration-500"></i>
         </button>
         <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="w-12 h-12 bg-panel2 border border-line hover:border-duck text-white rounded-full shadow-lg flex items-center justify-center" aria-label="Back to top">
-            <i class="fa-solid fa-arrow-up"></i>
+            <i class="fa-solid fa-chevron-up"></i>
         </button>
     </div>
 
@@ -157,21 +176,29 @@
     <div id="settings-overlay" class="fixed inset-0 bg-black/60 z-[101] hidden opacity-0 transition-opacity" onclick="toggleSettings()"></div>
     <aside id="settings-menu" class="fixed top-0 right-0 w-80 max-w-[85vw] h-full bg-panel z-[102] border-l border-line p-6 flex flex-col">
         <div class="flex justify-between items-center mb-8 pb-4 border-b border-line">
-            <h3 class="text-lg font-bold">Settings</h3>
+            <h3 class="text-lg font-bold"><i class="fa-solid fa-sliders mr-2 text-duck"></i>Preferences</h3>
             <button onclick="toggleSettings()" class="text-mute hover:text-duck text-3xl leading-none" aria-label="Close">&times;</button>
         </div>
-        <div class="flex justify-between items-center">
-            <span class="font-medium">Custom cursor</span>
-            <button onclick="toggleCursor()" id="cursor-toggle-bg" class="w-12 h-6 bg-duck rounded-full relative transition-colors" aria-label="Toggle custom cursor">
-                <span id="cursor-toggle-ball" class="w-4 h-4 bg-ink rounded-full absolute top-1 left-1 translate-x-6 transition-transform"></span>
-            </button>
+        <div class="space-y-6">
+            <div class="flex justify-between items-center gap-4">
+                <span class="font-medium">Background music</span>
+                <button onclick="toggleMusic()" id="music-switch" class="switch" aria-label="Toggle background music"><span></span></button>
+            </div>
+            <label class="block">
+                <span class="flex justify-between text-sm text-mute mb-2"><span>Volume</span><span id="vol-label">40%</span></span>
+                <input type="range" id="volume" min="0" max="100" value="40" class="w-full accent-[#ffd23f]">
+            </label>
+            <div class="flex justify-between items-center gap-4">
+                <span class="font-medium">Custom cursor</span>
+                <button onclick="toggleCursor()" id="cursor-switch" class="switch on" aria-label="Toggle custom cursor"><span></span></button>
+            </div>
         </div>
         <div class="mt-8 pt-6 border-t border-line">
             <h4 class="text-sm font-semibold text-mute mb-4">Quick links</h4>
             <div class="flex flex-col gap-3">
-                <a href="https://www.youtube.com/@Fatalquackers" target="_blank" rel="noopener" class="text-slate-300 hover:text-duck"><i class="fa-brands fa-youtube w-6"></i> YouTube</a>
-                <a href="https://github.com/FatalQuackers" target="_blank" rel="noopener" class="text-slate-300 hover:text-duck"><i class="fa-brands fa-github w-6"></i> GitHub</a>
-                <button onclick="copyDiscord(); toggleSettings();" class="text-left text-slate-300 hover:text-duck"><i class="fa-brands fa-discord w-6"></i> Copy Discord username</button>
+                <a href="https://fatalquackers.github.io/rushed/" target="_blank" rel="noopener" class="text-slate-300 hover:text-duck"><img src="projects/rushed-mark.svg" alt="" class="inline w-4 h-4 mr-2 rounded">RUSHED Studio</a>
+                <a href="https://www.youtube.com/@Fatalquackers" target="_blank" rel="noopener" class="text-slate-300 hover:text-duck"><i class="fa-brands fa-youtube w-6"></i>YouTube channel</a>
+                <button onclick="copyDiscord(); toggleSettings();" class="text-left text-slate-300 hover:text-duck"><i class="fa-brands fa-discord w-6"></i>Copy Discord username</button>
             </div>
         </div>
         <p class="mt-auto text-xs text-mute">Psst: try typing <span class="font-mono text-duck">robux</span> anywhere.</p>
@@ -180,32 +207,34 @@
     <!-- Nav -->
     <nav class="sticky top-0 z-50 bg-ink/80 backdrop-blur-xl border-b border-line">
         <div class="max-w-6xl mx-auto px-5 py-3 flex flex-col md:flex-row md:justify-between items-center gap-3">
-            <button class="font-display font-black text-xl tracking-tight select-none" onclick="triggerSecretClick()">
-                QUACKERS<span class="text-duck">.</span>
-            </button>
+            <div class="flex items-center gap-3">
+                <button class="font-display font-black text-xl tracking-tight select-none" onclick="triggerSecretClick()">QUACKERS<span class="text-duck">.</span></button>
+                <button onclick="toggleMusic()" id="music-btn" class="flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-duck bg-panel2 border border-line rounded-full px-3 py-1.5" aria-label="Play background music">
+                    <span class="eq"><span></span><span></span><span></span><span></span></span>
+                    <span id="music-label">Music</span>
+                </button>
+            </div>
             <div class="flex gap-1 overflow-x-auto max-w-full text-sm pb-1 md:pb-0">
-                <a href="#home" class="nav-link active" id="nav-home">Home</a>
-                <a href="#work" class="nav-link" id="nav-work">Work</a>
-                <a href="#testing" class="nav-link" id="nav-testing">QA</a>
-                <a href="#gallery" class="nav-link" id="nav-gallery">Gallery</a>
-                <a href="#pricing" class="nav-link" id="nav-pricing">Pricing</a>
-                <a href="#contact" class="nav-link" id="nav-contact">Contact</a>
+                <a href="#home" class="nav-link active" id="nav-home"><i class="fa-solid fa-house"></i>Home</a>
+                <a href="#portfolio" class="nav-link" id="nav-portfolio"><i class="fa-solid fa-folder-open"></i>Portfolio</a>
+                <a href="#gallery" class="nav-link" id="nav-gallery"><i class="fa-solid fa-images"></i>Gallery</a>
+                <a href="#pricing" class="nav-link" id="nav-pricing"><i class="fa-solid fa-tags"></i>Pricing</a>
+                <a href="#testing" class="nav-link" id="nav-testing"><i class="fa-solid fa-vial-virus"></i>QA</a>
+                <a href="#contact" class="nav-link" id="nav-contact"><i class="fa-solid fa-paper-plane"></i>Contact</a>
             </div>
         </div>
     </nav>
 
     <!-- ================= HOME ================= -->
     <main id="home" class="page-section active">
-        <section class="relative overflow-hidden">
-            <div class="absolute inset-0 hero-grid pointer-events-none"></div>
-            <div class="absolute -top-32 -left-24 w-96 h-96 bg-duck/10 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="absolute bottom-0 right-0 w-[28rem] h-[28rem] bg-sky/10 rounded-full blur-3xl pointer-events-none"></div>
+        <section class="hero-bg relative overflow-hidden">
+            <canvas id="hero-particles" class="absolute inset-0 w-full h-full pointer-events-none opacity-60"></canvas>
 
-            <div class="relative max-w-6xl mx-auto px-5 pt-16 pb-20 md:pt-24 md:pb-28 grid md:grid-cols-[1.1fr_.9fr] gap-12 items-center">
+            <div class="relative max-w-6xl mx-auto px-5 pt-14 pb-20 md:pt-20 md:pb-24 grid md:grid-cols-[1.1fr_.9fr] gap-12 items-center">
                 <div>
-                    <div class="inline-flex items-center gap-2 bg-panel border border-line px-3 py-1.5 rounded-full text-sm text-slate-300 mb-7">
-                        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                        Open for commissions · OCE
+                    <div class="flex flex-wrap gap-2 mb-7">
+                        <span class="inline-flex items-center gap-2 bg-panel/80 border border-line px-3 py-1.5 rounded-full text-sm text-slate-300"><i class="fa-solid fa-code text-duck"></i>OCE based multi-engine dev</span>
+                        <a href="#portfolio" class="inline-flex items-center gap-2 bg-rush/15 border border-rush/40 px-3 py-1.5 rounded-full text-sm text-white hover:bg-rush/25"><img src="projects/rushed-mark.svg" alt="" class="w-4 h-4 rounded">Developer @ RUSHED</a>
                     </div>
                     <h1 class="font-display font-black text-5xl sm:text-6xl lg:text-7xl leading-[1.02] tracking-tight mb-5">
                         Hi, I'm<br><span class="text-duck">Quackers.</span>
@@ -214,18 +243,18 @@
                         &gt; <span id="typewriter-text" class="text-white"></span><span class="cursor-blink text-duck">_</span>
                     </p>
                     <p class="text-lg text-slate-300 max-w-xl leading-relaxed mb-9">
-                        Multi-engine developer working across <strong class="text-white">Roblox</strong>, <strong class="text-white">UEFN</strong> and <strong class="text-white">Unreal Engine</strong>. I build worlds, animate characters and break games through professional QA. Lately I've been shipping my own projects too, from an Unreal co-op horror game to an open-source phone-to-PC app.
+                        Determined to push the boundaries of multiplayer experiences. I craft competitive maps in <strong class="text-white">UEFN</strong>, develop in <strong class="text-white">Unreal Engine</strong> and build massive <strong class="text-white">Roblox</strong> projects with my studio, <strong class="text-white">RUSHED</strong>. I focus on world building, animation and breaking games through professional QA testing.
                     </p>
                     <div class="flex flex-wrap gap-3">
-                        <a href="#work" class="bg-duck text-ink hover:bg-white px-7 py-3.5 rounded-full font-bold transition">See my work</a>
+                        <a href="#portfolio" class="bg-duck text-ink hover:bg-white px-7 py-3.5 rounded-full font-bold transition">View portfolio</a>
                         <a href="#contact" class="bg-panel border border-line hover:border-duck px-7 py-3.5 rounded-full font-bold transition">Hire me</a>
                         <a href="https://www.youtube.com/@Fatalquackers" target="_blank" rel="noopener" class="px-4 py-3.5 rounded-full font-bold text-slate-300 hover:text-white transition"><i class="fa-brands fa-youtube text-red-500 mr-2"></i>YouTube</a>
                     </div>
                 </div>
 
-                <div class="relative h-[340px] sm:h-[420px]">
+                <div class="relative h-[330px] sm:h-[420px]">
                     <img src="Image6.png" alt="Aquarium island build" class="shot float-a absolute right-0 top-0 w-[88%] rounded-2xl object-cover aspect-[16/10]">
-                    <img src="Image8.png" alt="Park build with timer" class="shot float-b absolute left-0 bottom-0 w-[62%] rounded-2xl object-cover aspect-[16/10]">
+                    <img src="Image8.png" alt="Park build" class="shot float-b absolute left-0 bottom-0 w-[62%] rounded-2xl object-cover aspect-[16/10]">
                     <div class="absolute right-3 bottom-6 bg-ink/90 border border-line rounded-xl px-4 py-3 shadow-xl">
                         <div class="text-xs text-mute">Engines</div>
                         <div class="font-semibold text-sm">Roblox · UEFN · Unreal</div>
@@ -233,51 +262,64 @@
                 </div>
             </div>
 
-            <!-- Now building ticker -->
-            <div class="relative border-y border-line bg-panel overflow-hidden py-3">
+            <div class="relative border-y border-line bg-panel/90 overflow-hidden py-3">
                 <div class="ticker font-display font-bold text-sm sm:text-base text-slate-300" id="ticker"></div>
             </div>
         </section>
 
-        <section class="max-w-6xl mx-auto px-5 py-20">
-            <div class="flex flex-wrap items-end justify-between gap-4 mb-10 reveal">
-                <div>
-                    <p class="text-duck font-semibold mb-2">Latest</p>
-                    <h2 class="font-display font-bold text-3xl md:text-4xl">What I'm working on</h2>
+        <!-- RUSHED banner -->
+        <section class="max-w-6xl mx-auto px-5 pt-20 reveal">
+            <a href="#portfolio" class="block rounded-[26px] overflow-hidden bg-rush relative group">
+                <div class="grid md:grid-cols-[1fr_1.1fr] items-center">
+                    <div class="p-8 md:p-12 relative z-10">
+                        <div class="flex items-center gap-3 mb-5">
+                            <img src="projects/rushed-mark.svg" alt="RUSHED logo" class="w-12 h-12 rounded-xl shadow-lg">
+                            <span class="font-mono text-xs bg-black/25 text-white px-3 py-1 rounded-full">My main studio</span>
+                        </div>
+                        <h2 class="font-display font-black text-4xl md:text-5xl text-white leading-[1.02] mb-4">RUSHED<span class="text-rushy">.</span></h2>
+                        <p class="text-white/90 text-lg max-w-md mb-6">An independent Roblox studio built around finding a game's potential and helping it take the next step. Discover, develop, grow.</p>
+                        <span class="inline-flex items-center gap-2 bg-ink text-white font-bold px-5 py-3 rounded-full group-hover:bg-white group-hover:text-ink transition">See the studio <i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
+                    <img src="projects/rushed-home.jpg" alt="RUSHED studio website" class="w-full h-full object-cover md:min-h-[340px] md:rounded-l-2xl group-hover:scale-[1.02] transition duration-700">
                 </div>
-                <a href="#work" class="text-slate-300 hover:text-duck font-semibold">All projects <i class="fa-solid fa-arrow-right ml-1"></i></a>
-            </div>
-            <div id="latest-grid" class="grid md:grid-cols-3 gap-5 reveal"></div>
+            </a>
         </section>
 
-        <section class="max-w-6xl mx-auto px-5 pb-20">
-            <h2 class="font-display font-bold text-3xl md:text-4xl mb-10 reveal">What I do</h2>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-16 reveal">
-                <div class="card glow lift p-7">
-                    <i class="fa-solid fa-mountain-city text-3xl text-duck mb-5"></i>
-                    <h3 class="text-lg font-bold mb-2">World building</h3>
-                    <p class="text-slate-400 text-[15px]">Immersive environments and structured level layouts for Roblox and UEFN.</p>
+        <section class="max-w-6xl mx-auto px-5 py-20">
+            <div class="text-center mb-12 reveal">
+                <div class="badge-ico mx-auto bg-duck/10 border-duck/30 text-duck"><i class="fa-solid fa-star"></i></div>
+                <h2 class="font-display font-bold text-3xl md:text-4xl">Core expertise</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-5 mb-16 reveal">
+                <div class="card glow tilt p-8 group">
+                    <div class="tilt-inner relative z-[2]">
+                        <i class="fa-solid fa-hammer absolute -top-2 -right-2 text-7xl opacity-5 group-hover:scale-110 transition-transform"></i>
+                        <i class="fa-solid fa-hammer text-3xl text-duck mb-5"></i>
+                        <h3 class="text-xl font-bold mb-2">World building</h3>
+                        <p class="text-slate-400">Designing immersive environments and structured level layouts for Roblox and UEFN.</p>
+                    </div>
                 </div>
-                <div class="card glow lift p-7">
-                    <i class="fa-solid fa-person-running text-3xl text-orange-400 mb-5"></i>
-                    <h3 class="text-lg font-bold mb-2">Character animation</h3>
-                    <p class="text-slate-400 text-[15px]">Fluid R6 and R15 animation, from traversal loops to heavy combat sequences.</p>
+                <div class="card glow tilt p-8 group">
+                    <div class="tilt-inner relative z-[2]">
+                        <i class="fa-solid fa-person-running absolute -top-2 -right-2 text-7xl opacity-5 group-hover:scale-110 transition-transform"></i>
+                        <i class="fa-solid fa-person-running text-3xl text-orange-400 mb-5"></i>
+                        <h3 class="text-xl font-bold mb-2">Character animation</h3>
+                        <p class="text-slate-400">Bringing characters to life with fluid R6 and R15 animations, from traversal loops to heavy combat sequences.</p>
+                    </div>
                 </div>
-                <a href="#testing" class="card glow lift p-7 block">
-                    <i class="fa-solid fa-bug text-3xl text-sky mb-5"></i>
-                    <h3 class="text-lg font-bold mb-2">QA &amp; playtesting</h3>
-                    <p class="text-slate-400 text-[15px]">Bug hunting, balancing and game-feel testing for big unreleased titles.</p>
-                    <span class="text-sky font-semibold text-sm mt-3 inline-block">QA details →</span>
+                <a href="#testing" class="card glow tilt p-8 group block">
+                    <div class="tilt-inner relative z-[2]">
+                        <i class="fa-solid fa-vial-virus absolute -top-2 -right-2 text-7xl opacity-5 group-hover:scale-110 transition-transform"></i>
+                        <i class="fa-solid fa-vial-virus text-3xl text-sky mb-5"></i>
+                        <h3 class="text-xl font-bold mb-2">QA &amp; playtesting</h3>
+                        <p class="text-slate-400">Strict bug hunting, balancing and game-feel testing for hit unreleased titles.</p>
+                        <span class="text-sky font-bold mt-4 inline-block group-hover:translate-x-2 transition-transform">See QA details →</span>
+                    </div>
                 </a>
-                <div class="card glow lift p-7">
-                    <i class="fa-solid fa-code text-3xl text-green-400 mb-5"></i>
-                    <h3 class="text-lg font-bold mb-2">Games &amp; apps</h3>
-                    <p class="text-slate-400 text-[15px]">My own projects: Unreal C++ games, Roblox plugins, websites and an open-source app.</p>
-                </div>
             </div>
 
             <div class="card p-7 md:p-10 reveal">
-                <h3 class="text-sm font-semibold text-mute mb-8">Engines I work in</h3>
+                <h3 class="text-sm font-semibold text-mute mb-8 text-center">Engines I operate</h3>
                 <div class="grid md:grid-cols-3 gap-8 mb-10">
                     <div>
                         <div class="flex justify-between mb-3"><span class="font-bold">Roblox Studio</span><span class="font-mono text-sm text-mute">95%</span></div>
@@ -292,71 +334,83 @@
                         <div class="h-2 bg-panel2 rounded-full overflow-hidden"><div class="h-full bg-orange-400 skill-bar-fill rounded-full" data-width="75%"></div></div>
                     </div>
                 </div>
-                <h3 class="text-sm font-semibold text-mute mb-4">Also in the toolbox</h3>
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap justify-center gap-2">
                     <span class="chip"><i class="fa-solid fa-cube mr-1.5 text-orange-400"></i>Blender</span>
                     <span class="chip"><i class="fa-brands fa-figma mr-1.5 text-pink-400"></i>Figma</span>
-                    <span class="chip">Luau</span>
-                    <span class="chip">Unreal C++</span>
-                    <span class="chip">Kotlin (Android)</span>
-                    <span class="chip">Swift (iOS)</span>
-                    <span class="chip">C# (Windows)</span>
-                    <span class="chip">HTML / JS</span>
+                    <span class="chip"><i class="fa-solid fa-gem mr-1.5 text-purple-400"></i>Obsidian</span>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- ================= WORK ================= -->
-    <main id="work" class="page-section">
+    <!-- ================= PORTFOLIO ================= -->
+    <main id="portfolio" class="page-section">
         <section class="max-w-6xl mx-auto px-5 py-16 md:py-20">
-            <div class="mb-12 reveal">
-                <p class="text-duck font-semibold mb-2">Work</p>
-                <h2 class="font-display font-bold text-4xl md:text-5xl mb-4">Projects &amp; timeline</h2>
-                <p class="text-slate-400 max-w-2xl text-lg">My own games, tools and apps, plus the studios I've built for.</p>
+            <div class="text-center mb-14 reveal">
+                <div class="badge-ico mx-auto bg-purple-500/10 border-purple-500/30 text-purple-400"><i class="fa-solid fa-folder-open"></i></div>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-3">Portfolio &amp; timeline</h2>
+                <p class="text-slate-400 max-w-xl mx-auto">My studio, the projects I'm running and the teams I've built for.</p>
             </div>
 
-            <!-- Featured: Tethr Link -->
-            <article class="card overflow-hidden mb-14 grid md:grid-cols-2 reveal">
-                <a href="https://fatalquackers.github.io/tethr-link/" target="_blank" rel="noopener" class="block bg-panel2 aspect-video md:aspect-auto">
-                    <img src="https://fatalquackers.github.io/tethr-link/videos/trailer-16x9.jpg" alt="Tethr Link trailer" class="w-full h-full object-cover" loading="lazy" onerror="this.parentElement.innerHTML='<div class=&quot;w-full h-full flex items-center justify-center text-6xl text-sky&quot;><i class=&quot;fa-solid fa-mobile-screen-button&quot;></i></div>'">
-                </a>
-                <div class="p-7 md:p-10 flex flex-col">
-                    <div class="flex flex-wrap gap-2 mb-4"><span class="status s-live">Open source · Live</span><span class="chip">Android · iPhone · Windows</span></div>
-                    <h3 class="font-display font-bold text-3xl md:text-4xl mb-3">Tethr Link</h3>
-                    <p class="text-slate-300 mb-5">A free, open-source app that links any Android phone or iPhone to a Windows PC: notifications and texts, screen mirroring with control, one-click hotspot, calls through your PC, photos and files. It started as Pixlink for Pixel phones and grew into a full Phone Link alternative.</p>
-                    <div class="flex flex-wrap gap-2 mb-7"><span class="chip">Kotlin</span><span class="chip">Swift</span><span class="chip">C# / XAML</span><span class="chip">Supabase</span></div>
-                    <div class="flex flex-wrap gap-3 mt-auto">
-                        <a href="https://fatalquackers.github.io/tethr-link/" target="_blank" rel="noopener" class="bg-duck text-ink hover:bg-white px-5 py-2.5 rounded-full font-bold transition">Website</a>
-                        <a href="https://fatalquackers.github.io/tethr-link/videos.html" target="_blank" rel="noopener" class="bg-panel2 border border-line hover:border-duck px-5 py-2.5 rounded-full font-bold transition"><i class="fa-solid fa-play mr-1.5"></i>Trailer</a>
-                        <a href="https://github.com/FatalQuackers/tethr-link" target="_blank" rel="noopener" class="bg-panel2 border border-line hover:border-duck px-5 py-2.5 rounded-full font-bold transition"><i class="fa-brands fa-github mr-1.5"></i>GitHub</a>
+            <!-- RUSHED featured -->
+            <article class="rounded-[26px] overflow-hidden border border-rush/40 bg-gradient-to-br from-rush/20 via-panel to-panel mb-8 reveal">
+                <div class="p-7 md:p-10">
+                    <div class="flex flex-wrap items-center gap-4 mb-5">
+                        <img src="projects/rushed-mark.svg" alt="RUSHED logo" class="w-14 h-14 rounded-xl">
+                        <div>
+                            <div class="flex flex-wrap gap-2 mb-1"><span class="status s-live">Main studio</span><span class="chip">Independent Roblox studio</span></div>
+                            <h3 class="font-display font-black text-3xl md:text-4xl">RUSHED<span class="text-rush">.</span></h3>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 text-lg max-w-3xl mb-6">The studio I'm part of. RUSHED looks past a game's current player count to find its potential: it scouts ideas, shapes them into playable experiences and helps games grow. Our first game is being scouted and prototyped now.</p>
+                    <div class="grid sm:grid-cols-3 gap-3 mb-7">
+                        <div class="bg-black/25 rounded-xl p-4"><div class="font-display font-bold text-rushy mb-1">Discover</div><p class="text-sm text-slate-300">Look past surface numbers to the core loop, audience and team.</p></div>
+                        <div class="bg-black/25 rounded-xl p-4"><div class="font-display font-bold text-rushy mb-1">Develop</div><p class="text-sm text-slate-300">Make it playable and prove the idea is fun before going bigger.</p></div>
+                        <div class="bg-black/25 rounded-xl p-4"><div class="font-display font-bold text-rushy mb-1">Grow</div><p class="text-sm text-slate-300">Updates, community events and listening to players.</p></div>
+                    </div>
+                    <div class="strip mb-6" data-strip="rushed"></div>
+                    <a href="https://fatalquackers.github.io/rushed/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-rush hover:bg-white hover:text-ink text-white font-bold px-6 py-3 rounded-full transition">Visit RUSHED <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i></a>
+                </div>
+            </article>
+
+            <!-- Tethr Link featured -->
+            <article class="card overflow-hidden mb-14 reveal">
+                <div class="p-7 md:p-10">
+                    <div class="flex flex-wrap items-center gap-4 mb-5">
+                        <img src="projects/tethr-icon.png" alt="Tethr Link icon" class="w-14 h-14 rounded-xl">
+                        <div>
+                            <div class="flex flex-wrap gap-2 mb-1"><span class="status s-live">Live · Free</span><span class="chip">Android · iPhone · Windows</span></div>
+                            <h3 class="font-display font-bold text-3xl md:text-4xl">Tethr Link</h3>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 text-lg max-w-3xl mb-6">A free, open-source app I created that links any Android phone or iPhone to a Windows PC: notifications and texts, screen mirroring, one-click hotspot, calls, photos and files. It started as Pixlink for Pixel phones and grew from there.</p>
+                    <div class="strip mb-6" data-strip="tethr"></div>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="https://fatalquackers.github.io/tethr-link/" target="_blank" rel="noopener" class="bg-sky text-ink hover:bg-white px-6 py-3 rounded-full font-bold transition">Website</a>
+                        <a href="https://fatalquackers.github.io/tethr-link/videos.html" target="_blank" rel="noopener" class="bg-panel2 border border-line hover:border-sky px-6 py-3 rounded-full font-bold transition"><i class="fa-solid fa-play mr-1.5"></i>Trailer</a>
+                        <a href="https://github.com/FatalQuackers/tethr-link" target="_blank" rel="noopener" class="bg-panel2 border border-line hover:border-sky px-6 py-3 rounded-full font-bold transition"><i class="fa-brands fa-github mr-1.5"></i>GitHub</a>
                     </div>
                 </div>
             </article>
 
-            <div class="flex flex-wrap gap-2 mb-6 reveal" id="project-filters">
-                <button class="filter-btn active" data-f="all">All</button>
-                <button class="filter-btn" data-f="roblox">Roblox</button>
-                <button class="filter-btn" data-f="unreal">Unreal</button>
-                <button class="filter-btn" data-f="web">Apps &amp; web</button>
-            </div>
-            <div id="project-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-20"></div>
+            <h3 class="font-display font-bold text-2xl mb-6 reveal">More projects</h3>
+            <div id="project-grid" class="grid sm:grid-cols-2 gap-5 mb-20 reveal"></div>
 
             <div class="grid md:grid-cols-2 gap-10 reveal">
                 <div>
-                    <h3 class="font-display font-bold text-2xl mb-8">The journey</h3>
+                    <h3 class="font-display font-bold text-2xl mb-8"><i class="fa-solid fa-route text-duck mr-2"></i>The journey</h3>
                     <div class="timeline space-y-9">
                         <div class="relative">
-                            <span class="t-dot bg-duck"></span>
+                            <span class="t-dot bg-duck flex items-center justify-center text-[7px] text-ink"><i class="fa-solid fa-crown"></i></span>
                             <h4 class="font-bold text-lg">The goal</h4>
                             <p class="text-sm text-duck mb-1">Future</p>
                             <p class="text-sm text-slate-400">To be the absolute best developer in the space.</p>
                         </div>
                         <div class="relative">
-                            <span class="t-dot bg-green-400"></span>
-                            <h4 class="font-bold text-lg">Solo projects</h4>
-                            <p class="text-sm text-green-400 mb-1">Now</p>
-                            <p class="text-sm text-slate-400">Building HAZARDOUS CORP. in Unreal, Parcel Dash on Roblox, and keeping Tethr Link updated.</p>
+                            <span class="t-dot bg-rush"></span>
+                            <h4 class="font-bold text-lg">Developer @ RUSHED</h4>
+                            <p class="text-sm text-rush mb-1">Current · Main studio</p>
+                            <p class="text-sm text-slate-400">Scouting ideas and building toward the studio's first Roblox release.</p>
                         </div>
                         <div class="relative">
                             <span class="t-dot bg-green-400"></span>
@@ -378,7 +432,7 @@
                         </div>
                         <div class="relative">
                             <span class="t-dot bg-slate-500"></span>
-                            <h4 class="font-bold text-lg text-slate-300">Developer @ GARP (Grow A Random Plant)</h4>
+                            <h4 class="font-bold text-lg text-slate-300">Ex-developer @ GARP (Grow A Random Plant)</h4>
                             <p class="text-sm text-mute mb-1">Past</p>
                             <p class="text-sm text-slate-400">Core environmental building, map setups and testing for community release.</p>
                         </div>
@@ -392,7 +446,7 @@
 
                 <div class="space-y-5">
                     <div class="card p-7">
-                        <h3 class="font-display font-bold text-xl mb-5">Released titles</h3>
+                        <h3 class="font-display font-bold text-xl mb-5"><i class="fa-solid fa-gamepad text-orange-400 mr-2"></i>Released titles</h3>
                         <ul class="divide-y divide-line">
                             <li><a href="https://www.roblox.com/games/122389212847304/Sunkun" target="_blank" rel="noopener" class="flex justify-between items-center py-3.5 hover:text-duck font-semibold">Sunkun <span class="chip">Roblox <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i></span></a></li>
                             <li><a href="https://www.roblox.com/games/136622842983476/Punch-For-Power" target="_blank" rel="noopener" class="flex justify-between items-center py-3.5 hover:text-duck font-semibold">Punch For Power <span class="chip">Roblox <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i></span></a></li>
@@ -400,52 +454,9 @@
                         </ul>
                     </div>
                     <div class="card p-7 bg-gradient-to-br from-sky/10 to-transparent">
-                        <h3 class="font-bold text-lg mb-2"><i class="fa-solid fa-map-location-dot text-sky mr-2"></i>UEFN prototypes</h3>
-                        <p class="text-sm text-slate-300">Competitive maps and structured environments built in UEFN. See the <a href="#gallery" class="text-sky hover:underline">gallery</a> for workflow results.</p>
+                        <h3 class="font-bold text-lg mb-2"><i class="fa-solid fa-map-location-dot text-sky mr-2"></i>Engine prototypes</h3>
+                        <p class="text-sm text-slate-300">Competitive maps and structured environments built in UEFN. Check out the <a href="#gallery" class="text-sky hover:underline">gallery</a> to see workflow results.</p>
                     </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- ================= QA ================= -->
-    <main id="testing" class="page-section">
-        <section class="max-w-6xl mx-auto px-5 py-16 md:py-20">
-            <div class="mb-12 reveal">
-                <p class="text-sky font-semibold mb-2">QA</p>
-                <h2 class="font-display font-bold text-4xl md:text-5xl mb-4">Pro QA &amp; playtesting</h2>
-                <p class="text-slate-400 max-w-2xl text-lg">I test and balance some of the most anticipated games on the platform. My job is to find the holes, exploits and bad flow before your players do.</p>
-            </div>
-            <div class="grid md:grid-cols-3 gap-5 mb-12 reveal">
-                <div class="card glow p-7 border-t-4 border-t-sky">
-                    <i class="fa-solid fa-shield-halved text-3xl text-sky mb-5"></i>
-                    <h3 class="text-lg font-bold mb-2">Exploit hunting</h3>
-                    <p class="text-slate-400 text-[15px]">Map holes, logic loops and oversights found so you can patch them before launch day.</p>
-                </div>
-                <div class="card glow p-7 border-t-4 border-t-purple-400">
-                    <i class="fa-solid fa-scale-balanced text-3xl text-purple-400 mb-5"></i>
-                    <h3 class="text-lg font-bold mb-2">Economy balancing</h3>
-                    <p class="text-slate-400 text-[15px]">Progression pacing and item values tested for long-term retention without grind frustration.</p>
-                </div>
-                <div class="card glow p-7 border-t-4 border-t-duck">
-                    <i class="fa-solid fa-gamepad text-3xl text-duck mb-5"></i>
-                    <h3 class="text-lg font-bold mb-2">Game feel &amp; UX</h3>
-                    <p class="text-slate-400 text-[15px]">Actionable feedback on UI flow, combat weight, input latency and general enjoyment.</p>
-                </div>
-            </div>
-            <div class="card p-7 md:p-9 reveal">
-                <h3 class="font-display font-bold text-xl mb-6">Test roster: active &amp; past</h3>
-                <div class="flex flex-wrap gap-3 font-medium">
-                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl">🌱 Garden Maniac</span>
-                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl">🌿 Plants vs Brainrots</span>
-                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl">⚔️ Jandels Battlegrounds</span>
-                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl">🌊 Brainrot Seas</span>
-                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl">🌾 Grow a random plant (past QA)</span>
-                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl">🪴 Catch a plant</span>
-                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl">🦎 Chameleon by SPS</span>
-                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl">🔫 Strike Force</span>
-                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl">🍀 +1 SPEED LUCKY BLOCK</span>
-                    <span class="bg-sky/10 border border-sky/40 text-sky px-4 py-2 rounded-xl italic font-bold">…and unreleased NDA titles 🤫</span>
                 </div>
             </div>
         </section>
@@ -454,23 +465,22 @@
     <!-- ================= GALLERY ================= -->
     <main id="gallery" class="page-section">
         <section class="max-w-6xl mx-auto px-5 py-16 md:py-20">
-            <div class="flex flex-wrap items-end justify-between gap-6 mb-10 reveal">
-                <div>
-                    <p class="text-duck font-semibold mb-2">Gallery</p>
-                    <h2 class="font-display font-bold text-4xl md:text-5xl mb-3">Builds &amp; clips</h2>
-                    <p class="text-slate-400">Click any shot to expand.</p>
+            <div class="text-center mb-10 reveal">
+                <div class="badge-ico mx-auto bg-pink-500/10 border-pink-500/30 text-pink-400"><i class="fa-solid fa-images"></i></div>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-3">Media gallery</h2>
+                <p class="text-slate-400">My latest builds, clips and project shots. Click any media to expand.</p>
+            </div>
+            <div class="flex flex-wrap justify-between items-center gap-4 mb-8 card p-3 reveal">
+                <div class="flex flex-wrap gap-2" id="gallery-filters">
+                    <button class="filter-btn active" data-g="all">All</button>
+                    <button class="filter-btn" data-g="build">Builds</button>
+                    <button class="filter-btn" data-g="video">Videos</button>
+                    <button class="filter-btn" data-g="project">Projects</button>
                 </div>
-                <div class="flex flex-wrap items-center gap-3">
-                    <div class="flex gap-2">
-                        <button onclick="setGalleryFilter('all')" id="btn-filter-all" class="filter-btn active">All</button>
-                        <button onclick="setGalleryFilter('image')" id="btn-filter-image" class="filter-btn">Images</button>
-                        <button onclick="setGalleryFilter('video')" id="btn-filter-video" class="filter-btn">Videos</button>
-                    </div>
-                    <select id="sort-gallery" onchange="renderGallery()" class="bg-panel2 border border-line rounded-full px-4 py-2 text-sm font-semibold focus:outline-none focus:border-duck">
-                        <option value="newest">Newest first</option>
-                        <option value="oldest">Oldest first</option>
-                    </select>
-                </div>
+                <select id="sort-gallery" class="bg-panel2 border border-line rounded-full px-4 py-2 text-sm font-semibold focus:outline-none focus:border-duck">
+                    <option value="newest">Newest first</option>
+                    <option value="oldest">Oldest first</option>
+                </select>
             </div>
             <div id="dynamic-gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 transition-opacity duration-300"></div>
         </section>
@@ -479,52 +489,52 @@
     <!-- ================= PRICING ================= -->
     <main id="pricing" class="page-section">
         <section class="max-w-6xl mx-auto px-5 py-16 md:py-20">
-            <div class="mb-12 reveal">
-                <p class="text-green-400 font-semibold mb-2">Pricing</p>
-                <h2 class="font-display font-bold text-4xl md:text-5xl">Commission rates</h2>
+            <div class="text-center mb-14 reveal">
+                <div class="badge-ico mx-auto bg-green-500/10 border-green-500/30 text-green-400"><i class="fa-solid fa-tags"></i></div>
+                <h2 class="font-display font-bold text-4xl md:text-5xl">Pricing rates</h2>
             </div>
             <div class="grid md:grid-cols-2 gap-5 mb-16 reveal">
-                <div class="card p-7 md:p-8">
+                <div class="card glow tilt p-7 md:p-8"><div class="tilt-inner relative z-[2]">
                     <h3 class="font-display font-bold text-xl mb-6 pb-4 border-b border-line"><i class="fa-solid fa-hammer mr-2 text-duck"></i>Building</h3>
                     <div class="space-y-2" id="price-build"></div>
-                </div>
-                <div class="card p-7 md:p-8">
+                </div></div>
+                <div class="card glow tilt p-7 md:p-8"><div class="tilt-inner relative z-[2]">
                     <h3 class="font-display font-bold text-xl mb-6 pb-4 border-b border-line"><i class="fa-solid fa-person-running mr-2 text-orange-400"></i>Animation (R6/R15)</h3>
                     <div class="space-y-2" id="price-anim"></div>
-                </div>
+                </div></div>
             </div>
 
-            <h3 class="font-display font-bold text-2xl mb-8 reveal">Payment structures</h3>
+            <h3 class="font-display font-bold text-2xl mb-8 text-center reveal">Payment structures</h3>
             <div class="grid md:grid-cols-3 gap-5 mb-16 reveal">
                 <div class="card p-7 text-center">
-                    <i class="fa-solid fa-lock text-2xl text-green-400 mb-4"></i>
+                    <div class="w-14 h-14 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4 text-green-400 text-xl"><i class="fa-solid fa-lock"></i></div>
                     <h4 class="font-bold text-lg mb-2">100% upfront</h4>
                     <p class="text-sm text-slate-400">Guarantees your priority spot and rapid delivery.</p>
                 </div>
-                <div class="card p-7 text-center border-duck relative">
+                <div class="card p-7 text-center !border-duck relative md:-translate-y-3">
                     <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-duck text-ink text-xs font-bold px-3 py-1 rounded-full">Most popular</span>
-                    <i class="fa-solid fa-scale-balanced text-2xl text-duck mb-4"></i>
+                    <div class="w-14 h-14 bg-duck/10 rounded-full flex items-center justify-center mx-auto mb-4 text-duck text-xl"><i class="fa-solid fa-scale-balanced"></i></div>
                     <h4 class="font-bold text-lg mb-2">50 / 50 split</h4>
                     <p class="text-sm text-slate-400">Pay a 50% deposit. Preview and approve the work, then pay the remaining 50% for handoff.</p>
                 </div>
                 <div class="card p-7 text-center">
-                    <i class="fa-solid fa-handshake-angle text-2xl text-purple-400 mb-4"></i>
+                    <div class="w-14 h-14 bg-purple-500/10 rounded-full flex items-center justify-center mx-auto mb-4 text-purple-400 text-xl"><i class="fa-solid fa-handshake-angle"></i></div>
                     <h4 class="font-bold text-lg mb-2">Pay after</h4>
                     <p class="text-sm text-slate-400">For trusted clients. View the final product in a locked showcase, pay before handoff.</p>
                 </div>
             </div>
 
-            <div class="max-w-3xl space-y-3 reveal">
+            <div class="max-w-3xl mx-auto space-y-3 reveal">
                 <details class="card group overflow-hidden">
                     <summary class="p-6 font-bold text-lg flex justify-between items-center cursor-pointer hover:bg-panel2">
-                        <span>Do you also do scripting or UI design?</span>
+                        <span><i class="fa-solid fa-code mr-2 text-duck"></i>Do you also do scripting or UI design?</span>
                         <i class="fa-solid fa-chevron-down transition-transform group-open:rotate-180 text-mute"></i>
                     </summary>
-                    <div class="px-6 pb-6 text-slate-400 text-[15px]">For commissions, no. I focus on what I'm best at: world building, character animation and QA playtesting. By not spreading myself thin over scripts and UI, you get the highest quality visual and testing work.</div>
+                    <div class="px-6 pb-6 text-slate-400 text-[15px]">No. I focus strictly on what I'm best at: world building, character animation and QA playtesting. By not spreading myself thin over scripts and UI, you get the highest quality visual and mechanical testing work.</div>
                 </details>
                 <details class="card group overflow-hidden">
                     <summary class="p-6 font-bold text-lg flex justify-between items-center cursor-pointer hover:bg-panel2">
-                        <span>What payment methods do you accept?</span>
+                        <span><i class="fa-solid fa-coins mr-2 text-yellow-400"></i>What payment methods do you accept?</span>
                         <i class="fa-solid fa-chevron-down transition-transform group-open:rotate-180 text-mute"></i>
                     </summary>
                     <div class="px-6 pb-6 text-slate-400 text-[15px]">Robux, via Roblox group payouts or a T-shirt with the 30% tax covered by the client. Direct cash equivalents are accepted depending on project scope. Open to rev-share only for established, highly promising studios.</div>
@@ -533,24 +543,67 @@
         </section>
     </main>
 
+    <!-- ================= QA ================= -->
+    <main id="testing" class="page-section">
+        <section class="max-w-6xl mx-auto px-5 py-16 md:py-20">
+            <div class="text-center mb-14 reveal">
+                <div class="badge-ico mx-auto bg-sky/10 border-sky/30 text-sky"><i class="fa-solid fa-vial-virus"></i></div>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-4">Pro QA &amp; playtesting</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto text-lg">I actively test and balance some of the most anticipated games on the platform. My job is to find the holes, exploits and bad flow before your players do.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-5 mb-12 reveal">
+                <div class="card glow tilt p-8 border-t-4 !border-t-sky text-center group"><div class="tilt-inner relative z-[2]">
+                    <i class="fa-solid fa-shield-halved text-4xl text-sky mb-5 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="text-lg font-bold mb-2">Exploit hunting</h3>
+                    <p class="text-slate-400 text-[15px]">Finding map holes, logic loops and oversights so you can patch them before launch day.</p>
+                </div></div>
+                <div class="card glow tilt p-8 border-t-4 !border-t-purple-400 text-center group"><div class="tilt-inner relative z-[2]">
+                    <i class="fa-solid fa-scale-balanced text-4xl text-purple-400 mb-5 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="text-lg font-bold mb-2">Economy balancing</h3>
+                    <p class="text-slate-400 text-[15px]">Testing progression pacing and item values for long-term retention without grind frustration.</p>
+                </div></div>
+                <div class="card glow tilt p-8 border-t-4 !border-t-duck text-center group"><div class="tilt-inner relative z-[2]">
+                    <i class="fa-solid fa-gamepad text-4xl text-duck mb-5 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="text-lg font-bold mb-2">Game feel &amp; UX</h3>
+                    <p class="text-slate-400 text-[15px]">Actionable feedback on UI flow, combat weight, input latency and general player enjoyment.</p>
+                </div></div>
+            </div>
+            <div class="card overflow-hidden reveal">
+                <div class="px-7 py-5 border-b border-line bg-panel2"><h3 class="font-display font-bold text-xl"><i class="fa-solid fa-list-check mr-2 text-sky"></i>Active / past test roster</h3></div>
+                <div class="p-7 flex flex-wrap gap-3 font-medium">
+                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl hover:-translate-y-1 transition-transform">🌱 Garden Maniac</span>
+                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl hover:-translate-y-1 transition-transform">🌿 Plants vs Brainrots</span>
+                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl hover:-translate-y-1 transition-transform">⚔️ Jandels Battlegrounds</span>
+                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl hover:-translate-y-1 transition-transform">🌊 Brainrot Seas</span>
+                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl hover:-translate-y-1 transition-transform">🌾 Grow a random plant (past QA)</span>
+                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl hover:-translate-y-1 transition-transform">🪴 Catch a plant</span>
+                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl hover:-translate-y-1 transition-transform">🦎 Chameleon by SPS</span>
+                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl hover:-translate-y-1 transition-transform">🔫 Strike Force</span>
+                    <span class="bg-panel2 border border-line px-4 py-2 rounded-xl hover:-translate-y-1 transition-transform">🍀 +1 SPEED LUCKY BLOCK</span>
+                    <span class="bg-sky/10 border border-sky/40 text-sky px-4 py-2 rounded-xl italic font-bold">…and unreleased NDA titles 🤫</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
     <!-- ================= CONTACT ================= -->
     <main id="contact" class="page-section">
         <section class="max-w-3xl mx-auto px-5 py-16 md:py-20">
-            <div class="mb-10 reveal">
-                <p class="text-duck font-semibold mb-2">Contact</p>
+            <div class="text-center mb-10 reveal">
+                <div class="badge-ico mx-auto bg-duck/10 border-duck/30 text-duck"><i class="fa-solid fa-paper-plane"></i></div>
                 <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">Let's work together</h2>
-                <div class="flex flex-wrap items-center gap-4 text-slate-300">
-                    <span class="bg-panel border border-line px-4 py-2 rounded-full"><i class="fa-regular fa-clock text-duck mr-2"></i>OCE time: <strong id="local-time" class="font-mono text-white">…</strong></span>
+                <div class="flex flex-wrap justify-center items-center gap-3 text-slate-300">
+                    <span class="bg-panel border border-line px-4 py-2 rounded-full"><i class="fa-regular fa-clock text-duck mr-2"></i>Local time (OCE): <strong id="local-time" class="font-mono text-white">…</strong></span>
                     <button onclick="copyDiscord()" class="bg-panel border border-line hover:border-duck px-4 py-2 rounded-full">
                         <i class="fa-brands fa-discord text-indigo-400 mr-2"></i>Quackers <i id="copy-icon" class="fa-regular fa-copy ml-1.5 text-sm text-mute"></i>
                     </button>
                 </div>
             </div>
-            <div class="card p-7 md:p-10 reveal">
-                <div data-fs-success style="display:none" class="bg-green-500/15 border border-green-500/40 text-green-300 p-4 rounded-xl font-bold mb-6">
+            <div class="card glow p-7 md:p-10 reveal">
+                <div data-fs-success style="display:none" class="bg-green-500/15 border border-green-500/40 text-green-300 p-4 rounded-xl font-bold mb-6 relative z-[2]">
                     <i class="fa-solid fa-circle-check mr-2"></i>Message sent! I'll get back to you soon.
                 </div>
-                <form id="contact-form" class="space-y-5">
+                <form id="contact-form" class="space-y-5 relative z-[2]">
                     <div data-fs-error class="font-bold"></div>
                     <div class="grid sm:grid-cols-2 gap-5">
                         <label class="block">
@@ -567,7 +620,7 @@
                         <textarea name="message" rows="5" required data-fs-field class="w-full bg-ink border border-line rounded-xl px-4 py-3.5 text-base focus:outline-none focus:border-duck resize-y"></textarea>
                     </label>
                     <button type="submit" data-fs-submit-btn class="w-full bg-duck hover:bg-white disabled:opacity-50 text-ink font-bold py-4 rounded-xl transition text-lg">
-                        Send message <i class="fa-solid fa-paper-plane ml-2"></i>
+                        Send transmission <i class="fa-solid fa-paper-plane ml-2"></i>
                     </button>
                 </form>
             </div>
@@ -578,128 +631,116 @@
         <div class="max-w-6xl mx-auto px-5 py-10 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="text-center md:text-left">
                 <div class="font-display font-black text-lg">QUACKERS<span class="text-duck">.</span></div>
-                <p class="text-mute text-sm">Changing the foundation of multiplayer gaming.</p>
+                <p class="text-mute text-sm">Changing the foundation of multiplayer gaming. Proudly part of <a href="https://fatalquackers.github.io/rushed/" target="_blank" rel="noopener" class="text-rush hover:underline">RUSHED</a>.</p>
             </div>
             <div class="flex gap-3">
                 <a href="https://www.youtube.com/@Fatalquackers" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-panel2 border border-line flex items-center justify-center hover:bg-red-500 hover:border-red-500 transition" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                <a href="https://github.com/FatalQuackers" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-panel2 border border-line flex items-center justify-center hover:bg-white hover:text-ink transition" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
                 <button onclick="copyDiscord()" class="w-10 h-10 rounded-full bg-panel2 border border-line flex items-center justify-center hover:bg-indigo-500 hover:border-indigo-500 transition" aria-label="Copy Discord username"><i class="fa-brands fa-discord"></i></button>
             </div>
-            <div class="text-mute text-sm">&copy; <span id="year">2026</span> Quackers Creative</div>
+            <div class="text-mute text-sm">&copy; <span id="year">2026</span> Quackers Creative. All rights reserved.</div>
         </div>
     </footer>
+
+    <!-- Music hint -->
+    <button id="music-hint" onclick="toggleMusic(); hideHint();" class="fixed bottom-5 left-5 z-50 bg-panel2 border border-line hover:border-duck rounded-2xl pl-4 pr-5 py-3 shadow-2xl flex items-center gap-3 text-left opacity-0 translate-y-4 pointer-events-none">
+        <span class="w-9 h-9 rounded-full bg-duck text-ink flex items-center justify-center"><i class="fa-solid fa-music"></i></span>
+        <span><span class="block font-bold text-sm">Play the soundtrack?</span><span class="block text-xs text-mute">Chill beats while you look around</span></span>
+    </button>
 
     <div id="toast-container" class="fixed top-20 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-2 pointer-events-none"></div>
 
     <script>
     {
-        /* ---------- DATA: edit these to update the site ---------- */
+        /* ===================== DATA: edit these to update the site ===================== */
         const projects = [
-            { name: 'HAZARDOUS CORP.', cat: 'unreal', status: 'dev', icon: 'fa-skull-crossbones', color: '#ff7a3d',
-              blurb: 'A 1–4 player co-op physics extraction horror-comedy aboard a cargo dirigible above the storm clouds. Steam multiplayer, server-authoritative mechanics and a retro CRT/brass-gauge UI.',
-              tags: ['Unreal Engine 5', 'C++', 'Co-op'], latest: true },
-            { name: 'Parcel Dash', cat: 'roblox', status: 'dev', icon: 'fa-box', color: '#ffd23f',
-              blurb: 'A rooftop parkour courier game: sprint, vault and leap across the city to deliver parcels. Cel-shaded, cartoony look, with the movement system already built.',
-              tags: ['Roblox', 'Parkour', 'Own models & UI'], latest: true },
-            { name: 'Tethr Link', cat: 'web', status: 'live', icon: 'fa-mobile-screen-button', color: '#4cc9f0',
-              blurb: 'Open-source Phone Link alternative for Android, iPhone and Windows. Notifications, texts, mirroring, hotspot, calls and files.',
-              tags: ['Kotlin', 'Swift', 'C#'], latest: true,
-              links: [['Website', 'https://fatalquackers.github.io/tethr-link/'], ['GitHub', 'https://github.com/FatalQuackers/tethr-link']] },
-            { name: 'RUSHED', cat: 'web', status: 'live', icon: 'fa-bolt', color: '#f472b6',
-              blurb: 'Website for RUSHED, an independent Roblox studio: a multi-page site with a built-in scouting dashboard for reviewing game submissions.',
-              tags: ['Web', 'JavaScript', 'GitHub Pages'],
-              links: [['GitHub', 'https://github.com/FatalQuackers/rushed']] },
-            { name: 'Quick Commands', cat: 'roblox', status: 'dev', icon: 'fa-terminal', color: '#a78bfa',
-              blurb: 'A plugin for the Exe 6 admin panel that maps panel actions and custom plugins to / chat commands. I also made the Better Announcements plugin for Exe 6.',
-              tags: ['Roblox', 'Luau', 'Plugin'] },
-            { name: 'Fly and Smash Eggs', cat: 'roblox', status: 'dev', icon: 'fa-egg', color: '#4ade80',
-              blurb: 'Take to the sky to reach eggs scattered around the map, then smash them.',
-              tags: ['Roblox', 'Simulator'] },
-            { name: 'Basketball tycoon (working title)', cat: 'roblox', status: 'dev', icon: 'fa-basketball', color: '#fb923c',
-              blurb: 'Every plot is a basketball court that earns you money. Upgrade the pull-up bars out front and progress to unlock new areas.',
-              tags: ['Roblox', 'Tycoon'] }
+            { name: 'Quick Commands', icon: 'fa-terminal', color: '#a78bfa', status: 'dev',
+              blurb: 'A plugin for the Exe 6 admin panel (Flare Studios) that turns panel actions and custom plugins into quick / chat commands. Sits alongside my Better Announcements plugin for Exe 6.',
+              tags: ['Roblox', 'Exe 6 plugin'] },
+            { name: 'Fly and Smash Eggs', icon: 'fa-egg', color: '#4ade80', status: 'dev',
+              blurb: 'My own Roblox game: take to the sky to reach eggs scattered around the map, then smash them.',
+              tags: ['Roblox', 'Owner'] }
         ];
-        const STATUS = { live: ['s-live', 'Live'], dev: ['s-dev', 'In development'], past: ['s-past', 'Past'] };
-        const nowBuilding = ['HAZARDOUS CORP.', 'Parcel Dash', 'Tethr Link', 'Quick Commands', 'Fly and Smash Eggs', 'RUSHED'];
+        const STATUS = { live: ['s-live', 'Live'], dev: ['s-dev', 'In development'] };
+        const nowBuilding = ['RUSHED Studio', 'Tethr Link', 'Quick Commands', 'Fly and Smash Eggs', 'Catch a plant', 'Toaster Productions'];
+        const strips = {
+            rushed: [['projects/rushed-home.jpg', 'RUSHED: home'], ['projects/rushed-games.jpg', 'RUSHED: game lineup'], ['projects/rushed-team.jpg', 'RUSHED: the team'], ['projects/rushed-dash.jpg', 'RUSHED: scouting dashboard']],
+            tethr: [['projects/tethr-trailer.jpg', 'Tethr Link: notifications on your PC'], ['projects/tethr-reveal.jpg', 'Tethr Link: reveal trailer'], ['projects/tethr-hype.jpg', 'Tethr Link: launch'], ['projects/tethr-setup.jpg', 'Tethr Link: setup guide']]
+        };
         const priceBuild = [['Simple assets', '50 – 100 R$'], ['Detailed props', '250 – 400 R$'], ['Exterior build', '500 – 800 R$'], ['Interior build', '800 – 1.2k R$'], ['Small map / lobby', '1.5k – 2.5k R$'], ['Large map', '3.5k – 10k R$']];
         const priceAnim = [['Basic loops', '50 – 250 R$'], ['Action / combat moves', '150 – 600 R$'], ['Dances / emotes', '350 – 1.2k R$'], ['Action sets (combos)', '500 – 1.5k R$']];
-        // Gallery: add files to the repo and list them here (newest last)
+        // Gallery (newest last). Add a file to the repo, then list it here.
         const mediaData = [
-            { type: 'video', src: 'Video1.mp4' },
-            ...Array.from({ length: 11 }, (_, i) => ({ type: 'image', src: `Image${i + 1}.png` }))
+            { type: 'video', group: 'build', src: 'Video1.mp4', cap: 'Build clip' },
+            ...Array.from({ length: 11 }, (_, i) => ({ type: 'image', group: 'build', src: `Image${i + 1}.png`, cap: 'Build' })),
+            ...strips.rushed.map(([src, cap]) => ({ type: 'image', group: 'project', src, cap })),
+            ...strips.tethr.map(([src, cap]) => ({ type: 'image', group: 'project', src, cap }))
         ].map((m, i) => ({ ...m, num: i }));
 
-        /* ---------- RENDER ---------- */
-        const projectCard = (p) => {
+        /* ===================== RENDER ===================== */
+        const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+        document.getElementById('project-grid').innerHTML = projects.map(p => {
             const [cls, label] = STATUS[p.status];
-            const links = (p.links || []).map(([t, u]) =>
-                `<a href="${u}" target="_blank" rel="noopener" class="text-sm font-semibold text-slate-300 hover:text-duck">${t} <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-0.5"></i></a>`).join('');
-            return `<article class="card glow lift p-6 flex flex-col" data-cat="${p.cat}">
+            return `<article class="card glow tilt p-7 flex flex-col"><div class="tilt-inner relative z-[2] flex flex-col h-full">
                 <div class="flex items-start justify-between mb-5">
                     <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl" style="background:${p.color}1f;color:${p.color}"><i class="fa-solid ${p.icon}"></i></div>
                     <span class="status ${cls}">${label}</span>
                 </div>
-                <h3 class="font-display font-bold text-xl mb-2">${p.name}</h3>
-                <p class="text-slate-400 text-[15px] mb-5">${p.blurb}</p>
-                <div class="flex flex-wrap gap-1.5 mt-auto">${p.tags.map(t => `<span class="chip">${t}</span>`).join('')}</div>
-                ${links ? `<div class="flex gap-4 mt-4 pt-4 border-t border-line">${links}</div>` : ''}
-            </article>`;
-        };
+                <h3 class="font-display font-bold text-xl mb-2">${esc(p.name)}</h3>
+                <p class="text-slate-400 text-[15px] mb-5">${esc(p.blurb)}</p>
+                <div class="flex flex-wrap gap-1.5 mt-auto">${p.tags.map(t => `<span class="chip">${esc(t)}</span>`).join('')}</div>
+            </div></article>`;
+        }).join('');
 
-        let projectFilter = 'all';
-        const renderProjects = () => {
-            document.getElementById('project-grid').innerHTML = projects
-                .filter(p => p.name !== 'Tethr Link' && (projectFilter === 'all' || p.cat === projectFilter))
-                .map(projectCard).join('') || '<p class="text-mute">Nothing here yet.</p>';
-        };
-        document.getElementById('latest-grid').innerHTML = projects.filter(p => p.latest).map(projectCard).join('');
-        document.getElementById('project-filters').addEventListener('click', e => {
-            const b = e.target.closest('.filter-btn'); if (!b) return;
-            projectFilter = b.dataset.f;
-            document.querySelectorAll('#project-filters .filter-btn').forEach(x => x.classList.toggle('active', x === b));
-            renderProjects();
+        document.querySelectorAll('[data-strip]').forEach(el => {
+            el.innerHTML = strips[el.dataset.strip].map(([src, cap]) =>
+                `<button class="aspect-video rounded-xl overflow-hidden border border-white/10 bg-black/30 group" data-src="${src}" data-type="image" data-cap="${esc(cap)}">
+                    <img src="${src}" alt="${esc(cap)}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition duration-500"></button>`).join('');
         });
-        renderProjects();
 
-        const tickerItems = nowBuilding.map(n => `<span class="px-6 whitespace-nowrap">${n}</span><span class="text-duck">✦</span>`).join('');
-        document.getElementById('ticker').innerHTML = `<span class="px-6 text-duck whitespace-nowrap">NOW BUILDING</span>${tickerItems}<span class="px-6 text-duck whitespace-nowrap">NOW BUILDING</span>${tickerItems}`;
+        const tickerItems = nowBuilding.map(n => `<span class="px-6 whitespace-nowrap">${esc(n)}</span><span class="text-duck">✦</span>`).join('');
+        document.getElementById('ticker').innerHTML = `<span class="px-6 text-duck whitespace-nowrap">CURRENTLY ON</span>${tickerItems}<span class="px-6 text-duck whitespace-nowrap">CURRENTLY ON</span>${tickerItems}`;
 
-        const priceRows = rows => rows.map(([k, v]) => `<div class="flex justify-between items-center gap-4 bg-panel2 px-4 py-3 rounded-xl"><span>${k}</span><span class="font-mono text-sm text-duck whitespace-nowrap">${v}</span></div>`).join('');
+        const priceRows = rows => rows.map(([k, v]) => `<div class="flex justify-between items-center gap-4 bg-panel2 px-4 py-3 rounded-xl hover:bg-[#20252d] transition-colors"><span>${k}</span><span class="font-mono text-sm text-duck whitespace-nowrap">${v}</span></div>`).join('');
         document.getElementById('price-build').innerHTML = priceRows(priceBuild);
         document.getElementById('price-anim').innerHTML = priceRows(priceAnim);
 
-        /* ---------- GALLERY ---------- */
-        let currentFilter = 'all';
-        window.setGalleryFilter = (f) => {
-            currentFilter = f;
-            document.querySelectorAll('[id^="btn-filter-"]').forEach(b => b.classList.toggle('active', b.id === `btn-filter-${f}`));
-            renderGallery();
-        };
-        window.renderGallery = () => {
+        /* ===================== GALLERY ===================== */
+        let gFilter = 'all';
+        const renderGallery = () => {
             const grid = document.getElementById('dynamic-gallery-grid');
             const order = document.getElementById('sort-gallery').value;
-            const items = mediaData.filter(m => currentFilter === 'all' || m.type === currentFilter)
+            const items = mediaData.filter(m => gFilter === 'all' || (gFilter === 'video' ? m.type === 'video' : m.group === gFilter && (gFilter !== 'build' || m.type === 'image')))
                 .sort((a, b) => order === 'newest' ? b.num - a.num : a.num - b.num);
             grid.style.opacity = 0;
             setTimeout(() => {
-                grid.innerHTML = items.map((m, i) => {
-                    const big = m.type === 'video' && currentFilter === 'all' && i === 0 ? 'md:col-span-2 md:row-span-2' : '';
+                grid.innerHTML = items.map(m => {
+                    const big = m.type === 'video' && gFilter === 'all' ? 'md:col-span-2 md:row-span-2' : '';
+                    const tag = m.group === 'project' ? `<span class="absolute top-3 left-3 z-10 text-[11px] font-bold bg-ink/85 px-2.5 py-1 rounded-full">${esc(m.cap.split(':')[0])}</span>` : '';
                     const media = m.type === 'video'
                         ? `<video src="${m.src}" class="w-full h-full object-cover pointer-events-none" muted preload="metadata"></video>
                            <div class="absolute inset-0 flex items-center justify-center"><span class="w-16 h-16 rounded-full bg-duck text-ink flex items-center justify-center text-xl group-hover:scale-110 transition"><i class="fa-solid fa-play ml-1"></i></span></div>`
-                        : `<img src="${m.src}" alt="Build screenshot" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">`;
-                    return `<button class="aspect-video bg-panel2 rounded-2xl overflow-hidden group border border-line relative ${big}" data-src="${m.src}" data-type="${m.type}">${media}</button>`;
+                        : `<img src="${m.src}" alt="${esc(m.cap)}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">`;
+                    return `<button class="aspect-video bg-panel2 rounded-2xl overflow-hidden group border border-line relative ${big}" data-src="${m.src}" data-type="${m.type}" data-cap="${esc(m.cap)}">${tag}${media}</button>`;
                 }).join('');
                 grid.style.opacity = 1;
             }, 150);
         };
-        document.getElementById('dynamic-gallery-grid').addEventListener('click', e => {
-            const t = e.target.closest('[data-src]'); if (t) openMedia(t.dataset.src, t.dataset.type);
+        document.getElementById('gallery-filters').addEventListener('click', e => {
+            const b = e.target.closest('.filter-btn'); if (!b) return;
+            gFilter = b.dataset.g;
+            document.querySelectorAll('#gallery-filters .filter-btn').forEach(x => x.classList.toggle('active', x === b));
+            renderGallery();
+        });
+        document.getElementById('sort-gallery').addEventListener('change', renderGallery);
+        document.addEventListener('click', e => {
+            const t = e.target.closest('[data-src]'); if (t) openMedia(t.dataset.src, t.dataset.type, t.dataset.cap);
         });
 
-        const openMedia = (src, type) => {
+        const openMedia = (src, type, cap) => {
             const modal = document.getElementById('media-modal'), img = document.getElementById('modal-img'), video = document.getElementById('modal-video');
             img.classList.add('hidden'); video.classList.add('hidden'); video.removeAttribute('src');
+            document.getElementById('modal-cap').textContent = cap && cap !== 'Build' ? cap : '';
             if (type === 'image') { img.src = src; img.classList.remove('hidden'); }
             else { video.src = src; video.classList.remove('hidden'); video.play().catch(() => {}); }
             modal.classList.remove('hidden'); setTimeout(() => modal.classList.remove('opacity-0'), 10);
@@ -711,8 +752,8 @@
         };
         document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-        /* ---------- PAGES (hash routing: #work, #pricing …) ---------- */
-        const PAGES = ['home', 'work', 'testing', 'gallery', 'pricing', 'contact'];
+        /* ===================== PAGES (#portfolio, #pricing …) ===================== */
+        const PAGES = ['home', 'portfolio', 'gallery', 'pricing', 'testing', 'contact'];
         const revealObserver = new IntersectionObserver((entries, obs) => {
             entries.forEach(en => {
                 if (!en.isIntersecting) return;
@@ -720,61 +761,196 @@
                 en.target.querySelectorAll('.skill-bar-fill').forEach(b => b.style.width = b.dataset.width);
                 obs.unobserve(en.target);
             });
-        }, { threshold: 0.12 });
+        }, { threshold: 0.1 });
 
         const showPage = (id) => {
-            if (id === 'portfolio') id = 'work'; // old link
+            if (id === 'work') id = 'portfolio';
             if (!PAGES.includes(id)) id = 'home';
             document.querySelectorAll('.page-section').forEach(p => p.classList.toggle('active', p.id === id));
             document.querySelectorAll('.nav-link').forEach(l => l.classList.toggle('active', l.id === 'nav-' + id));
-            const page = document.getElementById(id);
-            page.querySelectorAll('.reveal').forEach(el => {
+            document.getElementById(id).querySelectorAll('.reveal').forEach(el => {
                 el.classList.remove('active');
                 el.querySelectorAll('.skill-bar-fill').forEach(b => b.style.width = '0');
                 revealObserver.observe(el);
             });
             if (id === 'gallery') renderGallery();
-            window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+            if (id === 'home') sizeParticles();
+            window.scrollTo(0, 0);
         };
         window.addEventListener('hashchange', () => showPage(location.hash.slice(1)));
 
-        /* ---------- SETTINGS / CURSOR ---------- */
+        /* ===================== PARTICLE NETWORK (from the original) ===================== */
+        const canvas = document.getElementById('hero-particles'), ctx = canvas.getContext('2d');
+        let parts = [];
+        const sizeParticles = () => {
+            const r = canvas.getBoundingClientRect(); if (!r.width) return;
+            canvas.width = r.width; canvas.height = r.height;
+            const n = Math.min(Math.floor(r.width / 18), 80);
+            parts = Array.from({ length: n }, () => ({ x: Math.random() * r.width, y: Math.random() * r.height, vx: Math.random() - .5, vy: Math.random() - .5, s: Math.random() * 2 + 1 }));
+        };
+        let beat = 0; // music pulse
+        const drawParticles = () => {
+            requestAnimationFrame(drawParticles);
+            if (!document.getElementById('home').classList.contains('active')) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            beat *= 0.92;
+            for (const p of parts) {
+                p.x += p.vx * (1 + beat * 2); p.y += p.vy * (1 + beat * 2);
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.s + beat * 1.5, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255,210,63,${0.45 + beat * 0.4})`; ctx.fill();
+            }
+            for (let a = 0; a < parts.length; a++) for (let b = a + 1; b < parts.length; b++) {
+                const dx = parts[a].x - parts[b].x, dy = parts[a].y - parts[b].y, d = dx * dx + dy * dy;
+                if (d < 15000) {
+                    ctx.strokeStyle = `rgba(255,210,63,${(1 - d / 15000) * (0.16 + beat * 0.2)})`;
+                    ctx.beginPath(); ctx.moveTo(parts[a].x, parts[a].y); ctx.lineTo(parts[b].x, parts[b].y); ctx.stroke();
+                }
+            }
+        };
+        window.addEventListener('resize', sizeParticles);
+
+        /* ===================== BACKGROUND MUSIC (generated live, no files) ===================== */
+        // A chill lo-fi loop made with the Web Audio API: Rhodes-style chords, bass, soft drums and vinyl crackle.
+        let ac = null, master = null, musicOn = false, schedTimer = null, nextTime = 0, step = 0, volume = 0.4;
+        const BPM = 78, STEP = 60 / BPM / 4; // 16th notes
+        const midi = n => 440 * Math.pow(2, (n - 69) / 12);
+        const CHORDS = [[65, 69, 72, 76], [64, 67, 71, 74], [62, 65, 69, 72], [60, 64, 67, 71]]; // Fmaj7 Em7 Dm7 Cmaj7
+        const BASS = [41, 40, 38, 36];
+        const MELODY = [76, null, 79, null, 77, 76, null, 72, 74, null, 76, null, null, 72, null, null];
+        let noiseBuf = null;
+
+        const initAudio = () => {
+            ac = new (window.AudioContext || window.webkitAudioContext)();
+            master = ac.createGain(); master.gain.value = 0;
+            const lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2400;
+            master.connect(lp); lp.connect(ac.destination);
+            noiseBuf = ac.createBuffer(1, ac.sampleRate * 2, ac.sampleRate);
+            const d = noiseBuf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+            // vinyl crackle bed
+            const crackle = ac.createBufferSource(); crackle.buffer = noiseBuf; crackle.loop = true;
+            const cf = ac.createBiquadFilter(); cf.type = 'highpass'; cf.frequency.value = 3000;
+            const cg = ac.createGain(); cg.gain.value = 0.012;
+            crackle.connect(cf); cf.connect(cg); cg.connect(master); crackle.start();
+        };
+        const note = (freq, t, dur, vol, type = 'sine', detune = 0) => {
+            const o = ac.createOscillator(), g = ac.createGain();
+            o.type = type; o.frequency.value = freq; o.detune.value = detune;
+            g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + 0.02);
+            g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+            o.connect(g); g.connect(master); o.start(t); o.stop(t + dur + 0.05);
+        };
+        const kick = t => {
+            const o = ac.createOscillator(), g = ac.createGain();
+            o.frequency.setValueAtTime(120, t); o.frequency.exponentialRampToValueAtTime(40, t + 0.25);
+            g.gain.setValueAtTime(0.5, t); g.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
+            o.connect(g); g.connect(master); o.start(t); o.stop(t + 0.4);
+            setTimeout(() => { beat = 1; }, Math.max(0, (t - ac.currentTime) * 1000));
+        };
+        const hiss = (t, dur, vol, freq, type = 'highpass') => {
+            const s = ac.createBufferSource(), f = ac.createBiquadFilter(), g = ac.createGain();
+            s.buffer = noiseBuf; f.type = type; f.frequency.value = freq;
+            g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+            s.connect(f); f.connect(g); g.connect(master); s.start(t, Math.random()); s.stop(t + dur);
+        };
+        const scheduleStep = (s, t) => {
+            const bar = Math.floor(s / 16) % 4, i = s % 16;
+            const swing = i % 2 ? STEP * 0.18 : 0; t += swing;
+            if (i === 0) CHORDS[bar].forEach((n, k) => { note(midi(n), t + k * 0.012, STEP * 15, 0.045, 'triangle'); note(midi(n), t, STEP * 15, 0.02, 'sine', 7); });
+            if (i === 0 || i === 10) note(midi(BASS[bar]), t, STEP * 6, 0.16, 'sine');
+            if (i === 0 || i === 7 || i === 10) kick(t);
+            if (i === 4 || i === 12) hiss(t, 0.18, 0.12, 1800, 'bandpass');
+            if (i % 2 === 0) hiss(t, 0.05, i % 4 ? 0.025 : 0.04, 7000);
+            const m = MELODY[i]; if (m && bar % 2 === 1) note(midi(m), t, STEP * 3, 0.035, 'sine');
+        };
+        const scheduler = () => {
+            while (nextTime < ac.currentTime + 0.2) { scheduleStep(step, nextTime); nextTime += STEP; step++; }
+        };
+        const setMusicUI = () => {
+            document.getElementById('music-btn').classList.toggle('playing', musicOn);
+            document.getElementById('music-btn').classList.toggle('text-duck', musicOn);
+            document.getElementById('music-label').textContent = musicOn ? 'Playing' : 'Music';
+            document.getElementById('music-switch').classList.toggle('on', musicOn);
+        };
+        window.toggleMusic = () => {
+            musicOn = !musicOn;
+            try { localStorage.setItem('quackers-music', musicOn ? 'on' : 'off'); } catch (e) {}
+            if (musicOn) {
+                if (!ac) initAudio();
+                ac.resume();
+                nextTime = ac.currentTime + 0.1; step = 0;
+                clearInterval(schedTimer); schedTimer = setInterval(scheduler, 50);
+                master.gain.cancelScheduledValues(ac.currentTime);
+                master.gain.linearRampToValueAtTime(volume, ac.currentTime + 1.5);
+            } else if (ac) {
+                master.gain.cancelScheduledValues(ac.currentTime);
+                master.gain.setValueAtTime(master.gain.value, ac.currentTime);
+                master.gain.linearRampToValueAtTime(0, ac.currentTime + 0.6);
+                setTimeout(() => { if (!musicOn) clearInterval(schedTimer); }, 700);
+            }
+            hideHint(); setMusicUI();
+        };
+        document.getElementById('volume').addEventListener('input', e => {
+            volume = e.target.value / 100;
+            document.getElementById('vol-label').textContent = e.target.value + '%';
+            if (ac && musicOn) master.gain.setTargetAtTime(volume, ac.currentTime, 0.05);
+        });
+        const hint = document.getElementById('music-hint');
+        window.hideHint = () => { hint.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none'); };
+        // Browsers block autoplay, so offer it: resume on first tap if the visitor turned it on before, otherwise show a hint.
+        let musicPref = null; try { musicPref = localStorage.getItem('quackers-music'); } catch (e) {}
+        if (musicPref === 'on') {
+            const resume = () => { if (!musicOn) toggleMusic(); window.removeEventListener('pointerdown', resume); };
+            window.addEventListener('pointerdown', resume);
+        } else if (musicPref !== 'off') {
+            setTimeout(() => { if (!musicOn) hint.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none'); }, 2500);
+            setTimeout(hideHint, 14000);
+        }
+
+        /* ===================== SETTINGS / CURSOR / TILT ===================== */
         window.toggleSettings = () => {
             const menu = document.getElementById('settings-menu'), ov = document.getElementById('settings-overlay');
             if (menu.classList.contains('open')) { menu.classList.remove('open'); ov.classList.add('opacity-0'); setTimeout(() => ov.classList.add('hidden'), 300); }
             else { ov.classList.remove('hidden'); setTimeout(() => { ov.classList.remove('opacity-0'); menu.classList.add('open'); }, 10); }
         };
         const dot = document.getElementById('cursor-dot'), outline = document.getElementById('cursor-outline');
-        let cursorOn = true;
-        try { cursorOn = localStorage.getItem('quackers-cursor') !== 'off'; } catch (e) {}
-        const applyCursor = () => {
-            document.body.classList.toggle('custom-cursor', cursorOn);
-            document.getElementById('cursor-toggle-ball').classList.toggle('translate-x-6', cursorOn);
-            document.getElementById('cursor-toggle-bg').classList.toggle('bg-duck', cursorOn);
-            document.getElementById('cursor-toggle-bg').classList.toggle('bg-slate-600', !cursorOn);
-        };
+        let cursorOn = true; try { cursorOn = localStorage.getItem('quackers-cursor') !== 'off'; } catch (e) {}
+        const applyCursor = () => { document.body.classList.toggle('custom-cursor', cursorOn); document.getElementById('cursor-switch').classList.toggle('on', cursorOn); };
         window.toggleCursor = () => { cursorOn = !cursorOn; try { localStorage.setItem('quackers-cursor', cursorOn ? 'on' : 'off'); } catch (e) {} applyCursor(); };
         applyCursor();
+
         window.addEventListener('mousemove', e => {
             const card = e.target.closest('.glow');
             if (card) { const r = card.getBoundingClientRect(); card.style.setProperty('--mx', (e.clientX - r.left) + 'px'); card.style.setProperty('--my', (e.clientY - r.top) + 'px'); }
+            const tilt = e.target.closest('.tilt');
+            if (tilt) {
+                const r = tilt.getBoundingClientRect();
+                const tx = ((e.clientY - r.top) / r.height - .5) * -10, ty = ((e.clientX - r.left) / r.width - .5) * 10;
+                tilt.style.transition = 'none';
+                tilt.style.transform = `perspective(1000px) rotateX(${tx}deg) rotateY(${ty}deg) scale3d(1.02,1.02,1.02)`;
+            }
             if (!cursorOn) return;
             dot.style.opacity = outline.style.opacity = 1;
             dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
             outline.animate({ left: e.clientX + 'px', top: e.clientY + 'px' }, { duration: 400, fill: 'forwards' });
         });
-        document.addEventListener('mouseover', e => outline.classList.toggle('hover', !!e.target.closest('a, button, select, input, textarea, summary, [data-src]')));
+        document.addEventListener('mouseout', e => {
+            const tilt = e.target.closest('.tilt');
+            if (tilt && !tilt.contains(e.relatedTarget)) { tilt.style.transition = 'transform .5s ease'; tilt.style.transform = 'perspective(1000px)'; }
+        });
+        document.addEventListener('mouseover', e => outline.classList.toggle('hover', !!e.target.closest('a, button, select, input, textarea, summary')));
 
         window.addEventListener('scroll', () => {
             const h = document.documentElement.scrollHeight - innerHeight;
             document.getElementById('scroll-progress').style.width = (h > 0 ? scrollY / h * 100 : 0) + '%';
         }, { passive: true });
 
-        /* ---------- MISC ---------- */
+        /* ===================== MISC ===================== */
         const showToast = (msg) => {
             const t = document.createElement('div');
             t.className = 'bg-panel2 border border-line text-white px-5 py-3 rounded-full font-semibold shadow-2xl transition-all duration-300 -translate-y-4 opacity-0';
-            t.innerHTML = `<i class="fa-solid fa-circle-check text-duck mr-2"></i>`; t.append(msg);
+            t.innerHTML = '<i class="fa-solid fa-circle-check text-duck mr-2"></i>'; t.append(msg);
             document.getElementById('toast-container').appendChild(t);
             setTimeout(() => t.classList.remove('-translate-y-4', 'opacity-0'), 10);
             setTimeout(() => { t.classList.add('opacity-0', '-translate-y-4'); setTimeout(() => t.remove(), 300); }, 2800);
@@ -789,28 +965,26 @@
             else showToast('Discord: Quackers');
         };
 
-        const roles = ['World Builder', 'Character Animator', 'QA Tester', 'Game Developer'];
+        const roles = ['World Builder', 'Character Animator', 'QA Tester'];
         let ri = 0, ci = 0, del = false;
         const typeEl = document.getElementById('typewriter-text');
         const typeEffect = () => {
             const word = roles[ri];
             ci += del ? -1 : 1; typeEl.textContent = word.slice(0, ci);
-            let wait = del ? 45 : 95;
-            if (!del && ci === word.length) { wait = 1800; del = true; }
-            else if (del && ci === 0) { del = false; ri = (ri + 1) % roles.length; wait = 400; }
+            let wait = del ? 50 : 100;
+            if (!del && ci === word.length) { wait = 2000; del = true; }
+            else if (del && ci === 0) { del = false; ri = (ri + 1) % roles.length; wait = 500; }
             setTimeout(typeEffect, wait);
         };
-
         const updateClock = () => {
             document.getElementById('local-time').textContent = new Date().toLocaleTimeString('en-AU', { timeZone: 'Australia/Sydney', hour: '2-digit', minute: '2-digit', hour12: true });
         };
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        /* ---------- EASTER EGGS ---------- */
+        /* ===================== EASTER EGGS ===================== */
         let buf = '';
         document.addEventListener('keydown', e => {
-            if (e.target.matches('input, textarea')) return;
-            if (e.key.length !== 1) return;
+            if (e.target.matches('input, textarea') || e.key.length !== 1) return;
             buf = (buf + e.key.toLowerCase()).slice(-5);
             if (buf === 'robux') {
                 buf = '';
@@ -829,8 +1003,9 @@
             clickTimer = setTimeout(() => clicks = 0, 2000);
         };
 
-        /* ---------- INIT ---------- */
+        /* ===================== INIT ===================== */
         showPage(location.hash.slice(1) || 'home');
+        sizeParticles(); drawParticles();
         updateClock(); setInterval(updateClock, 30000);
         typeEffect();
     }
